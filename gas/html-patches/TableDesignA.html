@@ -1,0 +1,726 @@
+<!--
+  파일명: gas/html-patches/TableDesignA.html
+  목적: [v0.53.119 · 사용자 선택 A안 「클린 레저」] VF 표 화면들의 표 · 요약 카드 모양을 하나로 맞춘다.
+    대상 : 롤링 S/L · 월별 S/L · 생산의뢰 · 재고현황 · 출고가능 재고 · VF 매출상세
+           (view-rolling · view-monthly · view-prodreq · view-stock · view-invoice · view-estimated)
+    [바꾸는 것 — 모양만]
+      · 흰 바탕 · 가는 가로선. 묶음(PAST · FIRM · FRC …)은 머리글 맨 윗줄의 색 띠와 글자색으로만 표시 (원래 색의 계열은 그대로)
+      · 합계 줄은 연한 회색 · 굵게. 이번 달 열(롤링) · 적용 S/L 열(월별)은 옅게 강조하고 머리글에 작은 표시
+      · 롤링 백오더의 진한 빨강 칸 → 연한 막대 (값이 클수록 길게). 진한 채움 칸 → 같은 계열의 옅은 바탕 + 진한 글자
+      · 0 은 '–' 로 흐리게 (칸의 글자는 그대로 0 이라 내보내기 · 필터 · 합계 계산은 바뀌지 않음)
+      · 머리글 고정 : 페이지를 내려도 표 머리글이 화면 위에 붙어 따라온다. 첫 열은 옆으로 밀어도 남는다.
+        표 안에 세로 스크롤을 따로 만들지 않는다 (예전 요청 : 세로 이동은 페이지 스크롤 하나로)
+      · 행 높이 넓게 / 좁게 (각 화면 위쪽 단추 · 이 기기에 기억 akc_tbl_density)
+      · 위 요약 카드 : 롤링 · 월별은 새로 만들고, 생산의뢰 · 재고현황 · 출고가능 재고는 있던 카드를 같은 모양으로
+    [바꾸지 않는 것]
+      계산 · 서버 · 표에 들어가는 값 · 단추 동작 · 필터 · 내보내기.
+      원본 화면 파일은 그대로 두고, 표가 그려진 뒤에 모양만 입힌다.
+      화면 그대로 엑셀로 내보내는 곳(월별 · 롤링 · 매출상세)은 내보내는 순간만 원래 모양으로 되돌려 예전과 똑같은 파일이 나온다.
+      문제가 생기면 이 파일만 빼면 예전 모양으로 돌아간다.
+    이름표는 모두 tda- 로 시작한다 (다른 파일과 겹치지 않게).
+    [v0.53.120 · 사용자 요청] 세로 열 선이 없으니 읽기 불편 → 모든 칸에 얇은 세로선, 원래 굵은 선 자리(묶음 경계)는 2px 진한 선.
+      롤링 · 월별 위 요약 카드 4개는 세로로 납작하게 (윗줄 제목 · 아랫줄 값 + 설명) — 아래 표에 눈이 가도록.
+    [v0.53.121 · 사용자 요청]
+      · 월별 S/L : 올린 달마다 머리글 색 띠(오래된 달일수록 옅은 남색) · 달이 바뀌는 자리 굵은 선 · 적용 S/L 열은 청록 바탕
+                   적용 S/L 칸에 직전 회차보다 늘면 ▲(초록) 줄면 ▼(빨강) · 품목 이름 칸 연한 회색 · 아래 Material 머리글 줄은 회색 바탕 + 위 굵은 선
+      · 롤링 S/L 아래 표 : 위 품목 요약과 같은 PAST(빨강) · FIRM(파랑) · FRC(주황) 색 띠 (FIRM · FRC 글자로도 묶음을 찾게)
+      · 행 높이 : 기본은 좁게. 넓게는 작은 스위치 '행 넓게' 로 켤 때만 (꼭 눌러야 하는 단추처럼 보이지 않게)
+    [v0.53.122 · 사용자 요청] 머리글 윗줄 색 띠를 모든 열에 같은 3px 로 — 품번 · 품명 · 품목 · Material · Short Text 같은 설명 열은 진한 회색(#475569).
+      월별 S/L 은 Material 머리글 줄 위에 같은 굵기 한 줄 선을 그어 위 요약과 아래 품번 상세를 가른다.
+    [v0.53.125 · 사용자 확인] 월별 S/L 의 '적용' 열 = 고른 달의 직전 달에 마지막으로 올린 S/L (11월_SL → 10월 마지막 S/L).
+      예전에는 시트의 '적용 스냅샷'(그 달 안에서 가장 늦은 S/L)을 따라 11월_SL 에 11-02_SL 을 표시해 틀렸다.
+      매출상세 · 통합 예상매출 · 대시보드가 쓰는 규칙과 같다. 표의 숫자 · 서버 계산은 그대로 (표시 자리만 바뀜).
+    [v0.53.126 · 사용자 요청] 롤링 · 월별 S/L : 품번은 있는데 수량이 하나도 없는 줄은 기본으로 감추고, 필터 줄 끝 '수량 없는 품번 보기' 스위치로 보이게.
+      품번 · 품명으로 찾는 중에는 감추지 않는다. 값 · 필터 · 선택 합계 · 품목 요약 · 내보내기는 그대로 (내보내기에는 예전처럼 모든 품번이 담김).
+      함께 고침 : 필터만 바꿔 표 글자가 안 바뀌는 경우에도 위 요약 카드를 다시 맞춤 · 롤링 '고른 합계' 줄도 월별 '선택 합계'와 같은 청록 모양.
+-->
+<style id="tda-style">
+  /* ── 표를 담는 틀 : 흰 카드 ── */
+  .tda .excel-container { background: #fff !important; border: 1px solid #e3e7ec !important; border-radius: 14px !important; box-shadow: 0 1px 2px rgba(15, 23, 42, .04) !important; }
+  .tda .excel-table { font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif !important; font-size: 12.5px !important; color: #0f172a; background: #fff !important; }
+  /* 칸 선 : 가로 · 세로 모두 얇은 선 (세로선은 열을 따라 읽기 쉽게) · 묶음 경계(border-r-thick)는 아래에서 2px 진한 선 */
+  .tda .excel-table th, .tda .excel-table td { border: 0 !important; border-right: 1px solid #dde3ea !important; border-bottom: 1px solid #edf0f3 !important; padding: 8px 9px !important; }
+  body.tda-dense .tda .excel-table th, body.tda-dense .tda .excel-table td { padding-top: 3px !important; padding-bottom: 3px !important; }
+  body.tda-dense .tda .excel-table { font-size: 12px !important; }
+  .tda .excel-table .num-cell { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+  /* ── 머리글 줄 : 흰 바탕 · 진한 회색 글자 · 아래 가는 선 ── */
+  .tda .excel-table tr.tda-hr > * { font-weight: 600 !important; font-size: 12px !important; box-shadow: inset 0 -1px 0 #d5dbe2 !important; border-bottom: 0 !important; z-index: 20; }
+  .tda .excel-table tr.tda-hr > *:not(.sticky-col):not(.tda-sticky0) { position: relative; }
+  .tda .excel-table tr.tda-hr > .sticky-col, .tda .excel-table tr.tda-hr > .tda-sticky0 { z-index: 30 !important; }
+  /* 묶음 색 띠 : 머리글 맨 윗줄에만 3px */
+  .tda .excel-table tr.tda-hr > [data-tda-top="past"] { box-shadow: inset 0 3px 0 #e11d48, inset 0 -1px 0 #d5dbe2 !important; }
+  .tda .excel-table tr.tda-hr > [data-tda-top="firm"] { box-shadow: inset 0 3px 0 #2563eb, inset 0 -1px 0 #d5dbe2 !important; }
+  .tda .excel-table tr.tda-hr > [data-tda-top="frc"] { box-shadow: inset 0 3px 0 #d97706, inset 0 -1px 0 #d5dbe2 !important; }
+  .tda .excel-table tr.tda-hr > [data-tda-top="info"] { box-shadow: inset 0 3px 0 #0284c7, inset 0 -1px 0 #d5dbe2 !important; }
+  .tda .excel-table tr.tda-hr > [data-tda-top="ok"] { box-shadow: inset 0 3px 0 #0f766e, inset 0 -1px 0 #d5dbe2 !important; }
+  .tda .excel-table tr.tda-hr > [data-tda-top="warn"] { box-shadow: inset 0 3px 0 #ca8a04, inset 0 -1px 0 #d5dbe2 !important; }
+  .tda .excel-table tr.tda-hr > [data-tda-top="pur"] { box-shadow: inset 0 3px 0 #7c3aed, inset 0 -1px 0 #d5dbe2 !important; }
+  .tda .excel-table tr.tda-hr > [data-tda-top="neu"] { box-shadow: inset 0 3px 0 #94a3b8, inset 0 -1px 0 #d5dbe2 !important; }
+  /* 품번 · 품명 · 품목 같은 설명 열도 같은 굵기의 진한 회색 띠 (머리글 윗줄 전체가 한 줄로 이어지게) */
+  .tda .excel-table tr.tda-hr > [data-tda-top="plain"] { box-shadow: inset 0 3px 0 #475569, inset 0 -1px 0 #d5dbe2 !important; }
+  /* 머리글 속 작은 표시 (이번 달 · 적용) : 글자로 넣지 않아 내보내기 · 필터에 섞이지 않는다 */
+  .tda .excel-table [data-tda-pill]::before { content: attr(data-tda-pill); display: inline-block; font-size: 10px; font-weight: 700; line-height: 1.5; color: #1e40af; background: #dbeafe; border-radius: 999px; padding: 0 6px; margin: 0 4px 2px 0; vertical-align: middle; }
+  .tda .excel-table [data-tda-pill="적용"]::before { color: #115e59; background: #ccfbf1; }
+  /* ── 본문 ── */
+  .tda .excel-table .sticky-col:not([style*="background"]), .tda .excel-table .tda-sticky0:not([style*="background"]) { background-color: #fff !important; }
+  .tda .excel-table .sticky-col, .tda .excel-table .tda-sticky0 { border-right: 1px solid #cbd5e1 !important; }
+  .tda .excel-table .tda-sticky0 { position: sticky !important; left: 0; z-index: 10; }
+  .tda .excel-table tbody tr:hover > td:not([style*="background"]) { background-color: #f8fafc !important; }
+  .tda .excel-table td.tda-cur:not([style*="background"]) { background-color: #f5f8ff !important; }
+  .tda .excel-table tr.tda-tot > * { box-shadow: inset 0 -1px 0 #cbd3dc !important; font-weight: 700 !important; }
+  /* 묶음 경계 : 원래 화면이 굵은 선을 두던 자리 (롤링 BO | 지난달 | M+4 · 생산의뢰 달마다 · 월별 품목 열 …) */
+  .tda .excel-table th.border-r-thick, .tda .excel-table td.border-r-thick { border-right: 2px solid #94a3b8 !important; }
+  .tda .excel-table tr.tda-cat > td:first-child { font-weight: 600 !important; color: #0f172a !important; }
+  /* 월별 S/L : 올린 달마다 머리글 색 띠 (오래된 달일수록 옅게) · 달이 바뀌는 자리는 굵은 선 · 적용 S/L 은 청록 */
+  .tda .excel-table tr.tda-hr > [data-tda-top="m0"] { box-shadow: inset 0 3px 0 #c7d2fe, inset 0 -1px 0 #d5dbe2 !important; }
+  .tda .excel-table tr.tda-hr > [data-tda-top="m1"] { box-shadow: inset 0 3px 0 #a5b4fc, inset 0 -1px 0 #d5dbe2 !important; }
+  .tda .excel-table tr.tda-hr > [data-tda-top="m2"] { box-shadow: inset 0 3px 0 #818cf8, inset 0 -1px 0 #d5dbe2 !important; }
+  .tda .excel-table tr.tda-hr > [data-tda-top="m3"] { box-shadow: inset 0 3px 0 #6366f1, inset 0 -1px 0 #d5dbe2 !important; }
+  .tda .excel-table tr.tda-hr > [data-tda-top="m4"] { box-shadow: inset 0 3px 0 #4338ca, inset 0 -1px 0 #d5dbe2 !important; }
+  .tda .excel-table th.tda-mgap, .tda .excel-table td.tda-mgap { border-right: 2px solid #94a3b8 !important; }
+  #view-monthly.tda .excel-table td.tda-cur:not([style*="background"]) { background-color: #effaf7 !important; }
+  #view-monthly.tda .excel-table tr.tda-cat > td:first-child:not([style*="background"]) { background-color: #f8fafc !important; }
+  /* 월별 : 위 요약과 아래 품번 상세를 가르는 한 줄 굵은 선 (Material 머리글 줄 위 · 다른 띠와 같은 3px) */
+  #view-monthly.tda .excel-table tr.tda-hr[data-tda-sec] > * { box-shadow: inset 0 3px 0 #475569, inset 0 -1px 0 #d5dbe2 !important; }
+  /* 적용 S/L 칸 : 직전 회차보다 늘면 ▲ 초록, 줄면 ▼ 빨강 (글자로 넣지 않아 값 · 내보내기는 그대로) */
+  .tda .excel-table td[data-tda-d]::before { display: inline-block; font-size: 8px; line-height: 1; margin-right: 5px; vertical-align: 2px; -webkit-text-fill-color: currentColor; }
+  .tda .excel-table td[data-tda-d="up"]::before { content: '▲'; color: #16a34a; -webkit-text-fill-color: #16a34a; }
+  .tda .excel-table td[data-tda-d="down"]::before { content: '▼'; color: #e11d48; -webkit-text-fill-color: #e11d48; }
+  .tda .excel-table tr.est-block-title > td { background-color: #f1f5f9 !important; color: #0f172a !important; font-size: 14px !important; font-weight: 700 !important; padding: 12px 14px !important; box-shadow: inset 0 1px 0 #d5dbe2, inset 0 -1px 0 #d5dbe2 !important; }
+  /* 0 → '–' : 칸의 글자는 그대로 두고 크기만 0 으로 줄여 감춘 뒤 '–' 를 보인다 */
+  .tda .excel-table td.tda-z { font-size: 0 !important; }
+  .tda .excel-table td.tda-zr { text-align: right !important; }
+  .tda .excel-table td.tda-z::after { content: '–'; font-size: 12.5px; font-weight: 400; color: #94a3b8; -webkit-text-fill-color: #94a3b8; }
+  /* ── 위 요약 카드 (새로 만든 것 · 있던 것 모두 같은 모양) ── */
+  .tda .tda-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 0 0 10px; }
+  @media (max-width: 900px) { .tda .tda-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; } }
+  .tda .stock-card, .tda .iv-card, #view-prodreq.tda .grid > .bg-white.rounded-xl { background: #fff !important; border: 1px solid #e3e7ec !important; border-radius: 14px !important; box-shadow: 0 1px 2px rgba(15, 23, 42, .04) !important; padding: 14px 18px !important; }
+  .tda .stock-card .cap, .tda .iv-card .tt, #view-prodreq.tda .grid > .bg-white.rounded-xl p.text-sm { font-size: 12px !important; font-weight: 600 !important; color: #475569 !important; margin: 0 0 2px !important; }
+  .tda .stock-card .val, .tda .iv-card .vv, #view-prodreq.tda .grid > .bg-white.rounded-xl p.text-2xl { font-size: 24px !important; font-weight: 700 !important; letter-spacing: -.01em; font-variant-numeric: tabular-nums; line-height: 1.25; }
+  .tda .stock-card .sub, .tda .iv-card .sub, #view-prodreq.tda .grid > .bg-white.rounded-xl p.text-\[11px\] { font-size: 12px !important; color: #64748b !important; }
+  .tda .stock-card .ico, .tda .iv-card .ic, #view-prodreq.tda .grid > .bg-white.rounded-xl > .rounded-full { display: none !important; }
+  /* 새 요약 카드 (롤링 · 월별) : 아래 표에 눈이 가도록 납작하게 — 윗줄 제목, 아랫줄 값 + 설명 */
+  .tda .tda-kpi { background: #fff; border: 1px solid #e3e7ec; border-left: 3px solid var(--tda-acc, #cbd5e1); border-radius: 10px; padding: 7px 12px 8px; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 8px; row-gap: 1px; min-width: 0; }
+  .tda .tda-kpi .k { flex-basis: 100%; font-size: 11.5px; font-weight: 600; color: #64748b; line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tda .tda-kpi .v { font-size: 18px; font-weight: 700; letter-spacing: -.01em; font-variant-numeric: tabular-nums; line-height: 1.3; white-space: nowrap; }
+  .tda .tda-kpi .s { flex: 1 1 0; min-width: 0; font-size: 11.5px; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  @media (max-width: 900px) { .tda .tda-kpi .v { font-size: 16px; } .tda .tda-kpi .s { flex-basis: 100%; } }
+  /* ── 행 높이 단추 ── */
+  /* 기본은 좁게. 넓게는 고르는 사람만 켜는 작은 스위치 (눌러야 하는 단추처럼 보이지 않게 · 이 기기에 기억) */
+  .tda-swb { display: inline-flex; align-items: center; gap: 6px; margin-right: 10px; padding: 4px 6px; border: 0; background: transparent; font: inherit; font-size: 12px; font-weight: 500; color: #64748b; cursor: pointer; border-radius: 8px; white-space: nowrap; flex-shrink: 0; }
+  .tda-swb:hover { color: #334155; background: #f1f5f9; }
+  .tda-swb:focus-visible { outline: 2px solid #0f766e; outline-offset: 1px; }
+  .tda-swb .tda-sw { position: relative; width: 26px; height: 15px; border-radius: 999px; background: #cbd5e1; transition: background-color .15s; flex-shrink: 0; }
+  .tda-swb .tda-sw::after { content: ''; position: absolute; top: 2px; left: 2px; width: 11px; height: 11px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(15, 23, 42, .25); transition: transform .15s; }
+  .tda-swb[aria-checked="true"] { color: #0f766e; }
+  .tda-swb[aria-checked="true"] .tda-sw { background: #0f766e; }
+  .tda-swb[aria-checked="true"] .tda-sw::after { transform: translateX(11px); }
+  /* [v0.53.126] 수량이 하나도 없는 품번 줄 : 기본은 감춤 · '수량 없는 품번 보기' 스위치를 켜면 보임 (값 · 필터 · 합계 · 내보내기는 그대로) */
+  .tda table.tda-hidez tr.tda-zrow { display: none; }
+  .tda-zsw { margin: 0 0 0 auto; }
+  .tda-zsw .tda-zn { font-variant-numeric: tabular-nums; color: #94a3b8; font-weight: 600; }
+  .tda-zsw[aria-checked="true"] .tda-zn { color: #0f766e; }
+</style>
+<script>
+(function () {
+  'use strict';
+  if (window.__tdaTableDesign) return;
+  window.__tdaTableDesign = true;
+  var VIEWS = ['rolling', 'monthly', 'prodreq', 'stock', 'invoice', 'estimated'];
+  var BOX = ['excel-container-rolling-cat', 'excel-container-rolling', 'excel-container-monthly', 'excel-container-prodreq', 'excel-container-stock', 'excel-container-invoice', 'excel-container-estimated'];
+  var DKEY = 'akc_tbl_density';
+  var FG = { past: '#9f1239', firm: '#1e40af', frc: '#92400e', info: '#075985', ok: '#115e59', warn: '#854d0e', pur: '#5b21b6', neu: '#334155', plain: '#334155' };
+  var SOFT = { past: ['#fff1f2', '#9f1239'], frc: ['#fff7ed', '#9a3412'], warn: ['#fefce8', '#854d0e'], ok: ['#f0fdf4', '#166534'], info: ['#eff6ff', '#1e40af'], pur: ['#f5f3ff', '#5b21b6'], neu: ['#f8fafc', '#0f172a'] };
+  var ZERO = /^([₩$]\s?)?-?0(\.0+)?$|^-$|^–$/;
+  var PLAIN = /^(품번|품명|품목|모델|차종|단가|Material|Short Text|품목분류|구분)$/;
+  var txt = function (el) { return String(el && (el.innerText || el.textContent) || '').replace(/\s+/g, ' ').trim(); };
+  var num = function (s) { var n = parseFloat(String(s == null ? '' : s).replace(/[^\d.-]/g, '')); return isNaN(n) ? 0 : n; };
+  var each = function (list, fn) { Array.prototype.forEach.call(list || [], fn); };
+
+  /* ── 칸의 모양(style)을 바꿀 때 원래 값을 적어 둔다 (내보낼 때 그대로 되돌리려고) ── */
+  function setInl(t, el, prop, val) {
+    var st = el.style, cur = st.getPropertyValue(prop) + '|' + st.getPropertyPriority(prop);
+    var rec = el.__tdaRec || (el.__tdaRec = {});
+    if (!rec[prop] || rec[prop].set !== cur) rec[prop] = { v: st.getPropertyValue(prop), p: st.getPropertyPriority(prop) };
+    if (val === null) st.removeProperty(prop); else st.setProperty(prop, val, 'important');
+    rec[prop].set = st.getPropertyValue(prop) + '|' + st.getPropertyPriority(prop);
+    if (!el.__tdaIn) { el.__tdaIn = true; (t.__tdaTouched || (t.__tdaTouched = [])).push(el); }
+  }
+  function origOf(el, prop) { var r = el.__tdaRec && el.__tdaRec[prop]; return r ? r.v : el.style.getPropertyValue(prop); }
+  function restoreTable(t) {
+    if (!t) return;
+    each(t.__tdaTouched, function (el) {
+      var rec = el.__tdaRec || {};
+      Object.keys(rec).forEach(function (p) { if (rec[p].v === '') el.style.removeProperty(p); else el.style.setProperty(p, rec[p].v, rec[p].p); });
+      el.__tdaRec = null;
+      el.__tdaIn = false;
+    });
+    t.__tdaTouched = [];
+    each(t.querySelectorAll('[data-tda-shift]'), function (c) { c.style.transform = ''; c.removeAttribute('data-tda-shift'); });
+    (t.__tdaGroups || []).forEach(function (g) { g.__s = 0; });
+  }
+
+  /* ── 행 높이 ── */
+  function density() { try { return localStorage.getItem(DKEY) === 'comfortable' ? 'comfortable' : 'compact'; } catch (e) { return 'compact'; } }
+  function applyDensity(d) {
+    document.body.classList.toggle('tda-dense', d === 'compact');
+    each(document.querySelectorAll('.tda-dens'), function (b) { b.setAttribute('aria-checked', d === 'comfortable' ? 'true' : 'false'); });
+    try { if (typeof rollingApp !== 'undefined' && rollingApp && typeof rollingApp.syncRollingCatWidths_ === 'function') rollingApp.syncRollingCatWidths_(); } catch (e) {}
+    stickAll();
+  }
+  function densToggle() {
+    var w = document.createElement('button');
+    w.type = 'button';
+    w.className = 'tda-swb tda-dens';
+    w.setAttribute('role', 'switch');
+    w.setAttribute('aria-checked', 'false');
+    w.title = '표의 줄 간격을 넓혀 봅니다 (다시 누르면 좁게)';
+    w.innerHTML = '<span class="tda-sw" aria-hidden="true"></span>행 넓게';
+    w.addEventListener('click', function () {
+      var d = density() === 'comfortable' ? 'compact' : 'comfortable';
+      try { localStorage.setItem(DKEY, d); } catch (e) {}
+      applyDensity(d);
+    });
+    return w;
+  }
+
+  /* ── 표를 칸 자리(열 번호)로 펼친다 : 합친 칸(colspan · rowspan)도 제자리를 찾게 ── */
+  function grid(t) {
+    var g = [];
+    each(t.rows, function (tr, r) {
+      g[r] = g[r] || [];
+      var c = 0;
+      each(tr.cells, function (cell) {
+        while (g[r][c]) c++;
+        var cs = cell.colSpan || 1, rs = cell.rowSpan || 1;
+        for (var i = 0; i < rs; i++) { g[r + i] = g[r + i] || []; for (var j = 0; j < cs; j++) g[r + i][c + j] = cell; }
+        cell.__tdaCol = c;
+        c += cs;
+      });
+    });
+    return g;
+  }
+  function at(G, tr, col) { var c = tr && G[tr.rowIndex] && G[tr.rowIndex][col]; return c || null; }
+
+  /* ── 색 계열 ── */
+  function rgbaOf(s) {
+    s = String(s || '').trim();
+    var h = s.match(/^#([0-9a-f]{6})$/i);
+    if (h) { var n = parseInt(h[1], 16); return { r: n >> 16, g: (n >> 8) & 255, b: n & 255, a: 1 }; }
+    var m = s.match(/rgba?\(([^)]+)\)/);
+    if (!m) return null;
+    var p = m[1].split(',').map(function (x) { return parseFloat(x); });
+    return { r: p[0], g: p[1], b: p[2], a: (p.length > 3 ? p[3] : 1) };
+  }
+  function hueGroup(c) {
+    var r = c.r / 255, g = c.g / 255, b = c.b / 255, mx = Math.max(r, g, b), mn = Math.min(r, g, b), h = 0, d = mx - mn;
+    if (d < 0.08) return 'neu';
+    if (mx === r) h = ((g - b) / d) % 6; else if (mx === g) h = (b - r) / d + 2; else h = (r - g) / d + 4;
+    h = (h * 60 + 360) % 360;
+    if (h < 15 || h >= 330) return 'past';
+    if (h < 45) return 'frc';
+    if (h < 70) return 'warn';
+    if (h < 200) return 'ok';
+    if (h < 255) return 'info';
+    return 'pur';
+  }
+  function groupOf(cell, rolling) {
+    var t = txt(cell), c = ' ' + (cell.className || '') + ' ';
+    if (PLAIN.test(t)) return 'plain';
+    if (/Back Order|백오더|PAST|미출하|B\/O/i.test(t)) return 'past';
+    if (/^FIRM\b/.test(t)) return 'firm';
+    if (/^FRC\b/.test(t)) return 'frc';
+    if (/ header-red /.test(c)) return 'past';
+    if (/ header-green /.test(c)) return rolling ? 'firm' : 'ok';
+    if (/ header-orange /.test(c)) return 'frc';
+    if (/ header-yellow /.test(c)) return 'warn';
+    var bg = rgbaOf(origOf(cell, 'background-color'));
+    if (bg && bg.a > 0.3) { var hg = hueGroup(bg); if (hg !== 'neu') return hg; }
+    if (/ header-blue /.test(c)) return 'info';
+    return 'neu';
+  }
+
+  /* ── 진한 채움 칸 → 옅은 바탕 + 진한 글자 ── */
+  function softenCell(t, td) {
+    var c = rgbaOf(origOf(td, 'background-color'));
+    if (!c || c.a === 0) return;
+    // 롤링 백오더 칸 : rgba(204, 0, 0, 진하기) → 진하기에 비례하는 연한 막대
+    if (c.r === 204 && c.g === 0 && c.b === 0) {
+      var pct = Math.max(0, Math.min(100, Math.round((c.a / 0.7) * 100)));
+      setInl(t, td, 'background-color', 'transparent');
+      setInl(t, td, 'background-image', 'linear-gradient(90deg, rgba(225,29,72,.16) ' + pct + '%, transparent ' + pct + '%)');
+      setInl(t, td, 'color', num(txt(td)) ? '#9f1239' : '#0f172a');
+      return;
+    }
+    var lum = (0.2126 * c.r + 0.7152 * c.g + 0.0722 * c.b) / 255;
+    if (!(c.a >= 0.45 && lum < 0.72)) return;
+    var s = SOFT[hueGroup(c)] || SOFT.neu;
+    setInl(t, td, 'background-color', s[0]);
+    setInl(t, td, 'color', s[1]);
+  }
+
+  function thCount(tr) { var n = 0; each(tr.cells, function (c) { if (c.tagName === 'TH') n++; }); return n; }
+  function isTotalRow(tr) {
+    if (!tr || !tr.cells || !tr.cells.length) return false;
+    if (tr.classList.contains('monthly-sub-total') || tr.classList.contains('rolling-sub-total')) return true;
+    var t = txt(tr.cells[0]);
+    if (/^(합계|총계|TOTAL|Total)(\s|\(|$)/.test(t)) return true;
+    return t === 'Material' && tr.cells.length > 3 && /\d/.test(txt(tr.cells[2]));
+  }
+
+  /* ── 표 하나 꾸미기 ── */
+  function decorate(box) {
+    var t = box.querySelector('table.excel-table') || box.querySelector('table');
+    if (!t || !t.rows.length) { if (box.id === 'excel-container-monthly') kpiMonthly(null); return; }
+    var rolling = /rolling/.test(box.id), isCat = box.id === 'excel-container-rolling-cat';
+    var monthly = box.id === 'excel-container-monthly', isEst = box.id === 'excel-container-estimated';
+    var G = grid(t), thead = t.tHead, hrows = [];
+    each(t.rows, function (tr) {
+      var inHead = thead && tr.parentNode === thead;
+      var h = (inHead || tr.rowIndex === 0) && tr.cells.length > 0 && thCount(tr) * 2 >= tr.cells.length && !isTotalRow(tr);
+      tr.classList.toggle('tda-hr', !!h);
+      if (h) hrows.push(tr);
+    });
+    var labelRow = hrows[hrows.length - 1] || null;
+    // 머리글 : 흰 바탕 + 묶음 글자색, 맨 윗줄은 색 띠
+    hrows.forEach(function (tr, k) {
+      var prev = null;
+      if (monthly && k > 0) tr.setAttribute('data-tda-sec', '1'); else tr.removeAttribute('data-tda-sec');
+      each(tr.cells, function (c) {
+        var g = groupOf(c, rolling);
+        if (k === 0 && txt(c) === '' && (g === 'neu' || g === 'plain')) {
+          // 비어 있는 윗칸 : 같은 열 아랫줄이 백오더면 PAST, 롤링은 왼쪽 묶음(PAST · FIRM · FRC)을 잇는다
+          var below = '';
+          for (var r = tr.rowIndex + 1; r < G.length && r <= tr.rowIndex + 3; r++) { var bc = G[r] && G[r][c.__tdaCol]; if (bc && bc !== c) below += ' ' + txt(bc); }
+          if (/Back Order|백오더/i.test(below)) g = 'past';
+          else if (rolling && prev && /^(past|firm|frc)$/.test(prev)) g = prev;
+          else if (c.__tdaCol < 2) g = 'plain';
+        }
+        prev = g;
+        // 월별 아래쪽 품번 머리글(Material 줄)은 연한 회색 바탕 + 위 굵은 선으로 요약과 나눈다
+        setInl(t, c, 'background-color', (monthly && k > 0) ? '#f1f5f9' : '#fff');
+        setInl(t, c, 'color', FG[g] || FG.neu);
+        setInl(t, c, 'border-top', '0');
+        // 세로 붙임은 아래 '머리글 고정'이 맡는다. 칸에 박힌 top 값(예: 34px)이 행 높이를 바꿀 때 줄을 겹치게 하지 않도록 풀어 둔다
+        if (c.style.position === 'sticky' || c.style.top) setInl(t, c, 'top', 'auto');
+        each(c.querySelectorAll('[style*="color"]'), function (s) { setInl(t, s, 'color', FG[g] || FG.neu); });
+        if (k === 0) c.setAttribute('data-tda-top', g); else c.removeAttribute('data-tda-top');
+      });
+    });
+    // 이번 달(롤링 'M') · 적용 S/L(월별) 열
+    var curCol = -1;
+    hrows.forEach(function (tr) {
+      each(tr.cells, function (c) {
+        if (/^\d{1,2}월 M$/.test(txt(c))) { curCol = c.__tdaCol; c.setAttribute('data-tda-pill', '이번 달'); }
+        else if (c.getAttribute('data-tda-pill') === '이번 달') c.removeAttribute('data-tda-pill');
+      });
+    });
+    var applied = monthly ? monthlyApplied(t, G, hrows) : null;
+    if (applied) curCol = applied.col;
+    // 숫자 열 : 본문에 숫자 칸(num-cell)이 하나라도 있는 열. 그 열의 '-' 는 숫자처럼 오른쪽에 둔다
+    var numCols = {};
+    each(t.tBodies, function (tb) { each(tb.rows, function (tr) { each(tr.cells, function (td) { if (td.classList.contains('num-cell') && (td.colSpan || 1) === 1) numCols[td.__tdaCol] = true; }); }); });
+    // 본문 줄
+    each(t.rows, function (tr) {
+      if (tr.classList.contains('tda-hr')) return;
+      var tot = isTotalRow(tr), sub = tr.classList.contains('monthly-sub-total') || tr.classList.contains('rolling-sub-total');
+      tr.classList.toggle('tda-tot', tot);
+      tr.classList.toggle('tda-cat', monthly && !tot && !!thead && tr.parentNode === thead);
+      each(tr.cells, function (td, i) {
+        var col = td.__tdaCol;
+        var cur = curCol > -1 && col === curCol && (td.colSpan || 1) === 1;
+        td.classList.toggle('tda-cur', cur && td.tagName === 'TD');
+        if ((monthly || isEst) && i === 0 && td.tagName === 'TD' && !td.classList.contains('sticky-col') && (td.colSpan || 1) < 4) td.classList.add('tda-sticky0');
+        if (tot) {
+          var ink = sub ? '#115e59' : '#0f172a';
+          setInl(t, td, 'background-color', sub ? '#f0fdfa' : (cur ? (monthly ? '#dff5ef' : '#eaf1ff') : '#f8fafc'));
+          setInl(t, td, 'color', ink);
+          setInl(t, td, 'border-top', '0');
+          setInl(t, td, 'border-bottom', '0');
+          each(td.querySelectorAll('[style*="color"]'), function (s) { setInl(t, s, 'color', ink); });
+          var lab = at(G, labelRow, col);
+          if (!sub && lab && lab !== td && /Back Order|백오더/i.test(txt(lab)) && num(txt(td))) setInl(t, td, 'color', '#9f1239');
+        } else if (td.tagName === 'TD') {
+          softenCell(t, td);
+        }
+        if (td.tagName === 'TD' && td.classList.contains('num-cell')) {
+          var s = txt(td);
+          var z = ZERO.test(s) || (s === '' && /203,\s*213,\s*225|#cbd5e1/i.test(td.style.color));
+          td.classList.toggle('tda-z', z);
+        } else if (td.tagName === 'TD' && i > 0) {
+          // 빈 칸도 적용 S/L 의 ▲▼ 표시가 붙은 칸이면 '–' 로 보여 화살표만 덩그러니 남지 않게 한다
+          var dz = /^[-–]$/.test(txt(td)) || (txt(td) === '' && td.hasAttribute('data-tda-d'));
+          td.classList.toggle('tda-z', dz);
+          td.classList.toggle('tda-zr', dz && !!numCols[col]);
+        }
+      });
+    });
+    // 머리글 고정 묶음 : 맨 위에서 이어지는 머리글 줄들 + 그 뒤에 따로 있는 머리글 줄(월별 Material 줄)
+    var groups = [];
+    if (!isCat) {
+      var lead = [];
+      var src = thead ? thead.rows : [t.rows[0]];
+      for (var i = 0; i < src.length; i++) {
+        var tr = src[i];
+        if (tr.classList.contains('tda-hr') || (lead.length && tr.cells.length && thCount(tr) === tr.cells.length)) lead.push(tr); else break;
+      }
+      if (lead.length) groups.push(lead);
+      hrows.forEach(function (tr) { if (lead.indexOf(tr) < 0) groups.push([tr]); });
+    }
+    each(t.querySelectorAll('[data-tda-shift]'), function (c) { c.style.transform = ''; c.removeAttribute('data-tda-shift'); });
+    t.__tdaGroups = groups;
+    if (box.id === 'excel-container-rolling') markZeroRows(t, 'rolling');
+    if (monthly) markZeroRows(t, 'monthly');
+    stick(box);
+    if (isCat) kpiRolling(t, G, hrows);
+    if (monthly) kpiMonthly(applied);
+    // 위 요약 카드가 생기며 표가 아래로 밀릴 수 있어 자리를 한 번 더 잡는다
+    stickAll();
+  }
+
+  /* ── 수량 없는 품번 줄 (롤링 · 월별) ──
+     품번은 있는데 백오더 · 달마다 칸이 모두 비었거나 0 인 줄을 표시해 두고, 스위치가 꺼져 있으면 감춘다.
+     감추기는 이름표(class)로만 해서 원래 필터(style.display) · 선택 합계 · 품목 요약 · 내보내기는 그대로 둔다.
+     품번 · 품명으로 찾는 중에는 감추지 않는다 (찾는 품번이 수량이 없어도 보이게). 스위치 상태는 이 화면을 연 동안만 기억한다. */
+  var ZSHOW = { rolling: false, monthly: false };
+  function markZeroRows(t, view) {
+    var n = 0;
+    each(t.tBodies, function (tb) {
+      each(tb.rows, function (tr) {
+        var z = false;
+        if (!/sub-total/.test(tr.className) && !tr.classList.contains('tda-hr') && !tr.classList.contains('tda-tot') && tr.cells.length > 2 && txt(tr.cells[0]) !== '') {
+          var any = false;
+          z = true;
+          each(tr.cells, function (c) { if (c.__tdaCol >= 2) { any = true; if (!/^(|0|0\.0+|[-–]|[₩$]\s?0(\.0+)?)$/.test(txt(c))) z = false; } });
+          z = z && any;
+        }
+        tr.classList.toggle('tda-zrow', z);
+        if (z) n++;
+      });
+    });
+    t.__tdaZeroN = n;
+    applyZero(view);
+  }
+  function zeroSearching(view) {
+    var a = document.getElementById('filter-material-' + view), b = document.getElementById('filter-name-' + view);
+    return !!((a && String(a.value).trim()) || (b && String(b.value).trim()));
+  }
+  function applyZero(view) {
+    var t = document.getElementById('table-' + view);
+    var n = t ? (t.__tdaZeroN || 0) : 0;
+    if (t) t.classList.toggle('tda-hidez', !ZSHOW[view] && !zeroSearching(view));
+    var sw = document.getElementById('tda-zsw-' + view);
+    if (sw) {
+      sw.setAttribute('aria-checked', ZSHOW[view] ? 'true' : 'false');
+      var cnt = sw.querySelector('.tda-zn');
+      if (cnt) cnt.textContent = n ? ' ' + n.toLocaleString('ko-KR') + '개' : '';
+    }
+    stickAll();
+  }
+  function zeroToggle(view) {
+    var w = document.createElement('button');
+    w.type = 'button';
+    w.id = 'tda-zsw-' + view;
+    w.className = 'tda-swb tda-zsw';
+    w.setAttribute('role', 'switch');
+    w.setAttribute('aria-checked', 'false');
+    w.title = 'S/L 수량이 하나도 없는 품번은 기본으로 감춥니다. 켜면 모두 보입니다. (품번 · 품명으로 찾을 때는 감추지 않습니다)';
+    w.innerHTML = '<span class="tda-sw" aria-hidden="true"></span>수량 없는 품번 보기<span class="tda-zn"></span>';
+    w.addEventListener('click', function () { ZSHOW[view] = !ZSHOW[view]; applyZero(view); });
+    return w;
+  }
+
+  /* ── 월별 S/L : 적용 S/L 열 찾기 ──
+     [v0.53.125 · 사용자 확인] 그 달의 오더 = 직전 달에 마지막으로 올린 S/L (11월_SL → 10월 마지막 S/L)
+       매출상세 · 통합 예상매출 · 대시보드가 쓰는 규칙(estPickSnapshotOf · slbEstPickSnapshot_)과 같다 :
+       ① 직전 달(연도 포함) 마지막 S/L → ② 없으면 그 달 마지막 S/L → ③ 그것도 없으면 아직 오지 않은 달은 최신, 지난 달은 가장 이른 S/L
+     표의 숫자는 바꾸지 않고, 어느 열을 '적용'으로 표시할지만 정한다. */
+  function monthlyTarget() {
+    var m = 0, y = 0;
+    try {
+      var d = app.currentData;
+      if (d && d[1]) for (var i = 7; i <= 18 && !m; i++) { var mm = String(d[1][i] || '').match(/^(\d{1,2})월$/); if (mm) m = parseInt(mm[1], 10); }
+    } catch (e) {}
+    if (!(m >= 1 && m <= 12)) { var sel = document.getElementById('monthly-select'); m = sel ? (parseInt(sel.value, 10) || 0) : 0; }
+    try { y = parseInt(app.yearOf('monthly'), 10) || 0; } catch (e) {}
+    if (!(y >= 2000 && y <= 2999)) y = new Date().getFullYear();
+    return { y: y, m: m };
+  }
+  // S/L 이름(MM-DD_SL)에는 연도가 없어, 보고 있는 달에 가장 가까운 해로 읽는다 (예: 2027년 1월_SL 의 12-15_SL → 2026-12-15)
+  function slotDate(label, tg) {
+    var mt = String(label).match(/^(\d{1,2})-(\d{1,2})_SL$/);
+    if (!mt) return null;
+    var sm = parseInt(mt[1], 10), sd = parseInt(mt[2], 10), best = null;
+    [tg.y - 1, tg.y, tg.y + 1].forEach(function (yy) { var dist = Math.abs((yy * 12 + sm) - (tg.y * 12 + tg.m)); if (!best || dist < best.dist) best = { yy: yy, dist: dist }; });
+    return { yy: best.yy, mm: sm, dd: sd, key: best.yy * 10000 + sm * 100 + sd };
+  }
+  function pickApplied(slots, tg) {
+    if (!(tg.m >= 1 && tg.m <= 12)) return null;
+    var list = [];
+    slots.forEach(function (s) { var d = slotDate(s.label, tg); if (d) { s.d = d; list.push(s); } });
+    if (!list.length) return null;
+    var lastIn = function (yy, mm) { var b = null; list.forEach(function (s) { if (s.d.yy === yy && s.d.mm === mm && (!b || s.d.key > b.d.key)) b = s; }); return b; };
+    var py = tg.y, pm = tg.m - 1;
+    if (pm < 1) { pm = 12; py -= 1; }
+    var hit = lastIn(py, pm);
+    if (hit) return { s: hit, by: 'prev', pm: pm };
+    hit = lastIn(tg.y, tg.m);
+    if (hit) return { s: hit, by: 'same', pm: pm };
+    var early = list[0], late = list[0];
+    list.forEach(function (s) { if (s.d.key < early.d.key) early = s; if (s.d.key > late.d.key) late = s; });
+    var now = new Date(), curKey = now.getFullYear() * 100 + now.getMonth() + 1;
+    return (tg.y * 100 + tg.m > curKey) ? { s: late, by: 'latest', pm: pm } : { s: early, by: 'earliest', pm: pm };
+  }
+  function monthlyApplied(t, G, hrows) {
+    var row = hrows[0];
+    if (!row) return null;
+    var slots = [];
+    each(row.cells, function (c) { var s = txt(c); if (/_SL$/.test(s)) slots.push({ c: c, label: s, col: c.__tdaCol }); });
+    if (!slots.length) return null;
+    var tot = null, sub = null;
+    each(t.rows, function (tr) {
+      if (tr.classList.contains('monthly-sub-total')) { if (tr.style.display !== 'none') sub = tr; }
+      else if (!tot && isTotalRow(tr)) tot = tr;
+    });
+    var valAt = function (tr, col) { var c = at(G, tr, col); return c ? txt(c) : ''; };
+    var tg = monthlyTarget(), pk = pickApplied(slots, tg);
+    var hit = pk ? pk.s : slots[slots.length - 1];
+    var why = !pk ? '' : (pk.by === 'prev' ? (pk.pm + '월(직전 달)에 마지막으로 올린 S/L')
+      : (pk.by === 'same' ? (pk.pm + '월 S/L 이 없어 ' + tg.m + '월 마지막 S/L')
+      : (pk.pm + '월 S/L 이 없어 ' + (pk.by === 'latest' ? '가장 최근 S/L' : '가장 이른 S/L'))));
+    // 올린 달(이름 앞 두 자리)로 묶는다 : 07-16_SL · 07-21_SL → 7월 묶음
+    var mg = [], last = null;
+    slots.forEach(function (s) {
+      var m = (s.label.match(/^(\d{1,2})-\d{1,2}_SL$/) || [])[1] || s.label;
+      if (!last || last.m !== m) { last = { m: m, list: [] }; mg.push(last); }
+      last.list.push(s);
+      s.g = mg.length - 1;
+    });
+    each(row.cells, function (c) {
+      if (c.__tdaCol < 1 || c.getAttribute('data-tda-top') === null) return;
+      c.setAttribute('data-tda-top', 'neu');
+      setInl(t, c, 'color', FG.neu);
+    });
+    slots.forEach(function (s) {
+      var on = s === hit;
+      var lv = mg.length > 1 ? Math.round(s.g / (mg.length - 1) * 4) : 4;
+      if (on) s.c.setAttribute('data-tda-pill', '적용'); else s.c.removeAttribute('data-tda-pill');
+      s.c.setAttribute('data-tda-top', on ? 'ok' : 'm' + lv);
+      setInl(t, s.c, 'color', on ? FG.ok : (lv >= 3 ? '#3730a3' : '#475569'));
+    });
+    // 달이 바뀌는 자리 : 각 달 묶음의 마지막 칸 오른쪽에 굵은 선 (위 요약부터 품번 줄까지 모두)
+    var gapCols = {};
+    mg.forEach(function (g, i) { if (i < mg.length - 1) gapCols[g.list[g.list.length - 1].col] = true; });
+    each(t.rows, function (tr) { each(tr.cells, function (c) { c.classList.toggle('tda-mgap', !!gapCols[c.__tdaCol] && (c.colSpan || 1) === 1); }); });
+    var pos = slots.indexOf(hit), prev = pos > 0 ? slots[pos - 1] : null;
+    // 적용 S/L 칸 : 직전 회차와 견줘 늘었으면 ▲ · 줄었으면 ▼
+    each(t.rows, function (tr) {
+      if (tr.classList.contains('tda-hr')) return;
+      var a = at(G, tr, hit.col);
+      if (!a || a.tagName !== 'TD' || (a.colSpan || 1) !== 1) return;
+      var d = '';
+      if (prev) {
+        var b = at(G, tr, prev.col);
+        if (b && b !== a) { var x = num(txt(a)) - num(txt(b)); d = x > 0 ? 'up' : (x < 0 ? 'down' : ''); }
+      }
+      if (d) a.setAttribute('data-tda-d', d); else a.removeAttribute('data-tda-d');
+    });
+    var parts = 0, filtered = false;
+    each(t.tBodies.length ? t.tBodies[0].rows : [], function (tr) {
+      if (tr.classList.contains('monthly-sub-total')) return;
+      if (tr.style.display === 'none') { filtered = true; return; }
+      if (/^BIN/i.test(txt(tr.cells[0])) && num(valAt(tr, hit.col)) !== 0) parts++;
+    });
+    var srcRow = sub || tot;
+    return { col: hit.col, label: hit.label, why: why, total: srcRow ? valAt(srcRow, hit.col) : '0', prev: (srcRow && prev) ? valAt(srcRow, prev.col) : null, prevLabel: prev ? prev.label : '', parts: parts, filtered: filtered && !!sub };
+  }
+
+  /* ── 요약 카드 ── */
+  function kpiBox(id, before) {
+    var el = document.getElementById(id);
+    if (!el && before && before.parentNode) {
+      el = document.createElement('div');
+      el.id = id;
+      el.className = 'tda-kpis shrink-0';
+      before.parentNode.insertBefore(el, before);
+    }
+    return el;
+  }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function card(k, v, s, color) {
+    var c = color || '#0f172a';
+    return '<div class="tda-kpi" style="--tda-acc:' + (color ? c : '#cbd5e1') + '" title="' + esc(k + ' : ' + v + (s ? ' · ' + s : '')) + '"><span class="k">' + esc(k) + '</span><span class="v" style="color:' + c + '">' + esc(v) + '</span><span class="s">' + (s ? esc(s) : '') + '</span></div>';
+  }
+  // 표 칸과 같은 모양으로 숫자를 쓴다 ($ · ₩ · 소수 자리). 기호가 없으면 수량은 EA, 금액(원화로 셈한 값)은 ₩
+  function fmtLike(sample, n, mode) {
+    var s = String(sample || '').trim();
+    var pre = (s.replace(/^-/, '').match(/^[^\d]*/) || [''])[0].replace(/[-–\s]/g, '');
+    var dec = ((s.match(/\.(\d+)/) || [0, ''])[1] || '').length;
+    var body = Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+    if (!pre && mode === 'amt') pre = '₩';
+    return (n < 0 ? '-' : '') + pre + body + (pre ? '' : ' EA');
+  }
+  function modeOf(kind) {
+    try {
+      if (kind === 'rolling') return (typeof rollingApp !== 'undefined' && rollingApp && rollingApp.rollingMode === 'amt') ? 'amt' : 'qty';
+      return (typeof app !== 'undefined' && app && app.monthlyMode === 'amt') ? 'amt' : 'qty';
+    } catch (e) { return 'qty'; }
+  }
+  function kpiRolling(t, G, hrows) {
+    var cat = document.getElementById('excel-container-rolling-cat');
+    var holder = cat && cat.parentNode && cat.parentNode.closest ? (cat.parentNode.closest('.bg-white') || cat) : cat;
+    var box = kpiBox('tda-kpi-rolling', holder);
+    if (!box) return;
+    var tot = null;
+    each(t.rows, function (tr) { if (txt(tr.cells[0]) === '합계') tot = tr; });
+    var lab = hrows[hrows.length - 1];
+    if (!tot || !lab) { box.style.display = 'none'; return; }
+    var cols = {}, months = [];
+    (G[lab.rowIndex] || []).forEach(function (c, col) {
+      if (!c || c.__tdaCol !== col) return;
+      var s = txt(c);
+      if (/합산/.test(s)) cols.sum = col;
+      else if (/Back Order/i.test(s)) cols.bo = col;
+      else if (/M-1$/.test(s)) cols.m1 = col;
+      else if (/^\d{1,2}월 M$/.test(s)) cols.m = col;
+      else if (/M\+\d+$/.test(s)) months.push(col);
+    });
+    if (cols.m === undefined) { box.style.display = 'none'; return; }
+    box.style.display = '';
+    var cell = function (col) { var c = at(G, tot, col); return c ? txt(c) : ''; };
+    var mon = function (col) { var c = at(G, lab, col); return c ? txt(c).replace(/\s*M([+-]\d+)?$/, '') : ''; };
+    var sample = cell(cols.m), mLabel = mon(cols.m), md = modeOf('rolling');
+    var fut = 0;
+    months.forEach(function (col) { fut += num(cell(col)); });
+    var boTxt = cols.bo !== undefined ? cell(cols.bo) : '0';
+    box.innerHTML =
+      card('합산 (당월 + Back Order)', fmtLike(sample, cols.sum !== undefined ? num(cell(cols.sum)) : num(sample) + num(boTxt), md), mLabel + ' ' + sample + ' + 지난 미출하 ' + boTxt, '#0f766e') +
+      card('Back Order · 지난 미출하', fmtLike(sample, num(boTxt), md), (cols.m1 !== undefined ? mon(cols.m1) + '까지 ' : '') + '못 보낸 FIRM', '#9f1239') +
+      card('이번 달 (' + mLabel + ')', fmtLike(sample, num(sample), md), '새 출고일 기준 이번 달 ' + (md === 'amt' ? '금액' : '물량'), '#1e40af') +
+      card('앞으로 ' + months.length + '개월', fmtLike(sample, fut, md), months.length ? (mon(months[0]) + ' ~ ' + mon(months[months.length - 1])) : '');
+  }
+  function kpiMonthly(m) {
+    var cont = document.getElementById('excel-container-monthly');
+    var box = kpiBox('tda-kpi-monthly', cont);
+    if (!box) return;
+    if (!m) { box.style.display = 'none'; return; }
+    box.style.display = '';
+    var tot = num(m.total), prev = m.prev === null ? null : num(m.prev), diff = prev === null ? null : tot - prev, md = modeOf('monthly');
+    box.innerHTML =
+      card('이 달에 적용하는 S/L', m.label, m.why || '직전 달 마지막 S/L', '#115e59') +
+      card('이 달 S/L 합계' + (m.filtered ? ' (거른 품번)' : ''), fmtLike(m.total, tot, md), '적용 S/L 칸의 합계', '#1e40af') +
+      card('직전 회차 대비', diff === null ? '–' : ((diff > 0 ? '+' : '') + fmtLike(m.total, diff, md)), m.prevLabel ? (m.prevLabel + ' ' + m.prev) : '비교할 회차 없음', (diff === null || diff === 0) ? '#0f172a' : (diff < 0 ? '#9f1239' : '#166534')) +
+      card((md === 'amt' ? '금액' : '수량') + ' 있는 품번', m.parts.toLocaleString('ko-KR') + '개', m.filtered ? '거른 품번 중 · 적용 S/L 기준' : '적용 S/L 기준');
+  }
+
+  /* ── 머리글 고정 : 페이지를 내린 만큼 머리글 칸을 아래로 옮겨 화면 위에 붙여 둔다 ── */
+  function scrollTopEdge(box) {
+    var edge = 0;
+    for (var p = box.parentElement; p && p !== document.body; p = p.parentElement) {
+      var o = getComputedStyle(p).overflowY;
+      if ((o === 'auto' || o === 'scroll') && !p.classList.contains('excel-container')) { edge = p.getBoundingClientRect().top; break; }
+    }
+    var bar = document.querySelector('.gnb-bar');
+    if (bar && bar.offsetParent !== null) {
+      var bp = getComputedStyle(bar).position;
+      if (bp === 'sticky' || bp === 'fixed') { var b = bar.getBoundingClientRect(); if (b.height > 0 && b.bottom > edge && b.top <= edge + 1) edge = b.bottom; }
+    }
+    return Math.max(0, edge);
+  }
+  function stick(box) {
+    var t = box.querySelector('table.excel-table') || box.querySelector('table');
+    if (!t || !t.__tdaGroups || !t.__tdaGroups.length || box.offsetParent === null) return;
+    var edge = scrollTopEdge(box), tb = t.getBoundingClientRect(), gs = t.__tdaGroups;
+    for (var i = 0; i < gs.length; i++) {
+      var rows = gs[i];
+      if (!rows[0].isConnected) continue;
+      var top = rows[0].getBoundingClientRect().top;
+      var h = rows[rows.length - 1].getBoundingClientRect().bottom - top;
+      var limit = (i + 1 < gs.length) ? gs[i + 1][0].getBoundingClientRect().top : tb.bottom;
+      var shift = Math.round(Math.max(0, Math.min(edge - top, limit - top - h)));
+      if (gs[i].__s === shift) continue;
+      gs[i].__s = shift;
+      rows.forEach(function (tr) {
+        each(tr.cells, function (c) {
+          if (shift) { c.style.transform = 'translateY(' + shift + 'px)'; c.setAttribute('data-tda-shift', '1'); }
+          else { c.style.transform = ''; c.removeAttribute('data-tda-shift'); }
+        });
+      });
+    }
+  }
+  var stickPending = false;
+  function stickAll() {
+    if (stickPending) return;
+    stickPending = true;
+    (window.requestAnimationFrame || setTimeout)(function () {
+      stickPending = false;
+      BOX.forEach(function (id) { var b = document.getElementById(id); if (b) { try { stick(b); } catch (e) {} } });
+    });
+  }
+
+  /* ── 화면 그대로 엑셀로 내보낼 때는 잠깐 원래 모양으로 되돌린다 (나오는 파일이 예전과 똑같게) ── */
+  function wrapExport() {
+    if (typeof app === 'undefined' || !app || typeof app.exportExcelView !== 'function' || app.exportExcelView.__tda) return;
+    var orig = app.exportExcelView;
+    var wrapped = function (viewType) {
+      var view = document.getElementById('view-' + viewType), t = document.getElementById('table-' + viewType);
+      var box = document.getElementById('excel-container-' + viewType);
+      var had = !!(view && view.classList.contains('tda'));
+      try { if (had) view.classList.remove('tda'); restoreTable(t); } catch (e) {}
+      try { return orig.apply(this, arguments); }
+      finally { if (had) view.classList.add('tda'); try { if (box) decorate(box); } catch (e) {} }
+    };
+    wrapped.__tda = true;
+    app.exportExcelView = wrapped;
+  }
+
+  /* ── 준비 · 표가 그려질 때마다 꾸미기 ── */
+  var pending = {};
+  function schedule(box) {
+    if (pending[box.id]) return;
+    pending[box.id] = true;
+    (window.requestAnimationFrame || setTimeout)(function () {
+      pending[box.id] = false;
+      try { decorate(box); } catch (e) { if (window.console) console.warn('[표 디자인]', e); }
+    });
+  }
+  function watch(box) {
+    if (box.__tdaWatch) return;
+    box.__tdaWatch = true;
+    new MutationObserver(function () { schedule(box); }).observe(box, { childList: true, subtree: true, characterData: true });
+    schedule(box);
+  }
+  function init() {
+    VIEWS.forEach(function (v) {
+      var view = document.getElementById('view-' + v);
+      if (!view) return;
+      view.classList.add('tda');
+      var head = view.firstElementChild;
+      var ctrl = head && head.children.length > 1 ? head.lastElementChild : null;
+      if (ctrl && !view.querySelector('.tda-dens')) ctrl.insertBefore(densToggle(), ctrl.firstChild);
+      // 롤링 · 월별 : 필터 줄 끝에 '수량 없는 품번 보기' 스위치
+      if ((v === 'rolling' || v === 'monthly') && !document.getElementById('tda-zsw-' + v)) {
+        var nm = document.getElementById('filter-name-' + v);
+        var bar = nm && nm.parentNode && nm.parentNode.parentNode;
+        if (bar) bar.appendChild(zeroToggle(v));
+      }
+    });
+    // 롤링 · 월별 필터를 바꾸면 (줄을 감추고 보이기만 해서 표 글자가 안 바뀔 때도) 위 요약 카드 · 수량 없는 품번 감춤을 다시 맞춘다
+    ['input', 'keyup', 'change'].forEach(function (ev) {
+      document.addEventListener(ev, function (e) {
+        var m = e.target && e.target.id ? String(e.target.id).match(/^filter-(?:material|name|category|model)-(rolling|monthly)$/) : null;
+        if (!m) return;
+        setTimeout(function () { var b = document.getElementById('excel-container-' + m[1]); if (b) schedule(b); else applyZero(m[1]); }, 60);
+      }, true);
+    });
+    BOX.forEach(function (id) { var b = document.getElementById(id); if (b) watch(b); });
+    wrapExport();
+    applyDensity(density());
+    document.addEventListener('scroll', stickAll, { capture: true, passive: true });
+    window.addEventListener('resize', stickAll);
+    // 메뉴를 옮겨 다녀 숨어 있던 표가 다시 보일 때도 자리를 다시 잡는다
+    document.addEventListener('click', function () { setTimeout(stickAll, 80); }, true);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>

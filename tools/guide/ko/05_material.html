@@ -1,0 +1,440 @@
+<section id="bom">
+<div class="sh"><h2>BOM 관리</h2></div>
+<div class="meta2"><span class="path">사이드바 › 업무 › BOM 관리</span><span class="who">권한: BOM 관리</span></div>
+<p class="lede">완제품이 어떤 자재로 몇 개씩 만들어지는지(BOM), 자재를 얼마에 사는지(매입단가)를 찾아보고 고치는 곳입니다.</p>
+<div class="tw"><table class="fx">
+<tr><th>위 탭</th><th>하는 일</th></tr>
+<tr><td>BOM (자재명세서)</td><td>상위 · 하위 품목, 소요량, 공정, M/C, 고객사를 한 줄씩 봅니다.</td></tr>
+<tr><td>매입단가 명세서</td><td>품목별 매입단가(MAX · MIN · AVG)와 변동을 봅니다.</td></tr>
+<tr><td>M-BOM</td><td>제품재료비 현황 — 제품 하나 만드는 데 드는 총 재료비(유상사급 제외)</td></tr>
+<tr><td>E-BOM · F-BOM</td><td>엔지니어링 · 재무 BOM 을 직접 적어 관리 (F-BOM 은 금액 · 통화 · 환율 포함)</td></tr>
+<tr><td>설정</td><td>BOM · 단가 파일 올리기, 업체 관리</td></tr>
+</table></div>
+
+<h3 id="bom-find">자재 찾기 · 고치기</h3>
+<div class="do"><div class="dt">따라하기 · BOM (자재명세서)</div><ol class="st">
+<li><b><span class="k">BOM (자재명세서)</span> 탭을 누릅니다.</b><p>처음 한 번은 자료를 받느라 진행 막대가 돕니다. 다음부터는 바로 뜹니다.</p></li>
+<li><b>검색 칸에 품번 · 품명 · 공정명 등을 넣습니다.</b><p><span class="q">구분</span> · <span class="q">Level</span> · <span class="q">고객사</span> 로 더 좁힙니다. 다 풀려면 <span class="k">초기화</span>. 50건씩 쪽으로 나뉩니다.</p></li>
+<li><b>줄을 누르면 <span class="q">BOM 상세 제원</span> 창이 열립니다.</b><p>상위 · 하위 정보, 공정 · 생산 제원, 비고. 고객사명을 누르면 거래처 정보가 보입니다.</p></li>
+<li><b>고치려면 <span class="k">수정</span> → 값 변경 → <span class="k p">저장하기</span>.</b></li>
+<li><b>필요하면 <span class="k">엑셀</span> 로 지금 걸러 놓은 목록을 받습니다.</b><p>파일 이름 : <code>BOM자재명세서_날짜.xlsx</code></p></li>
+</ol></div>
+<ul>
+<li><b>하위 단위(UM)를 고치면</b> 그 품번에 대해 따로 기억해서 BOM 을 다시 올려도 유지됩니다. 표에서 주황빛 글자로 보입니다. 칸을 비우면 원래 단위로 돌아갑니다.</li>
+<li>Level 1 은 초록, 2 는 파랑 꼬리표입니다. 소요량 = 윗 품목 하나에 드는 개수.</li>
+</ul>
+<div class="nt bad">상세 창의 삭제는 그 줄을 데이터베이스에서 아주 지웁니다. 지우기 전에 상위 · 하위 품번을 한 번 더 확인하세요.</div>
+
+<h3 id="bom-price">매입단가 · 제품재료비</h3>
+<ul>
+<li><b>매입단가 명세서</b> : 검색 칸(품목코드 · 품목명 · 업체명 · 규격) + 업체 · 통화 · 구분 고르개 → 결과 안에서 <span class="q">약어</span> · <span class="q">품목 종류</span> 로 한 번 더 좁힙니다. <span class="k">상세보기</span> → 단가 정보 → <span class="k">수정</span> → <span class="k">저장하기</span>. <span class="k">엑셀</span> 은 좁힌 목록 그대로.</li>
+<li><b>M-BOM (제품재료비)</b> : 대분류(프로젝트)를 펼쳐 제품을 고르면 1개 만드는 총 재료비가 나옵니다. 단위가 다른 단가는 <span class="k">단가 수식 적용</span>(× 10, ÷ 100 등)으로 맞추고, 다시 올려도 유지됩니다. 풀려면 <span class="k">수식 해제</span>.</li>
+</ul>
+
+<h3 id="bom-upload">BOM · 단가 파일 올리기</h3>
+<div class="do"><div class="dt">따라하기 · BOM 올리기</div><ol class="st">
+<li><b>BOM 관리 오른쪽 위 <span class="k">설정</span> → 데이터 업로드로 갑니다.</b><p>본 화면 설정 › 업로드가 아니라 <b>BOM 관리 안의 설정</b>입니다.</p></li>
+<li><b>BOM 은 <span class="k">BOM 업로드</span> 에 Frm_MASTER BOM 파일 1개를 올립니다.</b></li>
+<li><b>단가는 <span class="k">완제품 파일 선택</span> · <span class="k">반제품 파일 선택</span> → <span class="k">단가 업로드 (완제품+반제품 병합)</span>.</b><p>양식은 <span class="k">양식다운</span>. 올린 종류만 새것으로 바뀌고, 직접 바꿔 둔 하위 단위는 지켜집니다.</p></li>
+</ol></div>
+</section>
+
+<section id="g-material">
+<div class="sh"><h2>자재관리 · 시작하기</h2></div>
+<div class="meta2"><span class="path">사이드바 › 업무 › 자재관리</span><span class="who">권한: 자재관리 (이메일 설정 · 데이터 점검 : 마스터)</span></div>
+<p class="lede">8/31 수불부 재고에 MES 입고 · 생산실적을 반영하고, BOM × 생산계획 · 롤링 S/L 로 앞으로 쓸 양을 셈해서 <b>어떤 자재가 언제 떨어지고 언제 발주해야 하는지</b> 알려 줍니다.</p>
+
+<div class="wf"><div class="wh">화면 구성 · 위에서 아래로</div><ol>
+<li><div><b>위 메뉴</b><span><span class="k">대시보드</span> · <span class="k">자재관리</span> · <span class="k">발주계획관리</span> · <span class="k">무상출고요청</span> · <span class="k">생산 차질 점검</span> · <span class="k">수불부 기준</span> · <span class="k">이메일 설정</span> · <span class="k">데이터 점검</span> · 오른쪽 <span class="k">새로 계산</span></span></div></li>
+<li><div><b>제목 줄</b><span>화면 이름 · <span class="k">내보내기</span>(CSV)</span></div></li>
+<li><div><b>조회 조건</b><span><span class="q">기준일</span> · <span class="q">자재 구분</span> · <span class="q">품목군</span> · <span class="q">고객사</span> · <span class="q">매입처</span> · <span class="q">JG 제외</span> · <span class="q">상품 제외</span> (대시보드 재고 · 소진, 생산 차질 점검, 수불부 기준)</span></div></li>
+<li><div><b>자료 줄</b><span>수불부 · BOM · 생산계획 · VF 롤링 S/L · 생산실적 · MES 입고 · 수입자재 목록 칩 (초록 = 있음, 빨강 = 없음)과 자료 날짜</span></div></li>
+</ol></div>
+<p>위 메뉴의 숫자 : 대시보드 = 결품 + 긴급 자재 수, 자재관리 = 집중 관리(인플레이터 · OPW · 와이어하네스) 중 조치가 필요한 수, 무상출고요청 = 확인 기다림 · 지연 요청 수, 생산 차질 점검 = 생산불가 완성품 수.</p>
+
+<h3 id="mm-flow">매일 쓰는 순서</h3>
+<div class="do"><div class="dt">따라하기 · 자재관리 하루 흐름</div><ol class="st">
+<li><b>(자료 담당) MES 자료를 올립니다.</b><p>설정 › 업로드 › 자재관리 4종(매입 · 외주임가공 · 상품매출 · 해외출고). → <a class="go" href="#up-mm">업로드 › 자재관리 MES</a></p></li>
+<li><b>위 오른쪽 <span class="k">새로 계산</span> 을 누릅니다.</b><p>업로드 뒤 한 번 누르면 최신 자료로 다시 셉니다. <b>자료 줄</b>의 날짜가 최근인지 확인하세요.</p></li>
+<li><b><span class="k">대시보드</span> › <span class="k">재고 · 소진</span> 카드를 봅니다.</b><p>즉시 조달 · 이번 주 발주 · 4주 안 발주 건수를 확인합니다. → <a class="go" href="#g-material-dash">대시보드</a></p></li>
+<li><b><span class="k">자재관리</span> 목록에서 급한 자재를 엽니다.</b><p>소진 예상 · 발주 시점을 보고 필요하면 입고 예정을 등록하거나 입고를 확인합니다. → <a class="go" href="#g-material-list">자재 목록 · 상세</a></p></li>
+<li><b><span class="k">발주계획관리</span> 에서 월 발주계획을 적고 협력사에 보냅니다.</b><p>→ <a class="go" href="#g-material-po">발주계획관리</a></p></li>
+<li><b>(생관팀) <span class="k">무상출고요청</span> 의 확인 기다림 · 지연 요청을 처리합니다.</b><p>샘플 · 반출 요청을 확인하고 출고 완료까지 처리합니다. → <a class="go" href="#g-material-free">무상출고요청</a></p></li>
+</ol></div>
+
+<h3 id="mm-cond">조회 조건 고르기</h3>
+<ul>
+<li><span class="q">기준일</span> : <span class="k">오늘</span>(기본) 또는 수불부 마감일(예: <span class="k">8/31 마감</span>). 자재관리 계산에도 같이 쓰입니다.</li>
+<li><span class="q">자재 구분</span> : 전체 / 해외 (수입) / 국내. <span class="q">품목군</span> : 전체 자재 · 주요자재 · ★ 집중 관리 · ★ 인플레이터 · ★ OPW · ★ 와이어하네스 · VINFAST · KGM 공용 · 해외 리드타임 90 · 60 · 45일 이상.</li>
+<li><span class="q">JG 제외</span> · <span class="q">상품 제외</span> 는 처음부터 체크되어 있습니다.</li>
+<li>구분 · 고객사 · 매입처는 모든 화면이 같은 값을 씁니다. 한 곳에서 바꾸면 다른 화면도 바뀝니다.</li>
+<li>기본값이 아닌 거르기 칸은 <b>초록</b>으로 바뀌고 <span class="k">↺ 초기화</span> 가 나타납니다.</li>
+</ul>
+
+<h3 id="mm-status">상태 뜻 · 날짜는 이렇게 정해집니다</h3>
+<div class="tw"><table class="fx">
+<tr><th>상태</th><th>뜻 · 할 일</th></tr>
+<tr><td><span class="b red">결품</span></td><td>보유 재고 0 이하 — 즉시 조달</td></tr>
+<tr><td><span class="b ora">긴급</span></td><td>14일 안에 소진 예상 — 입고 · 조달 일정 먼저 확인</td></tr>
+<tr><td><span class="b yel">발주 필요</span></td><td>리드타임 안에 소진 예상(발주 필요일이 오늘이거나 지남) — 발주</td></tr>
+<tr><td><span class="b blu">입고 확인 필요</span></td><td>입고 예정이 들어와야만 정상이거나, 예정일이 지났는데 정리되지 않음 — 실제 입고 확인 (자재관리 목록만)</td></tr>
+<tr><td><span class="b grn">정상</span></td><td>지금 계산 범위에서 발주 경고 없음</td></tr>
+<tr><td><span class="b gry">재고 미확인</span></td><td>수불부에도 없고 보유수량 맞추기도 없음 — 기준 자료 확인</td></tr>
+<tr><td><span class="b gry">휴면</span></td><td>최근 30일 · 앞으로 60일 사용 없음 — 생산 중단인지 확인 (무상출고로 쓰는 자재는 휴면 아님 · 상세의 <span class="k">💤 휴면 재고</span> 스위치로 직접 바꿀 수 있음)</td></tr>
+<tr><td><span class="b vio">소진 후 단종</span></td><td>남은 재고만 쓰고 재주문하지 않음 — 알림 · 발주에서 빠짐 (상세의 <span class="k">소진 후 사용 안 함</span> 스위치)</td></tr>
+</table></div>
+<div class="tw"><table class="fx">
+<tr><th>날짜 · 숫자</th><th>셈하는 법</th></tr>
+<tr><td>보유 재고</td><td>8/31 수불부 기말 + 그 뒤 MES 입고 · 자체 생산 − 사용량 (보유수량을 맞췄으면 그날 수량부터)</td></tr>
+<tr><td>사용량</td><td>생산실적 × BOM, 앞날은 MES 생산계획 · 롤링 S/L × BOM (BOM 없는 자재는 8월 평균, 상품은 상품매출)</td></tr>
+<tr><td>소진 예상</td><td>앞날 하루하루 사용량을 빼서 재고가 처음 0 이하가 되는 날 (365일 안). <b>지금</b> = 입고 예정 빼고 · <b>입고 반영</b> = 예정일에 더해서</td></tr>
+<tr><td>발주 필요일</td><td>소진 예상(입고 반영) − 리드타임 (리드타임 = 화면에서 고친 값 → 품목 기준표 → 기본값 해외 60일 · 국내 30일)</td></tr>
+<tr><td>추가 발주일</td><td>입고 예정이 모두 들어온 뒤 다음 소진일 − 리드타임</td></tr>
+</table></div>
+</section>
+
+<section id="g-material-dash">
+<div class="sh"><h2>자재 대시보드</h2></div>
+<div class="meta2"><span class="path">자재관리 › 대시보드</span></div>
+<p class="lede">위 탭으로 네 가지를 봅니다 : <span class="k">생산 · 출고</span> · <span class="k">협력사 매입 · 외주</span> · <span class="k">재고 · 소진</span> · <span class="k">발주계획</span>. 처음엔 이번 달 기준입니다.</p>
+
+<h3 id="mmd-stock">재고 · 소진 — 무엇이 언제 떨어지나</h3>
+<div class="do"><div class="dt">따라하기 · 급한 자재 찾기</div><ol class="st">
+<li><b><span class="k">재고 · 소진</span> 탭을 누르고 위 카드 4장을 봅니다.</b><p><span class="q">즉시 조달</span>(결품) · <span class="q">이번 주 발주</span>(발주 권장일 7일 안 · 지난 것 포함) · <span class="q">4주 안 발주</span>(8~28일) · <span class="q">휴면 · 재고 없음</span>. 카드 아래에 <span class="q">📦 발주 완료 N</span> 이 함께 보입니다.</p></li>
+<li><b>카드를 누르면 목록 창이 뜹니다.</b><p>창 안의 <span class="k">아래 표를 이 조건으로 거르기</span> 를 누르면 아래 표가 그 조건으로 좁혀집니다.</p></li>
+<li><b><span class="q">앞으로 12주 · 주별 소진 예정 자재</span> 막대를 봅니다.</b><p>파랑 = 해외, 회색 = 국내, ★ = 집중 관리. 막대를 누르면 그 주만, <span class="k">주 선택 풀기 ✕</span> 로 풉니다.</p></li>
+<li><b>표 위 상태 막대나 거르기로 좁힙니다.</b><p>상태 막대 칸을 누르면 그 상태만, 다시 누르면 전체. 검색 · <span class="q">상태</span> · <span class="q">사용량 근거</span> · <span class="q">사용 중인 것만</span>.</p></li>
+<li><b>줄을 누르면 옆 창에 자세한 내용이 나옵니다.</b><p>기준재고 · 추정 재고 · 입고 · 일 사용 · 120일 예상 재고 선 · 이 자재를 쓰는 완성품.</p></li>
+</ol></div>
+<div class="tw"><table class="fx">
+<tr><th>발주 권장 칸</th><th>뜻</th></tr>
+<tr><td><span class="b sky">📦 발주 완료</span> + 입고 MM/DD</td><td>입고 예정이 잡혀 있음 = 이미 발주함. 예정일에 들어왔는지 확인</td></tr>
+<tr><td>⚠ 입고 지연 확인</td><td>입고 예정일이 지남</td></tr>
+<tr><td>🚚 MM/DD 발송 · 🗓 MM/DD 출발 예정 · ⚠ 출발 MM/DD 지남</td><td>협력사 발송 기록 — 물건이 출발했는지 · 출발 예정일이 지났는지 → <a class="go" href="#mml-ship">협력사 발송 기록</a></td></tr>
+<tr><td>추가 발주 MM/DD</td><td>예정이 다 들어와도 그 뒤 다시 발주해야 함</td></tr>
+<tr><td>즉시 조달 · N일 지남 · 오늘 · MM/DD · D-N</td><td>아직 발주하지 않은 자재의 발주 시점</td></tr>
+</table></div>
+
+<h3 id="mmd-other">생산 · 출고 · 협력사 매입 · 발주계획</h3>
+<ul>
+<li><b>생산 · 출고</b> : <span class="q">자료</span> 생산실적 / 상품매출 / 해외출고. <span class="q">조회 년</span> → <span class="q">조회 월</span>(년을 먼저 골라야 함) · 세부 · 구분 · 고객사 · 검색. 카드(생산 수량 · 하루 평균 · 품번 · 불량률), 날짜별 · 상위 10 그래프, 품번 표. 줄을 누르면 날짜별 그래프와 BOM 자재가 나옵니다.</li>
+<li><b>협력사 매입 · 외주</b> : <span class="q">자료</span> 매입 / 외주임가공. 카드(매입 금액 · 협력사 · 입고 수량 · 확인 대기 · 반품), 월별 · 상위 10 협력사, 협력사별 표(확정 초록 · 대기 노랑 · 반품 빨강). 줄을 누르면 품번별 · 입고 내역.</li>
+<li><b>발주계획</b> : <span class="q">기간 시작</span> ~ <span class="q">기간 끝</span> · <span class="q">빠른 기간</span>(FIRM / FORECAST / 10개월 / 지난 6개월) · 업체 · 품목. 월별 막대(초록 FIRM · 보라 FORECAST · 회색 PAST)와 예상 사용량 선. 협력사 · 자재 줄을 누르면 발주계획관리에서 그 협력사 · 품번이 열립니다.</li>
+</ul>
+<p class="mut">표 머리를 누르면 정렬되고, 쪽당 줄 수는 50 / 100 / 200 에서 고릅니다.</p>
+</section>
+
+<section id="g-material-list">
+<div class="sh"><h2>자재 목록 · 자재 상세</h2></div>
+<div class="meta2"><span class="path">자재관리 › 자재관리</span></div>
+<p class="lede">자재마다 <b>언제 떨어지는지 · 언제 발주할지 · 입고가 들어왔는지</b>를 보고, 입고 예정 · 입고 확인을 기록합니다. ★ 인플레이터 · OPW · 와이어하네스가 먼저 나옵니다.</p>
+
+<div class="wf"><div class="wh">목록 화면 · 위에서 아래로</div><ol>
+<li><div><b>머리</b><span><span class="q">자재별 소진 · 입고 예정</span> · 건수 · 상태 막대 · <span class="k">⚠ 입고 지연 N · 정리</span> · <span class="k">🔁 품번 변경 규칙 N</span></span></div></li>
+<li><div><b>거르기</b><span>검색 · 품목군(기본 ★ 집중 관리) · 구분 · 고객사 · 매입처 · 상태 · 발주 시점 · <span class="k">↺ 초기화</span></span></div></li>
+<li><div><b>소진 타임라인</b><span>급한 자재 10개를 120일 막대로 (▼ 발주일 · ◆ 입고 예정)</span></div></li>
+<li><div><b>표</b><span>부품품번 · 품명 · 모품번(FG) · 매입처 │ 현재 재고 │ 1차 입고 예정 │ 2차 입고 예정 │ 리드타임 · 발주 · 상태</span></div></li>
+</ol></div>
+
+<h3 id="mml-find">급한 자재 찾기</h3>
+<div class="do"><div class="dt">따라하기 · 목록에서 좁히기</div><ol class="st">
+<li><b>상태 막대에서 <span class="b red">결품</span> · <span class="b ora">긴급</span> 칸을 누릅니다.</b><p>그 상태만 남습니다. 다시 누르면 전체로 돌아갑니다.</p></li>
+<li><b><span class="q">발주 시점</span> 에서 <span class="k">발주 시점 지남</span> · <span class="k">7일 안 발주</span> 를 고릅니다.</b><p>이미 발주한 것만 보려면 <span class="k">📦 입고 대기 (발주 완료)</span>.</p></li>
+<li><b>검색 칸에 품번 · 품명 · 모품번 · 매입처를 넣습니다.</b><p>품번은 - · 띄어쓰기 없이 넣어도 찾습니다(예: 569036AA26 = 569036-AA26). 안 나오면 까닭(예: 품목군에 들지 않음)과 <span class="k">이 자재 바로 열기 →</span> 가 나옵니다.</p></li>
+<li><b>줄을 누르면 자재 상세가 전체 화면으로 열립니다.</b><p><span class="k">← 목록으로</span> · Esc · 브라우저 뒤로 가기로 돌아오면 거르기와 스크롤 위치가 그대로입니다.</p></li>
+</ol></div>
+<ul>
+<li>표의 색 묶음 : 회청 = 현재 재고(보유 · 소진 예상), 연초록 = 1차 입고 예정, 연보라 = 2차 입고 예정. 입고를 더해도 소진일이 같으면 <span class="q">변화 없음</span>(입고가 소진보다 늦음).</li>
+<li>모품번 칸의 <span class="k">+N</span> 을 누르면 그 자리에서 모두 펼쳐집니다. <span class="k">복사</span> 는 줄바꿈으로 전부 복사, 글자를 끌어 일부만 복사해도 상세로 넘어가지 않습니다.</li>
+<li>입고 칸의 <span class="k">+ 입력</span> 이나 날짜를 누르면 작은 창에서 상세로 들어가지 않고 입고 예정 등록 · 수정 · 입고 확인을 합니다.</li>
+<li>휴면 자재는 아래 <span class="k">▸ 💤 휴면 자재 N개 … 펼치기</span> 안에 접혀 있습니다. 판정이 틀리면 상세에서 바꿉니다 → <a class="go" href="#mml-dorm">휴면 재고 · 소진 후 사용 안 함</a></li>
+<li>1차 · 2차 입고 날짜 옆 작은 표시 : 🚚 발송 확인 · 🗓 출발 예정 · ⚠ 출발 예정 지남 → <a class="go" href="#mml-ship">협력사 발송 기록</a></li>
+</ul>
+
+<h3 id="mml-detail">자재 상세 읽는 법</h3>
+<div class="wf"><div class="wh">상세 화면 · 위에서 아래로</div><ol>
+<li><div><b>머리</b><span>품번 · 상태 · 꼬리표 · 품명 · 매입처 · 모품번 · 오른쪽 스위치 두 개 <span class="q">💤 휴면 재고</span>(자동 / 직접) · <span class="q">소진 후 사용 안 함 (재주문 안 함)</span></span></div></li>
+<li><div><b>발주 띠</b><span>지금 할 일 한 줄 (예: <span class="q">⚠ 발주 시점 N일 지남 — 지금 발주하세요</span> · <span class="q">🛒 발주까지 D-N</span>) · 입고 예정이 있으면 <span class="q">📦 발주 완료 · 입고 대기</span> 띠와 시간 막대 · 줄마다 협력사 발송 표시(<span class="q">🚚 발송</span> · <span class="q">🗓 출발 MM/DD</span> · <span class="q">⚠ 미발송</span>)</span></div></li>
+<li><div><b>숫자 카드 6장</b><span>보유 재고 · 하루 평균 사용 · 소진 예상 지금 · 소진 예상 입고 반영 · 리드타임(<span class="k">✎ 수정</span>) · 발주 필요일(또는 발주 상태)</span></div></li>
+<li><div><b>재고 소진 그래프</b><span><span class="k">일간</span> / <span class="k">주간</span> / <span class="k">월간</span> · ◀ 기간 ▶</span></div></li>
+<li><div><b>자세히 보기</b><span>눌러서 바꿔 보는 카드 두 개 : <span class="k">📦 입고 · 재고 기록</span> · <span class="k">📅 기간별 재고</span></span></div></li>
+</ol></div>
+<div class="tw"><table class="fx">
+<tr><th>그래프</th><th>뜻</th></tr>
+<tr><td>보라 선</td><td>현재 재고 (입고 예정 빼고). 오늘 뒤는 점선 = 예상</td></tr>
+<tr><td>청록 점선</td><td>입고 예정까지 들어왔을 때의 재고</td></tr>
+<tr><td>초록 막대 / 옅은 초록 테두리</td><td>입고 / 입고 예정</td></tr>
+<tr><td>아래 칸 주황 막대</td><td>그날(주 · 월) 쓴 양 — 따로 눈금이라 작은 양도 보입니다</td></tr>
+<tr><td>세로선</td><td>오늘 · 소진 예상(빨강) · 발주 필요(또는 추가 발주)</td></tr>
+<tr><td>▶ 세모 (채움 / 흰 바탕)</td><td>협력사 출발일 — 채움 = 🚚 발송 확인 · 흰 바탕 = 출발 예정 (발송 전)</td></tr>
+<tr><td>출발 → 입고 화살표 선</td><td>출발일부터 입고 예정일까지 (실선 = 발송 확인 · 점선 = 출발 예정)</td></tr>
+</table></div>
+<div class="nt warn">청록 점선만 보고 이미 들어온 것으로 판단하지 마세요. 예정은 실제 입고가 아닙니다. 예정일이 지나면 들어왔는지 확인하고 <b>입고 확인</b>을 눌러야 합니다.</div>
+
+<h3 id="mml-lead">리드타임 고치기</h3>
+<div class="do"><div class="dt">따라하기 · 리드타임 고치기</div><ol class="st">
+<li><b>상세의 <span class="q">리드타임</span> 카드에서 <span class="k">✎ 수정</span> 을 누릅니다.</b><p>카드에 지금 값이 어디서 왔는지(품목 기준표 · 기본값 · ✎ 직접 수정) 보입니다.</p></li>
+<li><b>일수(1 ~ 365)를 넣습니다.</b><p>넣는 동안 바뀔 발주 필요일이 미리 보입니다.</p></li>
+<li><b><span class="k p">저장</span>(또는 Enter)을 누릅니다.</b><p>발주 필요일 · 상태 · 대시보드 · 메일이 새 값으로 다시 셈해지고, 목록 · 대시보드 · 발주계획관리에 ✎ 표시가 붙습니다. 원래대로 돌리려면 <span class="k">↺ … 로 되돌리기</span>.</p></li>
+</ol></div>
+<h3 id="mml-dorm">휴면 재고 · 소진 후 사용 안 함 바꾸기</h3>
+<p>상세 머리 오른쪽 스위치 두 개로 자재를 알림 · 발주에서 빼거나 다시 넣습니다. 바꾸면 화면 · 자동 메일 · AI 검색이 같은 판정으로 다시 셉니다.</p>
+<div class="tw"><table class="fx">
+<tr><th>스위치</th><th>켜면</th><th>이럴 때</th></tr>
+<tr><td><span class="k">💤 휴면 재고</span></td><td>휴면으로 봄 — 발주 알림 · 메일 · 목록 기본 보기에서 빠지고 목록 아래 💤 묶음으로 갑니다. 끄면 휴면이 아닌 재고(결품 · 발주 알림 대상)</td><td>생산이 끝났거나 당분간 안 쓰는 자재 · 반대로 쓰는데 휴면으로 잘못 나온 자재</td></tr>
+<tr><td><span class="k">소진 후 사용 안 함 (재주문 안 함)</span></td><td>남은 재고만 쓰고 재주문하지 않음 — 결품 · 긴급 · 발주 필요 알림, 메일 발주 표, 발주계획 자동 채우기에서 빠지고 소진 예상일만 보임</td><td>단종 예정 · 다른 품번으로 바뀌는 자재 (진영전기 와이어하네스 15개는 처음부터 켜짐)</td></tr>
+</table></div>
+<div class="do"><div class="dt">따라하기 · 휴면 재고 직접 정하기</div><ol class="st">
+<li><b>자재 상세를 열고 머리 오른쪽 <span class="k">💤 휴면 재고</span> 스위치를 봅니다.</b><p>스위치 끝의 <span class="q">자동</span> = 시스템이 판정한 값, <span class="q">직접</span> = 누군가 정한 값입니다. 마우스를 올리면 자동 판정과 까닭(예: 최근 30일 사용 0 · 앞으로 60일 수요 0), 정한 사람 · 날짜가 보입니다.</p></li>
+<li><b>스위치를 켜거나 끕니다.</b><p>켜면 <span class="q">휴면 재고로 표시했습니다</span>, 끄면 <span class="q">휴면 재고가 아닌 재고로 되돌렸습니다</span> 가 뜹니다. 직접 휴면으로 정한 자재는 대시보드 표에 <span class="q">💤 휴면 (직접 지정)</span> 으로 보입니다.</p></li>
+<li><b>자동 판정으로 돌리려면 스위치를 자동 판정과 같은 쪽으로 다시 돌립니다.</b><p>직접 지정이 지워지고 스위치 끝이 <span class="q">자동</span> 으로 돌아갑니다.</p></li>
+</ol></div>
+<div class="do"><div class="dt">따라하기 · 소진 후 사용 안 함</div><ol class="st">
+<li><b>상세 머리 오른쪽 <span class="k">소진 후 사용 안 함 (재주문 안 함)</span> 스위치를 켭니다.</b><p><span class="q">소진 후 단종으로 표시했습니다</span> 가 뜨고 상태가 <span class="b vio">소진 후 단종</span>, 목록의 발주 칸이 <span class="q">재주문 안 함</span> 이 됩니다.</p></li>
+<li><b>다시 발주 대상으로 돌리려면 스위치를 끕니다.</b><p><span class="q">소진 후 단종 표시를 껐습니다 — 다시 발주 알림 대상입니다</span> 가 뜹니다.</p></li>
+</ol></div>
+<h3 id="mml-inb">입고 예정 · 입고 확인 · 보유수량 맞추기</h3>
+<p>상세 아래 <span class="q">자세히 보기</span> 의 <span class="k">📦 입고 · 재고 기록</span> 카드를 누릅니다. 새 기록을 넣는 칸이 위, 기록 목록이 아래에 있습니다.</p>
+<div class="do"><div class="dt">따라하기 · 입고 예정 등록 (발주했을 때)</div><ol class="st">
+<li><b>종류 단추에서 <span class="k">📦 입고 예정</span> 을 고릅니다.</b></li>
+<li><b><span class="q">입고 예정일</span> · <span class="q">수량</span> 을 넣고, <span class="q">메모 (선택)</span> 에 PO 번호 · 선적일 등을 적습니다.</b></li>
+<li><b>아래 미리 보기 줄을 확인합니다.</b><p><span class="q">등록하면 → 소진 예상 A → B (+N일) · 발주 필요일 C</span>. 입고가 소진보다 늦으면 ⚠ 경고가 나옵니다.</p></li>
+<li><b><span class="k p">+ 등록</span> 을 누릅니다.</b><p>이제 이 자재는 <span class="b sky">📦 발주 완료</span> 로 표시되고, 상세 맨 위에 입고 대기 띠가 생깁니다.</p></li>
+</ol></div>
+<div class="do"><div class="dt">따라하기 · 입고 확인 (실제로 들어왔을 때)</div><ol class="st">
+<li><b>예정 줄(또는 맨 위 띠)의 <span class="k">✓ 입고 확인</span> 을 누릅니다.</b></li>
+<li><b><span class="q">실제 입고일</span> · <span class="q">실제 수량</span> 을 확인하거나 고칩니다.</b><p>아래에 재고에 실제로 더해질 수량이 미리 보입니다. 입고일 앞 7일 안에 MES 매입이 있으면 <span class="q">⚠ 입고일 앞 7일 안에 MES 매입이 있습니다</span> 가 뜹니다. 그 MES 가 이번 입고와 다른 입고면 <span class="k">다른 입고</span>(확인 수량을 모두 더함), 같은 입고면 <span class="k">같은 입고</span>(MES 로 이미 들어온 몫은 빼고 더함)를 고릅니다.</p></li>
+<li><b><span class="k p">재고에 반영</span> 을 누릅니다.</b><p>예정 없이 바로 넣으려면 종류 <span class="k">✅ 입고 확인</span> → 날짜(오늘까지) · 수량 → <span class="k">+ 입고 반영</span>.</p></li>
+</ol></div>
+<div class="do"><div class="dt">따라하기 · 보유수량 맞추기 (실제로 세어 봤을 때)</div><ol class="st">
+<li><b>종류 <span class="k">🔢 보유수량 맞추기</span> 를 고릅니다.</b></li>
+<li><b><span class="q">센 날짜</span> 와 <span class="q">실제 보유 수량</span> 을 넣습니다(0 도 됨).</b><p>미리 보기에 계산과의 차이가 나옵니다.</p></li>
+<li><b><span class="k p">+ 보유수량 맞추기</span> 를 누릅니다.</b><p>그날부터 이 수량에서 다시 셉니다.</p></li>
+</ol></div>
+<ul>
+<li>기록 고치기 : <span class="k">수정</span> → 아래 칸에서 고침 → <span class="k">저장</span>. 지우기 : <span class="k">삭제</span> → 확인. 입고 확인을 다시 예정으로 돌리려면 <span class="k">예정으로</span>.</li>
+<li>저장은 화면에 바로 반영되고 서버 저장은 뒤에서 이어집니다. 실패하면 <span class="q">저장하지 못해 되돌렸습니다</span> 가 뜹니다.</li>
+</ul>
+<h4>MES 입고와 저절로 맞춥니다</h4>
+<p>MES 매입(설정 › 업로드)이 실제 입고의 기준입니다. 같은 입고를 두 번 세지 않도록 화면 기록과 저절로 맞춥니다.</p>
+<div class="tw"><table class="fx">
+<tr><th>표시</th><th>뜻</th></tr>
+<tr><td><span class="q">MES N 들어옴 · 남은 M</span></td><td>예정 중 N 은 MES 로 들어왔고, 남은 M 만 앞날 계산에 씀</td></tr>
+<tr><td><span class="b grn">MES 반영 ✓</span></td><td>입고 확인한 수량이 MES 에도 있음 (한 번만 셈)</td></tr>
+<tr><td><span class="b gry">MES 대기</span></td><td>아직 MES 에 없음 — MES 가 올라오면 저절로 맞춤</td></tr>
+<tr><td><span class="k">🔗 MES 로 자동 확인 N건</span></td><td>MES 로 다 들어온 예정 목록 (펼쳐서 확인)</td></tr>
+<tr><td><span class="q">앞 MES 와 다른 입고</span></td><td>입고 확인 때 <span class="k">다른 입고</span> 를 고른 기록 — 입고일 앞 7일 MES 와 따로 더함</td></tr>
+</table></div>
+
+<h3 id="mml-ship">협력사 발송 기록 (출발 예정 · 발송 확인)</h3>
+<p>협력사가 알려 준 <b>출발 예정일</b>과 실제로 보낸 날(<b>발송 확인</b>)을 입고 예정마다 적어, 물건이 오는 중인지 한눈에 봅니다. 입고 예정일 · 재고 계산은 바뀌지 않습니다.</p>
+<div class="do"><div class="dt">따라하기 · 발송 기록 적기</div><ol class="st">
+<li><b>상세 <span class="k">📦 입고 · 재고 기록</span> 의 입고 예정 줄에서 <span class="k">🚚 발송 기록</span> 을 누릅니다.</b><p>줄 아래에 <span class="q">🚚 협력사 발송</span> 칸이 열립니다. 이미 적었으면 단추 자리에 지금 상태(예: <span class="q">🗓 11/20 출발 예정</span>)가 보이고, 눌러서 고칩니다.</p></li>
+<li><b>협력사가 알려 준 <span class="q">출발 예정일</span> 을 넣고 <span class="k p">저장</span> 을 누릅니다.</b><p>상태가 <span class="q">🗓 MM/DD 출발 예정</span> 이 됩니다.</p></li>
+<li><b>실제로 출발하면 <span class="q">실제 출발일</span> · <span class="q">운송장 · B/L</span>(선택)을 넣고 <span class="k p">저장</span>.</b><p>오늘 출발했으면 <span class="k">🚚 오늘 발송 확인</span> 한 번이면 됩니다. 상태가 <span class="q">🚚 MM/DD 발송</span> 이 됩니다. 잘못 적었으면 <span class="k">기록 지우기</span>.</p></li>
+</ol></div>
+<div class="tw"><table class="fx">
+<tr><th>표시</th><th>뜻 · 할 일</th></tr>
+<tr><td>🗓 MM/DD 출발 예정</td><td>협력사가 알려 준 출발일 · 아직 발송 확인 전</td></tr>
+<tr><td>🚚 MM/DD 발송</td><td>실제로 출발함 (발송 확인) · 마우스를 올리면 운송장 · 출발 뒤 입고까지 며칠인지</td></tr>
+<tr><td>⚠ 출발 MM/DD 지남</td><td>출발 예정일이 지났는데 발송 확인이 없음 — 협력사에 실제로 보냈는지 확인</td></tr>
+</table></div>
+<p>보이는 곳 : 자재 목록의 1차 · 2차 입고 날짜 옆 · 상세 맨 위 입고 대기 띠 · 재고 소진 그래프(▶ 출발일 · 출발 → 입고 선) · 대시보드 › 재고 · 소진 표의 발주 권장 칸 · 자동 메일의 발주 완료 줄.</p>
+
+<h3 id="mml-late">입고 지연 정리 · 품번 변경</h3>
+<div class="do"><div class="dt">따라하기 · 지연된 입고 예정 정리</div><ol class="st">
+<li><b>목록 머리의 <span class="k">⚠ 입고 지연 N · 정리</span> 를 누릅니다.</b><p>자재 · 예정일 · 수량 · MES 입고 · 메모가 나옵니다. MES 입고가 80% 이상이면 <span class="q">들어온 것 같습니다</span> 가 붙습니다.</p></li>
+<li><b>처리할 줄을 고릅니다.</b><p><span class="k">모두 고르기</span> 또는 <span class="k">MES 입고가 확인된 N건 고르기</span>.</p></li>
+<li><b>알맞은 단추를 누릅니다.</b><ul>
+<li><span class="k">✓ 고른 N건 입고 확인 (재고 반영)</span> : 실제로 들어왔는데 MES 에 없을 때</li>
+<li><span class="k">고른 N건 MES 반영됨</span> : MES 에 이미 들어왔을 때</li>
+<li><span class="k">고른 N건 삭제</span> · 날짜만 바꾸려면 줄의 <span class="k">날짜 수정</span></li></ul></li>
+</ol></div>
+<ul>
+<li><b>🔁 품번 변경 규칙</b> : 공급업체가 바뀌어 완성품의 자재 품번이 바뀐 것을 적습니다. 적용일 · 완성품 · 새 품번 · 바꿀 품번(비우면 자동) · 메모 → <span class="k">+ 줄 더하기</span> → <span class="k">저장 · 다시 계산</span>. 적용일부터 새 품번으로 사용량을 셉니다(예전 재고를 새 품번으로 옮기는 것은 아님).</li>
+<li><b>소진 후 사용 안 함</b> : 남은 재고만 쓰고 재주문하지 않는 자재로 바꾸는 상세 머리 스위치입니다. → <a class="go" href="#mml-dorm">휴면 재고 · 소진 후 사용 안 함</a></li>
+</ul>
+</section>
+
+<section id="g-material-po">
+<div class="sh"><h2>발주계획관리 · 협력사에 SL 보내기</h2></div>
+<div class="meta2"><span class="path">자재관리 › 발주계획관리</span></div>
+<p class="lede">자재별 월 발주계획(SL)을 적고 협력사에 엑셀 · 메일로 보냅니다. <b>FIRM = 이번 달 포함 4개월</b>, <b>FORECAST = 그 뒤 6개월</b>입니다. 예) 11월이면 FIRM 11~2월, FORECAST 3~8월. 협력사에 보낼 때는 <b>보낼 기간</b>(최대 12개월)과 <b>언어</b>(한국어 / English)를 고릅니다.</p>
+
+<div class="do"><div class="dt">따라하기 · 발주계획 적기</div><ol class="st">
+<li><b>거르기로 자재를 좁힙니다.</b><p>검색 · <span class="q">조회 년월</span>(그 달부터 10개월) · 품목군(기본 ★ 집중 관리) · 매입처 · 구분 · 고객사 · <span class="q">계획 있는 자재만</span>.</p></li>
+<li><b><span class="k">✎ 수정</span> 을 누릅니다.</b></li>
+<li><b>달 칸에 수량을 넣습니다.</b><p>흐린 숫자는 그 달 예상 사용량, <b>≈</b> 는 계획 · S/L 이 끝난 달이라 마지막 3개월 평균으로 추정한 값입니다. Enter = 아래 칸, Tab = 옆 칸, Esc = 그 칸 되돌리기.</p></li>
+<li><b><span class="k p">저장 (N)</span> 을 누릅니다.</b><p>바꾼 칸이 한꺼번에 저장됩니다. 그만두려면 <span class="k">취소</span>(모두 되돌릴지 묻습니다). 쪽을 넘겨도 바꾼 칸은 남아 있습니다.</p></li>
+</ol></div>
+<h3 id="po-auto">자동 채우기 · 범위 초기화 · 메모</h3>
+<ul>
+<li><span class="k">⚡ 자동 채우기</span> : <span class="q">어느 자재</span>(화면 전체 / 이 쪽 / 계획 있는 자재) · <span class="q">어느 달</span>(FIRM · FORECAST · 10개월) · <span class="q">어느 칸</span>(빈 칸만 / 덮어쓰기) · 3개월 평균 채우기 · <span class="q">VINFAST 백오더 반영</span>(달별 %, 합 100%) → <span class="k">채우기</span>. <b>아직 저장되지 않았으니 <span class="k">저장</span> 을 눌러야 합니다</b>(<span class="k">↶ 되돌리기</span> 가능).</li>
+<li><span class="k">🧹 범위 초기화</span> : 자재 · 달을 골라 수량만 지웁니다(메모는 남음). 이것도 <span class="k">저장</span> 해야 반영됩니다.</li>
+<li><span class="k">📝</span> 메모 : 자재 메모 · 달마다 메모 · 고친 기록. 주황 점이 있는 칸은 그 달 메모가 있다는 뜻입니다.</li>
+</ul>
+
+<h3 id="po-send">협력사에 보내기</h3>
+<div class="do"><div class="dt">따라하기 · SL 엑셀 · 메일</div><ol class="st">
+<li><b>보낼 매입처로 거른 뒤 <span class="k">⬇ SL 엑셀 (협력사 공유용)</span> 을 누릅니다.</b><p><span class="q">SL 엑셀 · 메일 (협력사 공유용)</span> 창이 뜹니다. 자재는 지금 거르기 그대로(모든 쪽)입니다.</p></li>
+<li><b><span class="q">보낼 기간</span> 을 고릅니다.</b><p>시작 월 ~ 끝 월(최대 12개월), 또는 <span class="q">당월부터</span> <span class="k">FIRM 4개월</span> · <span class="k">6개월</span> · <span class="k">10개월</span>. 처음 값은 조회 년월부터 10개월입니다. → <a class="go" href="#po-period">보낼 기간 고르기</a></p></li>
+<li><b><span class="q">언어</span> 를 확인합니다.</b><p>해외 업체는 처음부터 <span class="k">English</span>, 국내 업체는 <span class="k">한국어</span> 가 골라져 있습니다. → <a class="go" href="#po-en">영문 SL 보내기</a></p></li>
+<li><b><span class="q">협력사에 전할 말</span> 을 적습니다(비워도 됨).</b><p>엑셀 위쪽과 메일 본문에 들어갑니다.</p></li>
+<li><b>파일로 받으려면 <span class="k p">⬇ 엑셀 내려받기</span>, 메일로 보내려면 봉투 아이콘(<span class="k">이메일로 보내기</span>)을 누릅니다.</b></li>
+<li><b><span class="q">✉ SL 메일 보내기</span> 창에서 받는 사람(필수) · 참조 · 제목 · 본문을 확인합니다.</b><p>언어 · 보낼 기간은 이 창에서도 바꿀 수 있습니다(고친 제목 · 본문은 그대로 두고 기간 글자만 새 달로). 매입처를 골랐다면 <span class="q">'매입처' 주소록에 저장</span> 을 체크해 다음에 다시 씁니다. 본문 자리표 : {매입처} {FIRM} {FORECAST} {기간} {전할말}.</p></li>
+<li><b>첨부 <span class="k">⬇ 미리 받기</span> 로 엑셀을 열어 본 뒤 <span class="k p">✉ 보내기</span>.</b><p>창 아래 <span class="q">보낸 기록</span> 에 때 · 누가 · 받는 사람 · 제목 · 기간(개월 · English) · 결과가 남습니다.</p></li>
+</ol></div>
+<p class="mut">이 SL 메일은 직접 보낼 때만 나갑니다. 사내 조달 알림 메일(이메일 설정)과는 다른 기능입니다.</p>
+<h3 id="po-period">보낼 기간 고르기</h3>
+<div class="tw"><table class="fx">
+<tr><th>달 칸 색</th><th>뜻</th></tr>
+<tr><td><span class="b grn">FIRM</span></td><td>당월 포함 4개월 — 확정 발주 (수량 · 납기를 지켜 달라는 달)</td></tr>
+<tr><td><span class="b blu">FORECAST</span></td><td>그 뒤 달 — 예상 (생산 · 자재 준비용, 확정 아님)</td></tr>
+<tr><td><span class="b gry">PAST</span></td><td>당월보다 앞선 달 — 지난 계획 (시작 월을 당월 앞으로 고르면 들어감)</td></tr>
+</table></div>
+<ul>
+<li>기간은 최대 12개월입니다. 끝 월은 시작 월부터 12개월 안에서만 고를 수 있습니다.</li>
+<li>고른 기간에 맞춰 내려받는 엑셀 · 메일 첨부 · 메일 본문의 {기간} {FIRM} {FORECAST} 가 모두 같은 달이 됩니다. 칸 아래에 들어가는 달이 <span class="q">FIRM 2026-11 ~ 2027-02 (4)</span> 처럼 나옵니다.</li>
+</ul>
+<h3 id="po-en">해외 업체에 영문 SL 보내기</h3>
+<div class="do"><div class="dt">따라하기 · 영문 SL</div><ol class="st">
+<li><b>해외 업체로 거르고 <span class="k">⬇ SL 엑셀 (협력사 공유용)</span> 을 누릅니다.</b><p>그 매입처 자재의 절반 이상이 해외(수입)면 <span class="q">해외 업체 — 영문 자동 (AI 번역)</span> 으로 <span class="k">English</span> 가 먼저 골라집니다. 국내 업체도 <span class="k">English</span> 를 누르면 영문으로 보낼 수 있습니다.</p></li>
+<li><b>전할 말은 한글로 적어도 됩니다.</b><p>English 면 제목 · 본문 · 엑셀(시트 이름 Schedule Line · 머리글 Part No. · Description …)이 영어가 되고, 한글 전할 말 · 품명 · 메모는 AI 가 영어로 옮깁니다.</p></li>
+<li><b>메일 창에서 제목 · 본문을 읽어 봅니다.</b><p><span class="q">⚠ 제목 · 본문에 한글이 남아 있습니다</span> 가 뜨면 <span class="k">🌐 AI 영문 번역</span> 을 누르거나 영어로 고칩니다.</p></li>
+<li><b><span class="k">⬇ 미리 받기</span> 로 영문 엑셀을 확인하고 <span class="k p">✉ 보내기</span>.</b><p>보낸 뒤 <span class="q">엑셀에 번역 못 한 한글 N건</span> 이 뜨면 엑셀 안에 한글이 남은 것이니 품명 · 메모를 확인하세요.</p></li>
+</ol></div>
+<ul>
+<li>기본 문구는 한국어 · 영문 따로 저장됩니다(<span class="k">💾 기본 문구로 저장</span> · <span class="k">↺ 처음 문구</span>). 영문 자리표 : {SUPPLIER} {PERIOD} {MONTHS} {FIRM} {FORECAST} {NOTE}.</li>
+</ul>
+<div class="nt warn">AI 번역은 틀릴 수 있습니다. 품번 · 수량 · 날짜는 그대로 두지만, 보내기 전에 꼭 한 번 읽어 주세요.</div>
+</section>
+
+<section id="g-material-free">
+<div class="sh"><h2>무상출고요청 (샘플 · 반출)</h2></div>
+<div class="meta2"><span class="path">자재관리 › 무상출고요청</span><span class="who">보기 · 요청 : 자재관리 권한 · 확인 · 출고 : 생산관리팀 · 마스터 · 엑셀 올리기 : 마스터</span></div>
+<p class="lede">샘플 · 반출처럼 <b>돈을 받지 않고 내보내는 자재 · 제품</b>을 요청하고, 생산관리팀(생관팀)이 확인 · 출고까지 처리하는 곳입니다. 매달 쓰던 「샘플 &amp; 반출 의뢰서」 엑셀을 대신하고, 처리 결과는 자재관리 재고 · 입고 예정에 그대로 이어집니다.</p>
+<ul class="flow">
+<li><b>① 요청</b><span>요청자 · <span class="k">+ 새 요청</span> (품번 · 수량 · 목적 · 필요일자)</span></li>
+<li><b>② 확인</b><span>생관팀 · 처리 방식 · 공급 가능일 · 예상입고일 → 자재관리 입고 예정</span></li>
+<li><b>③ 출고 완료</b><span>생관팀 · 출고수량 · 일자 · 장소 → 자재관리 재고에서 뺌</span></li>
+</ul>
+
+<div class="wf"><div class="wh">화면 구성 · 위에서 아래로</div><ol>
+<li><div><b>숫자 카드 4장</b><span><span class="q">확인 기다림</span> · <span class="q">처리 중</span> · <span class="q">⚠ 지연</span>(필요일자가 지났는데 출고 전) · <span class="q">출고 완료</span> — 누르면 그 요청만 보입니다</span></div></li>
+<li><div><b>머리</b><span><span class="q">무상출고 요청</span> · 기간 · 건수 · 상태 막대 · 내 권한 표시 · <span class="k">+ 새 요청</span> · <span class="k">📤 엑셀 올리기</span>(마스터)</span></div></li>
+<li><div><b>생관팀 담당</b><span>수입자재 · 국내자재 · 완제품별 담당자 이름 (엑셀 맨 위 줄에서 읽음)</span></div></li>
+<li><div><b>거르기</b><span>검색 · <span class="q">기간 (의뢰서 달)</span> 연도 · 월 ‹ › · 상태 · 구분 · 자재/제품 · 출고유형 · 의뢰자 · <span class="q">내 담당 · 내 요청만</span> · <span class="k">↺ 초기화</span></span></div></li>
+<li><div><b>표</b><span>No · 품번 · 품명 · 구분 · 요청수량 · 필요일자 · 출고유형 · 공급 가능 · 입고 예정 (자재관리) · 출고 · 자재관리 재고 · 담당 · 상태 · 할 일 — 같은 의뢰(의뢰자 · 목적 · 필요일자)는 한 묶음</span></div></li>
+</ol></div>
+<p>처음에는 <b>이번 달</b> 요청이 보입니다. ‹ › 로 달을 옮기고, <span class="k">이번 달</span> 로 돌아옵니다. 위 메뉴 <span class="k">무상출고요청</span> 옆 숫자는 생관팀에게는 확인 기다림 + 늦은 처리 중 건수, 그 밖의 사람에게는 지연 건수입니다.</p>
+<div class="tw"><table class="fx">
+<tr><th>상태</th><th>뜻 · 지금 차례</th></tr>
+<tr><td><span class="b yel">대기</span></td><td>요청만 들어옴 — 생관팀 확인 차례 (요청자는 아직 고치거나 지울 수 있음)</td></tr>
+<tr><td><span class="b blu">확인 · 처리 중</span></td><td>생관팀이 처리 방식 · 날짜를 정함 — 출고 차례</td></tr>
+<tr><td><span class="b grn">출고 완료</span></td><td>내보냄 — 자재관리 재고에서 뺌</td></tr>
+<tr><td><span class="b gry">반려</span></td><td>처리하지 않음 — 반려 이유가 기록에 남음</td></tr>
+<tr><td><span class="b red">⚠ 지연</span></td><td>샘플 필요일자가 지났는데 아직 출고 전</td></tr>
+</table></div>
+
+<h3 id="free-new">요청하기 (요청자)</h3>
+<div class="do"><div class="dt">따라하기 · 새 무상출고 요청</div><ol class="st">
+<li><b><span class="k p">+ 새 요청</span> 을 누릅니다.</b><p><span class="q">+ 새 무상출고 요청</span> 창이 열립니다. 한 의뢰에 품번 여러 줄을 함께 넣습니다.</p></li>
+<li><b>위 칸에 <span class="q">의뢰자</span> · <span class="q">구분</span> · <span class="q">차종</span> · <span class="q">샘플 필요일자</span> · <span class="q">목적</span> 을 넣습니다.</b><p>예) 목적 : KGM 개발 검증 샘플 · JG 리워크용 부품</p></li>
+<li><b>줄마다 <span class="q">자재/제품</span> 을 고르고 <span class="q">품번</span> 을 넣습니다.</b><p>품번만 넣으면 <b>품명 · 단위가 저절로</b> 들어가고 잠깁니다(✓ 일치). 없는 품번이면 <span class="q">✗ 품목정보에 없는 품번</span> 과 비슷한 품번이 나오니 골라 주세요.</p></li>
+<li><b><span class="q">요청수량</span> 을 넣고, 필요하면 <span class="q">출고유형 (희망)</span> · <span class="q">비고</span> 를 적습니다.</b><p>출고유형은 비워 두면 생관팀이 정합니다(창고재고 · 생산요청 · 입고요청). 줄이 더 필요하면 <span class="k">+ 줄 더하기</span>, 빼려면 줄 끝 ✕.</p></li>
+<li><b><span class="k p">요청 등록</span> 을 누릅니다.</b><p><span class="q">요청 N줄을 등록했습니다 — 생관팀 확인을 기다립니다.</span> 가 뜨고 상태는 <span class="b yel">대기</span> 입니다. 어디에도 없는 품번이면 <span class="k">그대로 등록</span> / <span class="k">품번 고치기</span> 를 묻습니다.</p></li>
+</ol></div>
+<ul>
+<li>내가 화면에서 쓴 <b>대기</b> 요청은 줄의 <span class="k">수정</span> · <span class="k">지우기</span> 로 고치거나 지울 수 있습니다. 생관팀이 확인한 뒤에는 생관팀만 고칩니다.</li>
+<li>줄을 누르면 오른쪽에 상세 창이 열립니다 : ① 요청 → ② 확인 → ③ 출고 완료 진행, 요청 내용, 생관팀 처리, 같은 품번의 자재관리 재고 · 소진 예상, 처리 기록(누가 · 언제).</li>
+<li>내 것만 보려면 <span class="q">내 담당 · 내 요청만</span> 을 체크합니다.</li>
+</ul>
+
+<h3 id="free-ack">확인 · 출고 처리 (생관팀)</h3>
+<p>계정 부서에 <b>'생산관리'</b> 또는 <b>'생관'</b>이 들어 있는 사람과 마스터만 할 수 있습니다. 머리에 <span class="q">✓ 생관팀 처리 권한</span> 이 보이면 됩니다.</p>
+<div class="do"><div class="dt">따라하기 · 확인 처리</div><ol class="st">
+<li><b>대기 줄의 <span class="k">✓ 확인</span> 을 누릅니다.</b><p>여러 줄은 왼쪽 칸을 체크하고 위 띠의 <span class="k">✓ 확인</span> 으로 한 번에 합니다. 묶음 머리를 체크하면 그 의뢰 전체가 골라집니다.</p></li>
+<li><b><span class="q">처리 방식</span> 을 고릅니다 : 창고재고 · 생산요청 · 입고요청.</b></li>
+<li><b><span class="q">공급 가능일자</span> 와, 들어올 자재면 <span class="q">예상입고일</span> 을 넣습니다.</b><p>여러 줄이면 <span class="k">(모두에 넣기)</span> 로 같은 날짜를 채웁니다. 필요하면 <span class="q">메모</span>.</p></li>
+<li><b>줄마다 <span class="q">입고 예정 수량</span> 과 <span class="q">자재관리 입고 예정</span> 의 <span class="k">올리기</span> 를 확인합니다.</b><p>올리기를 켜면 자재관리 같은 품번의 <b>입고 예정</b>(🎁 표시)에 그대로 올라갑니다. 입고요청이면 처음부터 켜져 있습니다. 자재관리 목록에 없는 품번(완성품 등)은 <span class="q">목록에 없음</span>.</p></li>
+<li><b><span class="k p">✓ 확인 처리</span> 를 누릅니다.</b><p>상태가 <span class="b blu">확인 · 처리 중</span> 으로 바뀝니다. 날짜를 바꾸려면 줄의 <span class="k">수정</span>.</p></li>
+</ol></div>
+<div class="do"><div class="dt">따라하기 · 출고 완료</div><ol class="st">
+<li><b>처리 중 줄의 <span class="k">📦 출고</span> 를 누릅니다.</b><p>대기 줄을 바로 내보낼 때는 상세 창의 <span class="k">📦 바로 출고 완료</span>, 여러 줄은 체크 뒤 위 띠의 <span class="k">📦 출고 완료</span>.</p></li>
+<li><b><span class="q">출고일자</span>(오늘까지) · <span class="q">출고장소</span>(창고 · 라인)를 넣습니다.</b></li>
+<li><b>줄마다 <span class="q">출고수량</span> 과 <span class="k">재고에서 빼기</span> 를 확인합니다.</b><p>켜 두면 출고일자에 출고수량만큼 자재관리 <b>입고 · 재고 기록</b>에 − 로 들어가 재고 · 소진 예상이 바로 바뀝니다. 수량이 「1 BOX」 처럼 글자면 기록만 남고 재고에서는 빼지 않습니다(숫자로 넣으면 뺌).</p></li>
+<li><b><span class="k p">📦 출고 완료</span> 를 누릅니다.</b><p>상태가 <span class="b grn">출고 완료</span> 가 되고 표의 <span class="q">출고</span> 칸에 <span class="q">재고 −N</span> 이 보입니다.</p></li>
+</ol></div>
+<ul>
+<li><b>반려</b> : <span class="k">반려</span> → 반려 이유(필수) → <span class="k">반려</span>. 다시 받으려면 상세 창의 <span class="k">반려 풀기</span>.</li>
+<li><b>되돌리기</b>(상세 창) : <span class="k">확인 취소</span> = 대기로 (자동으로 올린 입고 예정은 지움 · 이미 입고 확인된 것은 그대로) · <span class="k">출고 완료 취소</span> = 처리 중으로 (재고에서 뺀 기록을 지워 재고를 다시 더함).</li>
+</ul>
+<div class="nt warn">상세 창의 <span class="k">지우기</span> 는 이어진 자재관리 입고 예정 · 재고 기록까지 함께 지우며 되돌릴 수 없습니다.</div>
+
+<h3 id="free-up">의뢰서 엑셀 올리기 (마스터)</h3>
+<div class="do"><div class="dt">따라하기 · 「샘플 &amp; 반출 의뢰서」 올리기</div><ol class="st">
+<li><b><span class="k p">📤 엑셀 올리기</span> 를 누르고 파일을 끌어 놓습니다.</b><p>여러 파일을 한 번에 골라도 됩니다. 파일 이름의 달(예: <code>2026 10월 무상출고.xlsx</code> → 10월)을 의뢰서 달로 씁니다.</p></li>
+<li><b>파일마다 미리 보기를 확인합니다.</b><p>새 요청 · 바뀜 · 같음 건수와 경고(날짜를 못 읽은 칸 등)가 나옵니다. <span class="k">▸ 줄 보기</span> 로 줄을 펼쳐 봅니다.</p></li>
+<li><b><span class="k p">저장</span> 을 누릅니다.</b><p>다시 올리면 같은 줄(달 · No · 품번)은 고치고 새 줄만 더합니다. 화면에서 생관팀이 처리한 값은 덮지 않습니다. 출고 완료된 줄은 <span class="q">출고 완료된 줄은 자재관리 재고에서 빼기</span> 로 재고에도 반영할 수 있습니다.</p></li>
+</ol></div>
+<p class="mut">같은 파일의 「품목정보」 시트도 저장되어, <span class="k">+ 새 요청</span> 창에서 품번만 넣으면 엑셀 VLOOKUP 과 같은 품명 · 단위가 들어갑니다.</p>
+
+<h3 id="free-link">자재관리와 이어지는 곳</h3>
+<div class="tw"><table class="fx">
+<tr><th>자재관리 화면</th><th>보이는 것</th></tr>
+<tr><td>자재 목록</td><td>품번 옆 <span class="b vio">🎁 N</span> = 처리 전 무상출고 요청 N건</td></tr>
+<tr><td>자재 상세</td><td><span class="q">🎁 무상출고 요청</span> 띠 (처리 전 · 출고 완료 · 재고에서 뺀 수량) · <span class="k">무상출고요청에서 보기 →</span></td></tr>
+<tr><td>입고 예정</td><td>확인 때 올린 예정에 🎁 번호 꼬리표 — 날짜 · 수량은 자재관리에서 고쳐도 됩니다</td></tr>
+<tr><td>입고 · 재고 기록</td><td><span class="q">🎁 무상출고</span> 묶음 = 출고 완료로 뺀 − 수량 (고치기 · 되돌리기는 무상출고요청에서)</td></tr>
+<tr><td>상태 (휴면)</td><td>생산 · 매입 사용이 없어도 무상출고로 쓰는 자재(처리 전 요청 · 최근 90일 출고)는 휴면으로 보지 않습니다</td></tr>
+</table></div>
+</section>
+
+<section id="g-material-prod">
+<div class="sh"><h2>생산 차질 점검 · 수불부 기준</h2></div>
+<div class="meta2"><span class="path">자재관리 › 생산 차질 점검 · 수불부 기준</span></div>
+<p class="lede">완성품 기준으로 <b>자재가 모자라 생산이 막히는 날</b>을 찾습니다. 수불부 기준은 재고 계산의 출발점인 재무회계팀 수불부를 그대로 보여 줍니다.</p>
+
+<h3 id="prod-check">생산 차질 점검</h3>
+<div class="do"><div class="dt">따라하기 · 막히는 완성품 찾기</div><ol class="st">
+<li><b>상태 막대에서 <span class="b red">생산불가</span> 또는 <span class="b ora">긴급</span> 을 누릅니다.</b><p><span class="q">앞으로 계획이 있는 것만</span> 은 처음부터 켜져 있습니다. 검색(완성품 · 라인 · 자재 품번) · <span class="q">라인</span> · <span class="q">상태</span> 로도 좁힙니다.</p></li>
+<li><b>표를 봅니다.</b><p>자재 충족(막대 + 부족 N) · <b>병목 자재</b> · 단독 생산 가능 · <b>부족 시작일</b> · 앞으로 계획 · <b>막히는 계획 수량</b>. ▶ 를 누르면 자재 줄이 펼쳐집니다.</p></li>
+<li><b>줄을 누르면 완성품 상세가 열립니다.</b><p>그래프(진청록 실적 · 연청록 생산계획 · 연보라 VINFAST 롤링 S/L · 빨강 막히는 계획), <span class="q">날짜별 생산계획</span>(생산 가능 / 일부만 가능 / 생산 불가), <span class="q">연결 자재 (BOM)</span>.</p></li>
+<li><b>병목 자재 줄을 눌러 자재 정보를 보고, 자재관리에서 입고 · 발주를 챙깁니다.</b><p>돌아가려면 <span class="k">← 목록으로 돌아가기</span>.</p></li>
+</ol></div>
+<p class="mut">자세한 판정 기준은 화면 아래 <span class="k">생산 차질 점검 보는 법</span> 을 펼쳐 보세요.</p>
+
+<h3 id="prod-base">수불부 기준</h3>
+<p>8월 말 수불부(기준 재고)를 품번별로 봅니다. 검색(품번 · 품명 · 업체)과 <span class="q">시트</span> 로 좁히고, 제목 줄에서 품번 수 · 기말 수량 · 기말 금액을 봅니다. 표 : 품목코드 · 품목명 · 업체 · 시트 · 기초 · 입고 · 출고 · 기말 · 기말 금액 · 구분. 줄을 누르면 자재 옆 창이 열립니다.</p>
+</section>
+
+<section id="g-material-mail">
+<div class="sh"><h2>이메일 설정 · 휴대폰 알림 · 데이터 점검</h2></div>
+<div class="meta2"><span class="path">자재관리 › 이메일 설정 · 데이터 점검</span><span class="who">권한: 마스터</span></div>
+<p class="lede">조달 · 발주 알림 메일을 정한 요일 · 시각에 사내 담당자에게 자동으로 보내고, 휴대폰으로 음성 안내를 보냅니다.</p>
+
+<div class="wf"><div class="wh">이메일 설정 화면</div><ol>
+<li><div><b>위 4칸</b><span><span class="q">자동 발송</span>(켜짐/꺼짐 · 다음 발송) · <span class="q">마지막 발송</span> · <span class="q">자료 기준</span>(최신 / ⚠ 확인) · <span class="q">지금 메일에 들어갈 자재</span>(그중 📦 발주 완료 N)</span></div></li>
+<li><div><b>① 자동 발송 · 예약</b><span>묶음 3개 : 전체 / 해외 수입 자재만 / ★ 집중 관리</span></div></li>
+<li><div><b>② 넣을 내용 · ③ 받는 사람 · ④ 메일 글</b><span>표 고르기 · 사내 받는 사람 · 참조 · 제목 · 본문 · 서명</span></div></li>
+<li><div><b>오른쪽 · 아래</b><span>미리보기(<span class="k">PC</span>/<span class="k">휴대폰</span>) · 휴대폰 알림 · 음성 안내 · 발송 기록</span></div></li>
+</ol></div>
+
+<div class="do"><div class="dt">따라하기 · 자동 메일 설정</div><ol class="st">
+<li><b>맨 위 <span class="q">자동 발송</span> 스위치를 켭니다.</b></li>
+<li><b>① 에서 묶음마다 예약 스위치 · 시각 · <span class="k">매일</span> 또는 <span class="k">요일 선택</span> 을 정합니다.</b><p>◉ 는 미리보기 · 시험 · 지금 보내기 대상 묶음입니다. 같은 묶음은 하루 한 번만 나가고, 보낼 것이 없으면 <span class="q">건너뜀</span> 으로 기록됩니다.</p></li>
+<li><b>② 넣을 표를 고릅니다.</b><p>즉시 조달 · 이번 주 발주 · 4주 안 발주. 해외 + 국내 고르기는 <b>전체</b> 묶음에만 쓰입니다.</p></li>
+<li><b>③ 받는 사람을 펼쳐 확인합니다.</b><p>세 묶음이 같은 사람에게 갑니다. 이름 · 아이디 · 주소 일부로 찾아 Enter, ⇄ 또는 끌어서 받는 사람 ↔ 참조, × 로 뺍니다.</p></li>
+<li><b>미리보기 → <span class="k">나에게 시험 메일</span> 로 확인하고 <span class="k p">저장</span>.</b><p>바로 보내려면 <span class="k">지금 보내기</span>(◉ 묶음 · 그 묶음의 오늘 자동 발송은 건너뜀).</p></li>
+</ol></div>
+<div class="nt warn"><span class="q">자료 기준</span> 에 ⚠ 가 보이면 생산실적 · MES 입고가 3일 넘게 안 올라왔거나, MES 생산계획이 7일 안에 끝나거나, 계산 기준일이 오늘과 다른 것입니다. 메일 숫자가 실제와 다를 수 있으니 자료부터 올려 주세요.</div>
+<ul>
+<li>메일 표는 입고 예정이 있는 자재를 아래 <b>📦 발주 완료 · 입고 확인</b> 묶음으로 따로 보여 줍니다(건수는 대시보드 카드와 같음).</li>
+<li>메일의 발주 완료 줄에는 협력사 발송(🚚 발송 · 출발 예정 · ⚠ 출발 예정 지남)이 함께 나옵니다. → <a class="go" href="#mml-ship">협력사 발송 기록</a></li>
+<li><b>휴대폰 알림 · 음성 안내</b> : AKC 안드로이드 앱이 즉시 조달 내용을 읽어 줍니다. 기본 08:30 · 17:30, 주말에도. <span class="k">저장</span> · <span class="k">미리 듣기</span> · <span class="k">내 휴대폰으로 시험</span>. 자재관리 권한이 있는 사람의 등록 기기로 갑니다.</li>
+<li><b>발송 기록</b> : 최근 20건(시각 · 종류 · 결과 보냄/건너뜀/실패 · 내용).</li>
+</ul>
+
+<h3 id="mm-diag">데이터 점검</h3>
+<p>계산에 쓰는 자료가 서로 잘 이어졌는지 점수로 보여 줍니다(80% 이상 초록 · 50% 이상 노랑 · 그 아래 빨강). 자료별 카드, <span class="q">8월 차이가 큰 자재</span>, <span class="q">단위가 다른 자재</span>, <span class="q">BOM 이 없는 계획 품번</span>, <span class="q">품번 찾기</span>(어떤 품번이 왜 안 보이는지), <span class="q">누락 위험 점검</span> 7항목을 봅니다. 숫자가 이상할 때 먼저 여기를 확인하세요.</p>
+</section>

@@ -1,0 +1,92 @@
+<section id="faq">
+<div class="sh"><h2>よくある質問</h2></div>
+<p class="lede">困ったときは、まずここを見てください。タイトルを押すと答えが開きます。</p>
+
+<h3 id="faq-access">ログイン · 画面</h3>
+<details class="mo"><summary>メニューが表示されません</summary><div class="in"><p>その画面の権限がないためです。故障ではありません。管理者（マスター）に必要な画面を依頼してください。→ <a class="go" href="#start-grade">レベルと権限</a></p></div></details>
+<details class="mo"><summary>パスワードを忘れました</summary><div class="in"><p>ログイン画面の <span class="q" title="비밀번호를 잊으셨나요?">パスワードをお忘れですか？</span> で ID · 名前 · 社員番号を入れると、仮パスワード（30分有効）が表示されます。→ <a class="go" href="#login-forgot">パスワードを忘れたとき</a></p></div></details>
+<details class="mo"><summary>認証番号のメールが届きません</summary><div class="in"><p>迷惑メールフォルダを確認し、1分後に <span class="k" title="인증번호 다시 보내기">認証番号を再送信</span> を押してください。アカウントに登録されたメールアドレスが間違っている場合は、管理者に修正を依頼してください。</p></div></details>
+<details class="mo"><summary>使っている途中でログアウトされました</summary><div class="in"><p>30分間何も操作しないと、自動でログアウトします。2分前のウィンドウで <span class="k" title="계속 사용">引き続き使用</span> を押すと続けられます。インストールした Android アプリと VF 出荷管理画面（8〜19時）は例外です。</p></div></details>
+<details class="mo"><summary>数字が古いままです · ほかの人がアップロードしたデータが見えません</summary><div class="in"><p>データは自動で反映されますが、入力欄に入力中の場合は入力が終わってから変わります。それでも変わらなければ <b>F5</b>（再読み込み）を押してください。資材管理は <span class="k" title="새로 계산">再計算</span> を押します。</p></div></details>
+<details class="mo"><summary>ダウンロードした Excel で形式の警告が出ます</summary><div class="in"><p><span class="k" title="예">はい</span> を押すと正常に開きます。名前を付けて保存すると、通常の Excel ファイルになります。</p></div></details>
+
+<h3 id="faq-stock">在庫 · 出荷</h3>
+<details class="mo"><summary>在庫が実際より少なく表示されます</summary><div class="in"><p>出庫可能在庫からは、まだ出ていない <b>待機インボイス</b> の数量が差し引かれています。すでに出たものなら、VF 出荷管理で <span class="k" title="출하하기">出荷する</span> を押してください。差し引きが解除されます。</p></div></details>
+<details class="mo"><summary>今月の目標（S/L）が変わりません</summary><div class="in"><p>正常です。今月の目標は前月最後の S/L 回次で決まるため、月の途中で変わりません。バックオーダーは最新の回次を使います。</p></div></details>
+<details class="mo"><summary>同じインボイスを再アップロードできません</summary><div class="in"><p>ファイル名に <code>_Rev01</code> のように、より高い Rev 番号を付けてください。同じか低い Rev は登録されません。→ <a class="go" href="#inv-upload">インボイスのアップロード</a></p></div></details>
+<details class="mo"><summary>出荷管理にインボイスが表示されません</summary><div class="in"><p>INV 発行で保存したか、または出庫可能在庫に Excel をアップロードしたかを確認してください。<span class="q" title="보기">表示</span> が <span class="k" title="대기">待機</span> になっているか、地域 · 輸送 · 検索の条件がかかっていないかも見てください。</p></div></details>
+<details class="mo"><summary>通知音が鳴りません</summary><div class="in"><p>ブラウザは、画面を一度も押していないと音を止めます。画面を一度押してから <span class="k" title="🔊 소리 시험">🔊 音声テスト</span> を押してみてください。<span class="k" title="🔕 알림 꺼짐">🔕 通知オフ</span> なら押してオンにします。→ <a class="go" href="#push-alert">通知</a></p></div></details>
+<details class="mo"><summary>アップロードを間違えました</summary><div class="in"><p>出荷データ · 生産実績は、<b>該当月のみ置換</b> をオンにしたまま、その月のファイルだけを再アップロードすれば大丈夫です。週次 S/L は同じ日付で再アップロードして <span class="k" title="덮어쓰기">上書き</span> するか、<span class="q" title="S/L 스냅샷 삭제">S/Lスナップショット削除</span> で削除します。</p></div></details>
+<details class="mo"><summary>金額が0で表示される品番があります</summary><div class="in"><p>単価が登録されていない品番です。黄色の帯の品番を <a class="go" href="#up-price">アップロード › 単価管理</a> に登録してください。</p></div></details>
+
+<h3 id="faq-etc">資材 · メール · その他</h3>
+<details class="mo"><summary>無償出庫依頼に確認 · 出庫ボタンが表示されません</summary><div class="in"><p>確認 · 出庫 · 差戻しは、アカウントの部署に「생산관리（生産管理）」（または「생관」）がある人とマスターだけができます。それ以外の人は依頼 · 閲覧のみです。Excel アップロードはマスターのみです。→ <a class="go" href="#free-ack">確認 · 出庫処理</a></p></div></details>
+<details class="mo"><summary>使っている資材なのに休眠と表示されます（またはその逆）</summary><div class="in"><p>資材詳細ヘッダーの <span class="k" title="💤 휴면 재고">💤 休眠在庫</span> スイッチで直接切り替えます。オフにすると再び欠品 · 発注通知の対象になります。→ <a class="go" href="#mml-dorm">休眠在庫 · 在庫切れ後は使用しない</a></p></div></details>
+<details class="mo"><summary>英文 SL メールにハングルが残っています</summary><div class="in"><p>メールウィンドウの <span class="k" title="🌐 AI 영문 번역">🌐 AI 英文翻訳</span> を押すか、直接英語に直してください。AI 翻訳ができないとハングルがそのまま残るので、送る前に読んでください。→ <a class="go" href="#po-en">英文 SL を送る</a></p></div></details>
+<details class="mo"><summary>入庫予定があるのに、なぜ「入庫確認必要」なのですか？</summary><div class="in"><p>予定は実際の入庫ではありません。予定が入らないと正常にならない場合や、予定日を過ぎた場合は、現物が入ったかを確認して <span class="k" title="✓ 입고 확인">✓ 入庫確認</span> を押してください。MES にすでに入っている場合は、<span class="k" title="MES 반영됨">MES反映済み</span> で整理します。</p></div></details>
+<details class="mo"><summary>メールの結果がはっきりしないとき、すぐに再送信してもよいですか？</summary><div class="in"><p>まず送信履歴で、状態 · 宛先 · 時刻を確認してください。<span class="b yel">一部未受信</span> なら、拒否されたアドレスだけを確認すれば大丈夫です。履歴と返送メールを見てから、再送信するかを決めてください。</p></div></details>
+<details class="mo"><summary>AI の回答が間違っているようです</summary><div class="in"><p>回答の下のショートカットからその画面で数字を確認し、<span class="k" title="🚩 답변 신고">🚩 回答を報告</span> を押してください。管理者が <a class="go" href="#ailearn">AI 学習</a> で調整します。</p></div></details>
+</section>
+
+<section id="glossary">
+<div class="sh"><h2>用語集</h2></div>
+<p class="lede">画面でよく目にする言葉です。</p>
+<h3 id="glo-plan">注文 · 計画</h3>
+<div class="tw"><table class="fx">
+<tr><th>用語</th><th>意味</th></tr>
+<tr><td>S/L</td><td>Shipping List。顧客がいつ、どれだけ欲しいかを送ってくる予定数量。毎週新しく受け取ります。</td></tr>
+<tr><td>回次（スナップショット）</td><td>S/L をアップロードした日のオーダーを1枚として保管したもの。<code>07-21_SL</code> のように日付で呼びます。</td></tr>
+<tr><td>ローリング</td><td>1つの回次で、今後の複数の月を見通すこと。</td></tr>
+<tr><td>バックオーダー</td><td>納めるべきだったのに、まだ納められていない遅れた数量。</td></tr>
+<tr><td>FIRM · FORECAST · PAST</td><td>確定 · 予測オーダー（発注計画）· 過去の月。資材の発注計画は FIRM 4か月 + FORECAST 6か月、協力会社に送る SL は最大12か月。</td></tr>
+<tr><td>調整比率</td><td>S/L のうち、実際に売れると見込む比率（通常80%前後）。</td></tr>
+<tr><td>FY</td><td>会計年度。4月から翌年3月まで。</td></tr>
+</table></div>
+<h3 id="glo-stock">在庫 · 出荷</h3>
+<div class="tw"><table class="fx">
+<tr><th>用語</th><th>意味</th></tr>
+<tr><td>棚卸 · 実在庫</td><td>倉庫で直接数えた数量 · 棚卸後の生産と出荷を反映したいまの数量。</td></tr>
+<tr><td>可用在庫</td><td>実際に出せる数量（海上：+ 予定生産、航空：− 梱包未完了）。</td></tr>
+<tr><td>出庫可能</td><td>可用在庫から待機インボイスを引いた数量。</td></tr>
+<tr><td>SL残数量</td><td>今月の目標のうち、まだ満たしていない数量。</td></tr>
+<tr><td>Rev</td><td>インボイスを修正して再発行した改訂番号。大きいほど新しい。</td></tr>
+<tr><td>出庫依頼 · 出庫不可</td><td>「この日にこの車で出してください」という約束 ·「このパレットは出せません」という表示。</td></tr>
+<tr><td>P/L No · NET · GROSS</td><td>パレットの連番 · 品物だけの重さ · 梱包まで含めた重さ。</td></tr>
+<tr><td>フォワーダー · DG</td><td>輸送代行業者 · 危険物（Dangerous Goods、エアバッグの火薬など）。</td></tr>
+</table></div>
+<h3 id="glo-mat">資材</h3>
+<div class="tw"><table class="fx">
+<tr><th>用語</th><th>意味</th></tr>
+<tr><td>リードタイム</td><td>発注から入庫までにかかる日数。資材詳細の ✎ で直せる。</td></tr>
+<tr><td>無償出庫</td><td>サンプル · 搬出のように代金を受け取らずに出す出庫。無償出庫依頼で 依頼 → 生管の確認 → 出庫完了。</td></tr>
+<tr><td>休眠</td><td>直近30日 · 今後60日の使用がない資材。詳細の 💤 スイッチで直接指定 · 解除できる。</td></tr>
+<tr><td>在庫切れ後は使用しない（在庫切れ後に廃番）</td><td>残りの在庫だけを使い、再発注しない資材。発注通知から外れる。</td></tr>
+<tr><td>出発予定 · 発送確認</td><td>協力会社から知らされた出発日 · 実際に出発した日の記録（送り状・B/L）。</td></tr>
+<tr><td>発注必要日</td><td>在庫切れ予想日 − リードタイム。</td></tr>
+<tr><td>入庫予定 · 入庫確認</td><td>今後入る予定 · 実際に入った記録。</td></tr>
+<tr><td>MES</td><td>社内の生産 · 仕入システム。仕入データが実際の入庫の基準。</td></tr>
+<tr><td>受払台帳</td><td>財務会計チームの月末在庫台帳。在庫計算の起点。</td></tr>
+<tr><td>≈</td><td>データのない月を、平均などで推定した値。</td></tr>
+</table></div>
+<h3 id="glo-item">品目の略語</h3>
+<div class="tw"><table>
+<tr><th>略語</th><th>製品</th><th>略語</th><th>製品</th></tr>
+<tr><td>DAB</td><td>運転席エアバッグ</td><td>PAB</td><td>助手席エアバッグ</td></tr>
+<tr><td>SAB</td><td>サイドエアバッグ</td><td>CAB</td><td>カーテンエアバッグ</td></tr>
+<tr><td>KAB</td><td>ニーエアバッグ</td><td>CeAB</td><td>センターエアバッグ</td></tr>
+<tr><td>STW</td><td>ステアリングホイール</td><td>FRT SB · RR SB</td><td>前席 · 後席シートベルト</td></tr>
+<tr><td>FRT BKL · RR BKL</td><td>前席 · 後席バックル</td><td>その他</td><td>その他</td></tr>
+</table></div>
+</section>
+
+<section id="privacy-info">
+<div class="sh"><h2>個人情報 · 利用規定</h2></div>
+<div class="meta2"><span class="path">メイン画面の最下部 · ログイン画面の左上</span></div>
+<p class="lede">システムがどの個人情報をなぜ処理するのか、利用者が守るべき規定を別にまとめてあります。初めて使う方は一度読んでください。</p>
+<ul>
+<li><b>個人情報処理方針</b>：処理する情報（名前 · 社員番号 · 部署 · 役職 · 業務用メール · アクセス記録）、目的、保管期間、委託、情報主体の権利、問い合わせ先（情報保護責任者）。</li>
+<li><b>システム利用規定</b>：アカウント · パスワードの管理、禁止行為、データのダウンロード · 持ち出し、アクセス記録、違反時の措置。</li>
+<li>ログイン · 権限変更 · 主な処理 · ファイルのダウンロードは、利用者 · 日時 · 接続元とともに1年間記録されます。</li>
+<li>アカウント削除は、🔑 ウィンドウの <span class="k" title="계정 삭제 요청">アカウント削除依頼</span> で依頼すると、30日以内に処理されます。</li>
+</ul>
+</section>

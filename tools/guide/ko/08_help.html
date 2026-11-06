@@ -1,0 +1,92 @@
+<section id="faq">
+<div class="sh"><h2>자주 묻는 질문</h2></div>
+<p class="lede">막혔을 때 먼저 여기를 보세요. 제목을 누르면 답이 펼쳐집니다.</p>
+
+<h3 id="faq-access">로그인 · 화면</h3>
+<details class="mo"><summary>메뉴가 보이지 않습니다</summary><div class="in"><p>그 화면 권한이 없는 것입니다. 고장이 아닙니다. 관리자(마스터)에게 필요한 화면을 요청하세요. → <a class="go" href="#start-grade">등급과 권한</a></p></div></details>
+<details class="mo"><summary>비밀번호를 잊었습니다</summary><div class="in"><p>로그인 화면의 <span class="q">비밀번호를 잊으셨나요?</span> 에서 아이디 · 이름 · 사번을 넣으면 임시 비밀번호(30분)가 뜹니다. → <a class="go" href="#login-forgot">비밀번호 찾기</a></p></div></details>
+<details class="mo"><summary>인증번호 메일이 오지 않습니다</summary><div class="in"><p>스팸함을 확인하고 1분 뒤 <span class="k">인증번호 다시 보내기</span> 를 누르세요. 계정에 적힌 메일 주소가 틀렸다면 관리자에게 고쳐 달라고 요청하세요.</p></div></details>
+<details class="mo"><summary>쓰던 중에 로그아웃되었습니다</summary><div class="in"><p>30분 동안 아무것도 하지 않으면 자동으로 로그아웃됩니다. 2분 전 창에서 <span class="k">계속 사용</span> 을 누르면 이어집니다. 설치한 안드로이드 앱과 VF 출하관리 화면(08~19시)은 예외입니다.</p></div></details>
+<details class="mo"><summary>숫자가 예전 그대로입니다 · 다른 사람이 올린 자료가 안 보입니다</summary><div class="in"><p>자료는 저절로 반영되지만, 입력 칸에 글을 쓰는 중이면 다 쓴 뒤에 바뀝니다. 그래도 그대로면 <b>F5</b>(새로고침)를 누르세요. 자재관리는 <span class="k">새로 계산</span> 을 누릅니다.</p></div></details>
+<details class="mo"><summary>내려받은 엑셀이 형식 경고를 냅니다</summary><div class="in"><p><span class="k">예</span> 를 누르면 정상으로 열립니다. 다른 이름으로 저장하면 일반 엑셀 파일이 됩니다.</p></div></details>
+
+<h3 id="faq-stock">재고 · 출하</h3>
+<details class="mo"><summary>재고가 실제보다 적게 나옵니다</summary><div class="in"><p>출고가능 재고에는 아직 나가지 않은 <b>대기 인보이스</b> 수량이 빠져 있습니다. 이미 나간 것이라면 VF 출하관리에서 <span class="k">출하하기</span> 를 눌러 주세요. 차감이 풀립니다.</p></div></details>
+<details class="mo"><summary>이번 달 목표(S/L)가 바뀌지 않습니다</summary><div class="in"><p>정상입니다. 이번 달 목표는 지난 달 마지막 S/L 회차로 정해져 달 중간에 흔들리지 않습니다. 백오더는 최신 회차를 씁니다.</p></div></details>
+<details class="mo"><summary>같은 인보이스를 다시 올릴 수 없습니다</summary><div class="in"><p>파일 이름에 <code>_Rev01</code> 처럼 더 높은 Rev 번호를 붙여 주세요. 같거나 낮은 Rev 는 들어가지 않습니다. → <a class="go" href="#inv-upload">인보이스 올리기</a></p></div></details>
+<details class="mo"><summary>출하관리에 인보이스가 보이지 않습니다</summary><div class="in"><p>INV 발행에서 저장했는지, 또는 출고가능 재고에 엑셀을 올렸는지 확인하세요. <span class="q">보기</span> 가 <span class="k">대기</span> 인지, 지역 · 운송 · 검색 조건이 걸려 있지 않은지도 보세요.</p></div></details>
+<details class="mo"><summary>알림 소리가 나지 않습니다</summary><div class="in"><p>브라우저는 화면을 한 번도 누르지 않으면 소리를 막습니다. 화면을 한 번 누르고 <span class="k">🔊 소리 시험</span> 을 눌러 보세요. <span class="k">🔕 알림 꺼짐</span> 이면 눌러서 켭니다. → <a class="go" href="#push-alert">알림</a></p></div></details>
+<details class="mo"><summary>업로드를 잘못했습니다</summary><div class="in"><p>출하데이터 · 생산실적은 <b>해당 월만 교체</b>를 켠 채 그 달 파일만 다시 올리면 됩니다. 주간 S/L 은 같은 날짜로 다시 올려 <span class="k">덮어쓰기</span> 하거나 <span class="q">S/L 스냅샷 삭제</span> 로 지웁니다.</p></div></details>
+<details class="mo"><summary>금액이 0 으로 나오는 품번이 있습니다</summary><div class="in"><p>단가가 등록되지 않은 품번입니다. 노란 띠의 품번을 <a class="go" href="#up-price">업로드 › 단가 관리</a> 에 넣어 주세요.</p></div></details>
+
+<h3 id="faq-etc">자재 · 메일 · 기타</h3>
+<details class="mo"><summary>무상출고요청에 확인 · 출고 단추가 보이지 않습니다</summary><div class="in"><p>확인 · 출고 · 반려는 계정 부서에 '생산관리'(또는 '생관')가 있는 사람과 마스터만 할 수 있습니다. 다른 사람은 요청 · 보기만 됩니다. 엑셀 올리기는 마스터만 됩니다. → <a class="go" href="#free-ack">확인 · 출고 처리</a></p></div></details>
+<details class="mo"><summary>쓰는 자재인데 휴면으로 나옵니다 (또는 그 반대)</summary><div class="in"><p>자재 상세 머리의 <span class="k">💤 휴면 재고</span> 스위치로 직접 바꿉니다. 끄면 다시 결품 · 발주 알림 대상이 됩니다. → <a class="go" href="#mml-dorm">휴면 재고 · 소진 후 사용 안 함</a></p></div></details>
+<details class="mo"><summary>영문 SL 메일에 한글이 남아 있습니다</summary><div class="in"><p>메일 창의 <span class="k">🌐 AI 영문 번역</span> 을 누르거나 직접 영어로 고치세요. AI 번역이 안 되면 한글이 그대로 남으니 보내기 전에 읽어 주세요. → <a class="go" href="#po-en">영문 SL 보내기</a></p></div></details>
+<details class="mo"><summary>입고 예정이 있는데 왜 '입고 확인 필요'인가요?</summary><div class="in"><p>예정은 실제 입고가 아닙니다. 예정이 들어와야만 정상이거나 예정일이 지났다면, 실물이 들어왔는지 확인하고 <span class="k">✓ 입고 확인</span> 을 눌러 주세요. MES 에 이미 들어왔다면 <span class="k">MES 반영됨</span> 으로 정리합니다.</p></div></details>
+<details class="mo"><summary>메일 결과가 분명하지 않을 때 바로 다시 보내도 되나요?</summary><div class="in"><p>먼저 보낸 기록에서 상태 · 받는 사람 · 시각을 확인하세요. <span class="b yel">일부 못 받음</span> 이면 거절된 주소만 확인하면 됩니다. 기록과 반송 메일을 본 뒤 다시 보낼지 정하세요.</p></div></details>
+<details class="mo"><summary>AI 답이 틀린 것 같습니다</summary><div class="in"><p>답 아래 바로가기로 그 화면에서 숫자를 확인하고, <span class="k">🚩 답변 신고</span> 를 눌러 주세요. 관리자가 <a class="go" href="#ailearn">AI 학습</a> 에서 다듬습니다.</p></div></details>
+</section>
+
+<section id="glossary">
+<div class="sh"><h2>용어 사전</h2></div>
+<p class="lede">화면에서 자주 마주치는 말입니다.</p>
+<h3 id="glo-plan">주문 · 계획</h3>
+<div class="tw"><table class="fx">
+<tr><th>말</th><th>뜻</th></tr>
+<tr><td>S/L</td><td>Shipping List. 고객사가 언제 얼마를 달라고 보내온 예정 수량. 주마다 새로 받습니다.</td></tr>
+<tr><td>회차 (스냅샷)</td><td>S/L 을 올린 날의 오더를 한 장으로 보관한 것. <code>07-21_SL</code> 처럼 날짜로 부릅니다.</td></tr>
+<tr><td>롤링</td><td>한 회차로 앞으로 여러 달을 내다보는 것.</td></tr>
+<tr><td>백오더</td><td>줬어야 하는데 아직 못 준 밀린 물량.</td></tr>
+<tr><td>FIRM · FORECAST · PAST</td><td>확정 · 예측 오더(발주계획) · 지난 달. 자재 발주계획은 FIRM 4개월 + FORECAST 6개월, 협력사에 보내는 SL 은 최대 12개월.</td></tr>
+<tr><td>조정비율</td><td>S/L 중 실제로 팔릴 것으로 보는 비율(보통 80% 안팎).</td></tr>
+<tr><td>FY</td><td>회계연도. 4월부터 이듬해 3월까지.</td></tr>
+</table></div>
+<h3 id="glo-stock">재고 · 출하</h3>
+<div class="tw"><table class="fx">
+<tr><th>말</th><th>뜻</th></tr>
+<tr><td>실사 · 실재고</td><td>창고에서 직접 센 수량 · 실사 뒤 생산과 출하를 반영한 지금 수량.</td></tr>
+<tr><td>가용재고</td><td>실제로 내보낼 수 있는 수량(해상 : + 예정생산, 항공 : − 포장 미완료).</td></tr>
+<tr><td>출고가능</td><td>가용재고에서 대기 인보이스를 뺀 수량.</td></tr>
+<tr><td>SL잔여</td><td>이번 달 목표 가운데 아직 못 채운 수량.</td></tr>
+<tr><td>Rev</td><td>인보이스를 고쳐 다시 발행한 개정 번호. 높을수록 새것.</td></tr>
+<tr><td>출고요청 · 출고불가</td><td>"이날 이 차로 내보내 주세요" 약속 · "이 팔레트는 못 보냅니다" 표시.</td></tr>
+<tr><td>P/L No · NET · GROSS</td><td>팔레트 일련번호 · 물건만의 무게 · 포장까지 더한 무게.</td></tr>
+<tr><td>포워더 · DG</td><td>운송 대행사 · 위험물(Dangerous Goods, 에어백 화약 등).</td></tr>
+</table></div>
+<h3 id="glo-mat">자재</h3>
+<div class="tw"><table class="fx">
+<tr><th>말</th><th>뜻</th></tr>
+<tr><td>리드타임</td><td>발주부터 입고까지 걸리는 날 수. 자재 상세에서 ✎ 로 고칠 수 있음.</td></tr>
+<tr><td>무상출고</td><td>샘플 · 반출처럼 돈을 받지 않고 내보내는 출고. 무상출고요청에서 요청 → 생관팀 확인 → 출고 완료.</td></tr>
+<tr><td>휴면</td><td>최근 30일 · 앞으로 60일 사용이 없는 자재. 상세의 💤 스위치로 직접 정하거나 되돌릴 수 있음.</td></tr>
+<tr><td>소진 후 사용 안 함 (소진 후 단종)</td><td>남은 재고만 쓰고 다시 주문하지 않는 자재. 발주 알림에서 빠짐.</td></tr>
+<tr><td>출발 예정 · 발송 확인</td><td>협력사가 알려 준 출발일 · 실제로 출발한 날 기록 (운송장 · B/L).</td></tr>
+<tr><td>발주 필요일</td><td>소진 예상일 − 리드타임.</td></tr>
+<tr><td>입고 예정 · 입고 확인</td><td>앞으로 들어올 계획 · 실제로 들어온 기록.</td></tr>
+<tr><td>MES</td><td>사내 생산 · 매입 시스템. 매입 자료가 실제 입고의 기준.</td></tr>
+<tr><td>수불부</td><td>재무회계팀의 월말 재고 장부. 재고 계산의 출발점.</td></tr>
+<tr><td>≈</td><td>자료가 없는 달을 평균 등으로 추정한 값.</td></tr>
+</table></div>
+<h3 id="glo-item">품목 줄임말</h3>
+<div class="tw"><table>
+<tr><th>줄임말</th><th>제품</th><th>줄임말</th><th>제품</th></tr>
+<tr><td>DAB</td><td>운전석 에어백</td><td>PAB</td><td>조수석 에어백</td></tr>
+<tr><td>SAB</td><td>사이드 에어백</td><td>CAB</td><td>커튼 에어백</td></tr>
+<tr><td>KAB</td><td>무릎 에어백</td><td>CeAB</td><td>센터 에어백</td></tr>
+<tr><td>STW</td><td>스티어링 휠</td><td>FRT SB · RR SB</td><td>앞 · 뒷좌석 안전벨트</td></tr>
+<tr><td>FRT BKL · RR BKL</td><td>앞 · 뒷좌석 버클</td><td>기타</td><td>그 밖</td></tr>
+</table></div>
+</section>
+
+<section id="privacy-info">
+<div class="sh"><h2>개인정보 · 이용 규정</h2></div>
+<div class="meta2"><span class="path">메인 화면 맨 아래 · 로그인 화면 왼쪽 위</span></div>
+<p class="lede">시스템이 어떤 개인정보를 왜 처리하는지, 사용자가 지켜야 할 규정을 따로 정리해 두었습니다. 처음 쓰는 분은 한 번 읽어 주세요.</p>
+<ul>
+<li><b>개인정보 처리방침</b> : 처리하는 정보(이름 · 사번 · 부서 · 직급 · 업무 메일 · 접속 기록), 목적, 보관 기간, 위탁, 정보주체의 권리, 문의처(정보보호 책임자).</li>
+<li><b>시스템 이용 규정</b> : 계정 · 비밀번호 관리, 금지 행위, 자료 내려받기 · 반출, 접속 기록, 위반 시 조치.</li>
+<li>로그인 · 권한 변경 · 주요 처리 · 파일 내려받기는 사용자 · 일시 · 접속지와 함께 1년 동안 기록됩니다.</li>
+<li>계정 삭제는 🔑 창의 <span class="k">계정 삭제 요청</span> 으로 요청하면 30일 안에 처리됩니다.</li>
+</ul>
+</section>

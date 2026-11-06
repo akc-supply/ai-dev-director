@@ -1,0 +1,440 @@
+<section id="bom">
+<div class="sh"><h2>BOM 管理</h2></div>
+<div class="meta2"><span class="path">サイドバー › 業務 › BOM 管理</span><span class="who">権限：BOM 管理</span></div>
+<p class="lede">完成品がどの資材を何個ずつ使って作られるか（BOM）、資材をいくらで買っているか（仕入単価）を調べて修正する場所です。</p>
+<div class="tw"><table class="fx">
+<tr><th>上部タブ</th><th>機能</th></tr>
+<tr><td>BOM（資材明細書）</td><td>上位 · 下位品目、所要量、工程、M/C、顧客を1行ずつ見ます。</td></tr>
+<tr><td>仕入単価明細書</td><td>品目別の仕入単価（MAX · MIN · AVG）と変動を見ます。</td></tr>
+<tr><td>M-BOM</td><td>製品材料費の状況 — 製品1つを作るのにかかる総材料費（有償支給を除く）</td></tr>
+<tr><td>E-BOM · F-BOM</td><td>エンジニアリング · 財務 BOM を直接入力して管理（F-BOM は金額 · 通貨 · 為替レートを含む）</td></tr>
+<tr><td>設定</td><td>BOM · 単価ファイルのアップロード、業者管理</td></tr>
+</table></div>
+
+<h3 id="bom-find">資材を探す · 修正する</h3>
+<div class="do"><div class="dt">操作手順 · BOM（資材明細書）</div><ol class="st">
+<li><b><span class="k" title="BOM (자재명세서)">BOM（資材明細書）</span> タブを押します。</b><p>初回はデータを受信するため進行バーが回ります。次回からはすぐに表示されます。</p></li>
+<li><b>検索欄に品番 · 品名 · 工程名などを入れます。</b><p><span class="q" title="구분">区分</span> · <span class="q" title="Level">Level</span> · <span class="q" title="고객사">顧客</span> でさらに絞り込みます。すべて解除するには <span class="k" title="초기화">リセット</span>。50件ずつページに分かれます。</p></li>
+<li><b>行を押すと <span class="q" title="BOM 상세 제원">BOM 詳細仕様</span> ウィンドウが開きます。</b><p>上位 · 下位の情報、工程 · 生産の仕様、備考。顧客名を押すと取引先の情報が表示されます。</p></li>
+<li><b>修正するには <span class="k" title="수정">修正</span> → 値を変更 → <span class="k p" title="저장하기">保存する</span>。</b></li>
+<li><b>必要なら <span class="k" title="엑셀">Excel</span> で、いま絞り込んだ一覧をダウンロードします。</b><p>ファイル名：<code>BOM자재명세서_날짜.xlsx</code>（BOM資材明細書_日付）</p></li>
+</ol></div>
+<ul>
+<li><b>下位単位（UM）を修正すると</b>、その品番について別に記憶するので、BOM を再アップロードしても維持されます。表ではオレンジ色の文字で表示されます。欄を空にすると元の単位に戻ります。</li>
+<li>Level 1 は緑、2 は青のタグです。所要量 = 上位品目1つに必要な個数。</li>
+</ul>
+<div class="nt bad">詳細ウィンドウの削除は、その行をデータベースから完全に消します。削除する前に、上位 · 下位の品番をもう一度確認してください。</div>
+
+<h3 id="bom-price">仕入単価 · 製品材料費</h3>
+<ul>
+<li><b>仕入単価明細書</b>：検索欄（品目コード · 品目名 · 業者名 · 規格）+ 業者 · 通貨 · 区分のセレクター → 結果の中で <span class="q" title="약어">略語</span> · <span class="q" title="품목 종류">品目種類</span> でもう一度絞り込みます。<span class="k" title="상세보기">詳細</span> → 単価情報 → <span class="k" title="수정">修正</span> → <span class="k" title="저장하기">保存する</span>。<span class="k" title="엑셀">Excel</span> は絞り込んだ一覧のまま。</li>
+<li><b>M-BOM（製品材料費）</b>：大分類（プロジェクト）を展開して製品を選ぶと、1個作る総材料費が表示されます。単位が違う単価は <span class="k" title="단가 수식 적용">単価数式を適用</span>（× 10、÷ 100 など）で合わせ、再アップロードしても維持されます。解除するには <span class="k" title="수식 해제">数式解除</span>。</li>
+</ul>
+
+<h3 id="bom-upload">BOM · 単価ファイルのアップロード</h3>
+<div class="do"><div class="dt">操作手順 · BOM のアップロード</div><ol class="st">
+<li><b>BOM 管理の右上 <span class="k" title="설정">設定</span> → データアップロードへ移動します。</b><p>メイン画面の設定 › アップロードではなく、<b>BOM 管理の中の設定</b> です。</p></li>
+<li><b>BOM は <span class="k" title="BOM 업로드">BOM アップロード</span> に Frm_MASTER BOM ファイルを1つアップロードします。</b></li>
+<li><b>単価は <span class="k" title="완제품 파일 선택">完成品ファイル選択</span> · <span class="k" title="반제품 파일 선택">半製品ファイル選択</span> → <span class="k" title="단가 업로드 (완제품+반제품 병합)">単価アップロード（完成品+半製品を結合）</span>。</b><p>様式は <span class="k" title="양식다운">様式ダウンロード</span>。アップロードした種類だけが新しくなり、手で変更した下位単位は維持されます。</p></li>
+</ol></div>
+</section>
+
+<section id="g-material">
+<div class="sh"><h2>資材管理 · はじめに</h2></div>
+<div class="meta2"><span class="path">サイドバー › 業務 › 資材管理</span><span class="who">権限：資材管理（メール設定 · データ点検：マスター）</span></div>
+<p class="lede">8/31 の受払台帳の在庫に MES 入庫 · 生産実績を反映し、BOM × 生産計画 · ローリング S/L で今後使う量を計算して、<b>どの資材がいつ切れ、いつ発注すべきか</b> を知らせます。</p>
+
+<div class="wf"><div class="wh">画面構成 · 上から下へ</div><ol>
+<li><div><b>上部メニュー</b><span><span class="k" title="대시보드">ダッシュボード</span> · <span class="k" title="자재관리">資材管理</span> · <span class="k" title="발주계획관리">発注計画管理</span> · <span class="k" title="무상출고요청">無償出庫依頼</span> · <span class="k" title="생산 차질 점검">生産支障チェック</span> · <span class="k" title="수불부 기준">受払台帳基準</span> · <span class="k" title="이메일 설정">メール設定</span> · <span class="k" title="데이터 점검">データ点検</span> · 右に <span class="k" title="새로 계산">再計算</span></span></div></li>
+<li><div><b>タイトル行</b><span>画面名 · <span class="k" title="내보내기">エクスポート</span>（CSV）</span></div></li>
+<li><div><b>照会条件</b><span><span class="q" title="기준일">基準日</span> · <span class="q" title="자재 구분">資材区分</span> · <span class="q" title="품목군">品目群</span> · <span class="q" title="고객사">顧客</span> · <span class="q" title="매입처">仕入先</span> · <span class="q" title="JG 제외">JG除外</span> · <span class="q" title="상품 제외">商品除外</span>（ダッシュボードの在庫 · 在庫切れ、生産支障チェック、受払台帳基準）</span></div></li>
+<li><div><b>資料行</b><span>受払台帳 · BOM · 生産計画 · VF ローリング S/L · 生産実績 · MES 入庫 · 輸入資材リストのチップ（緑 = あり、赤 = なし）と資料の日付</span></div></li>
+</ol></div>
+<p>上部メニューの数字：ダッシュボード = 欠品 + 緊急の資材数、資材管理 = 重点管理（インフレーター · OPW · ワイヤーハーネス）のうち対応が必要な数、無償出庫依頼 = 確認待ち · 遅延の依頼数、生産支障チェック = 生産不可の完成品数。</p>
+
+<h3 id="mm-flow">毎日の使い方</h3>
+<div class="do"><div class="dt">操作手順 · 資材管理の1日の流れ</div><ol class="st">
+<li><b>（データ担当）MES のデータをアップロードします。</b><p>設定 › アップロード › 資材管理4種（仕入 · 外注賃加工 · 商品売上 · 海外出庫）。→ <a class="go" href="#up-mm">アップロード › 資材管理 MES</a></p></li>
+<li><b>右上の <span class="k" title="새로 계산">再計算</span> を押します。</b><p>アップロード後に一度押すと、最新のデータで計算し直します。<b>資料行</b> の日付が最近のものか確認してください。</p></li>
+<li><b><span class="k" title="대시보드">ダッシュボード</span> › <span class="k" title="재고 · 소진">在庫・枯渇</span> のカードを見ます。</b><p>即時調達 · 今週発注 · 4週以内に発注の件数を確認します。→ <a class="go" href="#g-material-dash">ダッシュボード</a></p></li>
+<li><b><span class="k" title="자재관리">資材管理</span> の一覧で、急ぎの資材を開きます。</b><p>在庫切れ予想 · 発注時点を見て、必要なら入庫予定を登録したり入庫を確認したりします。→ <a class="go" href="#g-material-list">資材一覧 · 詳細</a></p></li>
+<li><b><span class="k" title="발주계획관리">発注計画管理</span> で月の発注計画を入力し、協力会社に送ります。</b><p>→ <a class="go" href="#g-material-po">発注計画管理</a></p></li>
+<li><b>（生管）<span class="k" title="무상출고요청">無償出庫依頼</span> の確認待ち · 遅延の依頼を処理します。</b><p>サンプル · 搬出の依頼を確認し、出庫完了まで処理します。→ <a class="go" href="#g-material-free">無償出庫依頼</a></p></li>
+</ol></div>
+
+<h3 id="mm-cond">照会条件を選ぶ</h3>
+<ul>
+<li><span class="q" title="기준일">基準日</span>：<span class="k" title="오늘">今日</span>（初期値）または受払台帳の締め日（例：<span class="k" title="8/31 마감">8/31 締め</span>）。資材管理の計算にも使われます。</li>
+<li><span class="q" title="자재 구분">資材区分</span>：すべて / 海外（輸入）/ 国内。<span class="q" title="품목군">品目群</span>：全資材 · 主要資材 · ★ 重点管理 · ★ インフレーター · ★ OPW · ★ ワイヤーハーネス · VINFAST · KGM 共用 · 海外リードタイム 90 · 60 · 45日以上。</li>
+<li><span class="q" title="JG 제외">JG除外</span> · <span class="q" title="상품 제외">商品除外</span> は最初からチェックされています。</li>
+<li>区分 · 顧客 · 仕入先は、すべての画面で同じ値を使います。1か所で変えると、ほかの画面も変わります。</li>
+<li>初期値以外の絞り込み欄は <b>緑</b> に変わり、<span class="k" title="↺ 초기화">↺ リセット</span> が表示されます。</li>
+</ul>
+
+<h3 id="mm-status">状態の意味 · 日付の決まり方</h3>
+<div class="tw"><table class="fx">
+<tr><th>状態</th><th>意味 · やること</th></tr>
+<tr><td><span class="b red">欠品</span></td><td>保有在庫0以下 — すぐ調達</td></tr>
+<tr><td><span class="b ora">緊急</span></td><td>14日以内に在庫切れ予想 — 入庫 · 調達の日程を先に確認</td></tr>
+<tr><td><span class="b yel">発注必要</span></td><td>リードタイム内に在庫切れ予想（発注必要日が今日か経過済み）— 発注</td></tr>
+<tr><td><span class="b blu">入庫確認必要</span></td><td>入庫予定が入らないと正常にならない、または予定日を過ぎたのに整理されていない — 実際の入庫を確認（資材管理の一覧のみ）</td></tr>
+<tr><td><span class="b grn">正常</span></td><td>いまの計算範囲では発注の警告なし</td></tr>
+<tr><td><span class="b gry">在庫未確認</span></td><td>受払台帳にもなく、保有数量の調整もない — 基準データを確認</td></tr>
+<tr><td><span class="b gry">休眠</span></td><td>直近30日 · 今後60日の使用なし — 生産中止か確認（無償出庫で使う資材は休眠ではない · 詳細の <span class="k" title="💤 휴면 재고">💤 休眠在庫</span> スイッチで直接変更できる）</td></tr>
+<tr><td><span class="b vio">在庫切れ後に廃番</span></td><td>残りの在庫だけを使い、再発注しない — 通知 · 発注から除外（詳細の <span class="k" title="소진 후 사용 안 함">在庫切れ後は使用しない</span> スイッチ）</td></tr>
+</table></div>
+<div class="tw"><table class="fx">
+<tr><th>日付 · 数字</th><th>計算方法</th></tr>
+<tr><td>保有在庫</td><td>8/31 受払台帳の期末 + その後の MES 入庫 · 自社生産 − 使用量（保有数量を調整した場合はその日の数量から）</td></tr>
+<tr><td>使用量</td><td>生産実績 × BOM、今後は MES 生産計画 · ローリング S/L × BOM（BOM のない資材は8月平均、商品は商品売上）</td></tr>
+<tr><td>在庫切れ予想</td><td>今後の1日ごとの使用量を引いて、在庫が初めて0以下になる日（365日以内）。<b>現在</b> = 入庫予定を除く · <b>入庫反映</b> = 予定日に加算</td></tr>
+<tr><td>発注必要日</td><td>在庫切れ予想（入庫反映）− リードタイム（リードタイム = 画面で直した値 → 品目基準表 → 既定値 海外60日 · 国内30日）</td></tr>
+<tr><td>追加発注日</td><td>入庫予定がすべて入ったあとの次の在庫切れ日 − リードタイム</td></tr>
+</table></div>
+</section>
+
+<section id="g-material-dash">
+<div class="sh"><h2>資材ダッシュボード</h2></div>
+<div class="meta2"><span class="path">資材管理 › ダッシュボード</span></div>
+<p class="lede">上部のタブで4つを見ます：<span class="k" title="생산 · 출고">生産・出荷</span> · <span class="k" title="협력사 매입 · 외주">協力会社 購買・外注</span> · <span class="k" title="재고 · 소진">在庫・枯渇</span> · <span class="k" title="발주계획">発注計画</span>。最初は今月の基準です。</p>
+
+<h3 id="mmd-stock">在庫 · 在庫切れ — 何がいつ切れるか</h3>
+<div class="do"><div class="dt">操作手順 · 急ぎの資材を探す</div><ol class="st">
+<li><b><span class="k" title="재고 · 소진">在庫・枯渇</span> タブを押し、上のカード4枚を見ます。</b><p><span class="q" title="즉시 조달">即時調達</span>（欠品）· <span class="q" title="이번 주 발주">今週発注</span>（発注推奨日が7日以内 · 経過分を含む）· <span class="q" title="4주 안 발주">4週以内に発注</span>（8〜28日）· <span class="q" title="휴면 · 재고 없음">休眠・在庫なし</span>。カードの下に <span class="q" title="📦 발주 완료 N">📦 発注済み N</span> も表示されます。</p></li>
+<li><b>カードを押すと一覧ウィンドウが出ます。</b><p>ウィンドウ内の <span class="k" title="아래 표를 이 조건으로 거르기">下の表をこの条件で絞り込む</span> を押すと、下の表がその条件で絞り込まれます。</p></li>
+<li><b><span class="q" title="앞으로 12주 · 주별 소진 예정 자재">今後12週 · 週別 在庫切れ予定資材</span> の棒グラフを見ます。</b><p>青 = 海外、グレー = 国内、★ = 重点管理。棒を押すとその週だけ、<span class="k" title="주 선택 풀기 ✕">週選択解除 ✕</span> で解除します。</p></li>
+<li><b>表の上の状態バーや絞り込みで絞ります。</b><p>状態バーの欄を押すとその状態だけ、もう一度押すとすべて。検索 · <span class="q" title="상태">状態</span> · <span class="q" title="사용량 근거">使用量根拠</span> · <span class="q" title="사용 중인 것만">使用中のみ</span>。</p></li>
+<li><b>行を押すと、横のウィンドウに詳細が表示されます。</b><p>基準在庫 · 推定在庫 · 入庫 · 日使用量 · 120日予想在庫の線 · この資材を使う完成品。</p></li>
+</ol></div>
+<div class="tw"><table class="fx">
+<tr><th>発注推奨の欄</th><th>意味</th></tr>
+<tr><td><span class="b sky">📦 発注済み</span> + 入庫 MM/DD</td><td>入庫予定が入っている = すでに発注済み。予定日に入ったか確認</td></tr>
+<tr><td>⚠ 入庫遅延確認</td><td>入庫予定日を過ぎた</td></tr>
+<tr><td>🚚 MM/DD 発送 · 🗓 MM/DD 出発予定 · ⚠ 出発 MM/DD 超過</td><td>協力会社の発送記録 — 品物が出発したか · 出発予定日を過ぎたか → <a class="go" href="#mml-ship">協力会社の発送記録</a></td></tr>
+<tr><td>追加発注 MM/DD</td><td>予定がすべて入っても、その後また発注が必要</td></tr>
+<tr><td>即時調達 · N日経過 · 今日 · MM/DD · D-N</td><td>まだ発注していない資材の発注時点</td></tr>
+</table></div>
+
+<h3 id="mmd-other">生産 · 出荷 · 協力会社購買 · 発注計画</h3>
+<ul>
+<li><b>生産 · 出荷</b>：<span class="q" title="자료">資料</span> 生産実績 / 商品売上 / 海外出庫。<span class="q" title="조회 년">照会年</span> → <span class="q" title="조회 월">照会月</span>（先に年を選ぶ必要あり）· 詳細 · 区分 · 顧客 · 検索。カード（生産数量 · 1日平均 · 品番 · 不良率）、日付別 · 上位10のグラフ、品番の表。行を押すと、日付別のグラフと BOM 資材が表示されます。</li>
+<li><b>協力会社 購買 · 外注</b>：<span class="q" title="자료">資料</span> 仕入 / 外注賃加工。カード（仕入金額 · 協力会社 · 入庫数量 · 確認待ち · 返品）、月別 · 上位10協力会社、協力会社別の表（確定は緑 · 待ちは黄 · 返品は赤）。行を押すと品番別 · 入庫明細。</li>
+<li><b>発注計画</b>：<span class="q" title="기간 시작">期間開始</span> 〜 <span class="q" title="기간 끝">期間終了</span> · <span class="q" title="빠른 기간">クイック期間</span>（FIRM / FORECAST / 10か月 / 過去6か月）· 業者 · 品目。月別の棒（緑 FIRM · 紫 FORECAST · グレー PAST）と予想使用量の線。協力会社 · 資材の行を押すと、発注計画管理でその協力会社 · 品番が開きます。</li>
+</ul>
+<p class="mut">表の見出しを押すと並べ替わり、1ページの行数は 50 / 100 / 200 から選びます。</p>
+</section>
+
+<section id="g-material-list">
+<div class="sh"><h2>資材一覧 · 資材詳細</h2></div>
+<div class="meta2"><span class="path">資材管理 › 資材管理</span></div>
+<p class="lede">資材ごとに <b>いつ切れるか · いつ発注するか · 入庫が入ったか</b> を見て、入庫予定 · 入庫確認を記録します。★ インフレーター · OPW · ワイヤーハーネスが先に表示されます。</p>
+
+<div class="wf"><div class="wh">一覧画面 · 上から下へ</div><ol>
+<li><div><b>ヘッダー</b><span><span class="q" title="자재별 소진 · 입고 예정">資材別 枯渇・入庫予定</span> · 件数 · 状態バー · <span class="k" title="⚠ 입고 지연 N · 정리">⚠ 入庫遅延 N · 整理</span> · <span class="k" title="🔁 품번 변경 규칙 N">🔁 品番変更ルール N</span></span></div></li>
+<li><div><b>絞り込み</b><span>検索 · 品目群（初期値 ★ 重点管理）· 区分 · 顧客 · 仕入先 · 状態 · 発注時点 · <span class="k" title="↺ 초기화">↺ リセット</span></span></div></li>
+<li><div><b>在庫切れタイムライン</b><span>急ぎの資材10件を120日の棒で（▼ 発注日 · ◆ 入庫予定）</span></div></li>
+<li><div><b>表</b><span>部品品番 · 品名 · 親品番（FG）· 仕入先 │ 現在の在庫 │ 1次入庫予定 │ 2次入庫予定 │ リードタイム · 発注 · 状態</span></div></li>
+</ol></div>
+
+<h3 id="mml-find">急ぎの資材を探す</h3>
+<div class="do"><div class="dt">操作手順 · 一覧で絞り込む</div><ol class="st">
+<li><b>状態バーで <span class="b red">欠品</span> · <span class="b ora">緊急</span> の欄を押します。</b><p>その状態だけが残ります。もう一度押すと、すべてに戻ります。</p></li>
+<li><b><span class="q" title="발주 시점">発注時点</span> で <span class="k" title="발주 시점 지남">発注時点を経過</span> · <span class="k" title="7일 안 발주">7日以内に発注</span> を選びます。</b><p>発注済みのものだけを見るには <span class="k" title="📦 입고 대기 (발주 완료)">📦 入庫待ち（発注済み）</span>。</p></li>
+<li><b>検索欄に品番 · 品名 · 親品番 · 仕入先を入れます。</b><p>品番は - やスペースなしで入れても見つかります（例：569036AA26 = 569036-AA26）。表示されない場合は、理由（例：品目群に入っていない）と <span class="k" title="이 자재 바로 열기 →">この資材を開く →</span> が表示されます。</p></li>
+<li><b>行を押すと、資材詳細が全画面で開きます。</b><p><span class="k" title="← 목록으로">← 一覧へ</span> · Esc · ブラウザの戻るで戻ると、絞り込みとスクロール位置はそのままです。</p></li>
+</ol></div>
+<ul>
+<li>表の色のまとまり：青灰 = 現在の在庫（保有 · 在庫切れ予想）、薄緑 = 1次入庫予定、薄紫 = 2次入庫予定。入庫を加えても在庫切れ日が同じなら <span class="q" title="변화 없음">変化なし</span>（入庫が在庫切れより遅い）。</li>
+<li>親品番欄の <span class="k" title="+N">+N</span> を押すと、その場ですべて展開されます。<span class="k" title="복사">コピー</span> は改行区切りで全部コピーし、文字をドラッグして一部だけコピーしても詳細には移動しません。</li>
+<li>入庫欄の <span class="k" title="+ 입력">+ 入力</span> や日付を押すと、詳細に入らずに小さなウィンドウで入庫予定の登録 · 修正 · 入庫確認ができます。</li>
+<li>休眠資材は、下の <span class="k" title="▸ 💤 휴면 자재 N개 … 펼치기">▸ 💤 休眠資材 N 件 … 展開</span> の中に折りたたまれています。判定が違う場合は詳細で変更します → <a class="go" href="#mml-dorm">休眠在庫 · 在庫切れ後は使用しない</a></li>
+<li>1次 · 2次の入庫日の横の小さな表示：🚚 発送確認 · 🗓 出発予定 · ⚠ 出発予定超過 → <a class="go" href="#mml-ship">協力会社の発送記録</a></li>
+</ul>
+
+<h3 id="mml-detail">資材詳細の見方</h3>
+<div class="wf"><div class="wh">詳細画面 · 上から下へ</div><ol>
+<li><div><b>ヘッダー</b><span>品番 · 状態 · タグ · 品名 · 仕入先 · 親品番 · 右側の2つのスイッチ <span class="q" title="💤 휴면 재고">💤 休眠在庫</span>（自動 / 手動）· <span class="q" title="소진 후 사용 안 함 (재주문 안 함)">在庫切れ後は使用しない（再発注しない）</span></span></div></li>
+<li><div><b>発注の帯</b><span>いまやることの1行（例：<span class="q" title="⚠ 발주 시점 N일 지남 — 지금 발주하세요">⚠ 発注時点を N 日経過 — 今すぐ発注してください</span> · <span class="q" title="🛒 발주까지 D-N">🛒 発注まで D-N</span>）· 入庫予定があれば <span class="q" title="📦 발주 완료 · 입고 대기">📦 発注済み · 入庫待ち</span> の帯と時間バー · 行ごとに協力会社の発送表示（<span class="q" title="🚚 발송">🚚 発送済み</span> · <span class="q" title="🗓 출발 MM/DD">🗓 出発 MM/DD</span> · <span class="q" title="⚠ 미발송">⚠ 未発送</span>）</span></div></li>
+<li><div><b>数字カード6枚</b><span>保有在庫 · 1日平均使用量 · 在庫切れ予想（現在）· 在庫切れ予想（入庫反映）· リードタイム（<span class="k" title="✎ 수정">✎ 修正</span>）· 発注必要日（または発注状態）</span></div></li>
+<li><div><b>在庫推移グラフ</b><span><span class="k" title="일간">日次</span> / <span class="k" title="주간">週間</span> / <span class="k" title="월간">月間</span> · ◀ 期間 ▶</span></div></li>
+<li><div><b>詳しく見る</b><span>押して切り替えるカード2枚：<span class="k" title="📦 입고 · 재고 기록">📦 入庫 · 在庫記録</span> · <span class="k" title="📅 기간별 재고">📅 期間別在庫</span></span></div></li>
+</ol></div>
+<div class="tw"><table class="fx">
+<tr><th>グラフ</th><th>意味</th></tr>
+<tr><td>紫の線</td><td>現在の在庫（入庫予定を除く）。今日より後は点線 = 予想</td></tr>
+<tr><td>青緑の点線</td><td>入庫予定まで入ったときの在庫</td></tr>
+<tr><td>緑の棒 / 薄緑の枠</td><td>入庫 / 入庫予定</td></tr>
+<tr><td>下段のオレンジの棒</td><td>その日（週 · 月）に使った量 — 別の目盛りなので少量でも見えます</td></tr>
+<tr><td>縦線</td><td>今日 · 在庫切れ予想（赤）· 発注必要（または追加発注）</td></tr>
+<tr><td>▶ 三角（塗り / 白抜き）</td><td>協力会社の出発日 — 塗り = 🚚 発送確認 · 白抜き = 出発予定（発送前）</td></tr>
+<tr><td>出発 → 入庫の矢印線</td><td>出発日から入庫予定日まで（実線 = 発送確認 · 点線 = 出発予定）</td></tr>
+</table></div>
+<div class="nt warn">青緑の点線だけを見て、すでに入ったと判断しないでください。予定は実際の入庫ではありません。予定日を過ぎたら入ったかを確認し、<b>入庫確認</b> を押す必要があります。</div>
+
+<h3 id="mml-lead">リードタイムを直す</h3>
+<div class="do"><div class="dt">操作手順 · リードタイムを直す</div><ol class="st">
+<li><b>詳細の <span class="q" title="리드타임">リードタイム</span> カードで <span class="k" title="✎ 수정">✎ 修正</span> を押します。</b><p>カードに今の値の出どころ（品目基準表 · 既定値 · ✎ 直接修正）が表示されます。</p></li>
+<li><b>日数（1 ～ 365）を入れます。</b><p>入力中に、変わる発注必要日がプレビューされます。</p></li>
+<li><b><span class="k p" title="저장">保存</span>（または Enter）を押します。</b><p>発注必要日 · 状態 · ダッシュボード · メールが新しい値で再計算され、一覧 · ダッシュボード · 発注計画管理に ✎ 印が付きます。元に戻すには <span class="k" title="↺ … 로 되돌리기">↺ … に戻す</span>。</p></li>
+</ol></div>
+<h3 id="mml-dorm">休眠在庫 · 在庫切れ後は使用しない の切り替え</h3>
+<p>詳細ヘッダー右側の2つのスイッチで、資材を通知 · 発注から外したり戻したりします。切り替えると、画面 · 自動メール · AI 検索が同じ判定で再計算します。</p>
+<div class="tw"><table class="fx">
+<tr><th>スイッチ</th><th>オンにすると</th><th>こんなとき</th></tr>
+<tr><td><span class="k" title="💤 휴면 재고">💤 休眠在庫</span></td><td>休眠とみなす — 発注通知 · メール · 一覧の標準表示から外れ、一覧下の 💤 グループに入ります。オフにすると休眠ではない在庫（欠品 · 発注通知の対象）</td><td>生産が終わった、または当面使わない資材 · 逆に使っているのに休眠と誤判定された資材</td></tr>
+<tr><td><span class="k" title="소진 후 사용 안 함 (재주문 안 함)">在庫切れ後は使用しない（再発注しない）</span></td><td>残りの在庫だけを使い、再発注しない — 欠品 · 緊急 · 発注必要の通知、メールの発注表、発注計画の自動入力から外れ、在庫切れ予想日だけを表示</td><td>廃番予定 · 別の品番に切り替わる資材（ジニョン電機のワイヤーハーネス15件は最初からオン）</td></tr>
+</table></div>
+<div class="do"><div class="dt">操作手順 · 休眠在庫を直接指定する</div><ol class="st">
+<li><b>資材の詳細を開き、ヘッダー右側の <span class="k" title="💤 휴면 재고">💤 休眠在庫</span> スイッチを見ます。</b><p>スイッチ末尾の <span class="q" title="자동">自動</span> = システムが判定した値、<span class="q" title="직접">手動</span> = 誰かが指定した値です。マウスを乗せると、自動判定とその理由（例：直近30日の使用0 · 今後60日の需要0）、指定した人 · 日付が表示されます。</p></li>
+<li><b>スイッチをオン / オフにします。</b><p>オンにすると <span class="q" title="휴면 재고로 표시했습니다">休眠在庫として表示しました</span>、オフにすると <span class="q" title="휴면 재고가 아닌 재고로 되돌렸습니다">休眠ではない在庫に戻しました</span> と表示されます。手動で休眠にした資材は、ダッシュボードの表に <span class="q" title="💤 휴면 (직접 지정)">💤 休眠（手動指定）</span> と表示されます。</p></li>
+<li><b>自動判定に戻すには、スイッチを自動判定と同じ側にもう一度切り替えます。</b><p>手動指定が消え、スイッチ末尾が <span class="q" title="자동">自動</span> に戻ります。</p></li>
+</ol></div>
+<div class="do"><div class="dt">操作手順 · 在庫切れ後は使用しない</div><ol class="st">
+<li><b>詳細ヘッダー右側の <span class="k" title="소진 후 사용 안 함 (재주문 안 함)">在庫切れ後は使用しない（再発注しない）</span> スイッチをオンにします。</b><p><span class="q" title="소진 후 단종으로 표시했습니다">在庫切れ後に廃番として表示しました</span> と表示され、状態が <span class="b vio">在庫切れ後に廃番</span>、一覧の発注欄が <span class="q" title="재주문 안 함">再発注しない</span> になります。</p></li>
+<li><b>発注対象に戻すには、スイッチをオフにします。</b><p><span class="q" title="소진 후 단종 표시를 껐습니다 — 다시 발주 알림 대상입니다">在庫切れ後に廃番の表示を解除しました — 再び発注通知の対象です</span> と表示されます。</p></li>
+</ol></div>
+<h3 id="mml-inb">入庫予定 · 入庫確認 · 保有数量の調整</h3>
+<p>詳細の下の <span class="q" title="자세히 보기">詳しく見る</span> で <span class="k" title="📦 입고 · 재고 기록">📦 入庫 · 在庫記録</span> カードを押します。新しい記録を入れる欄が上、記録の一覧が下にあります。</p>
+<div class="do"><div class="dt">操作手順 · 入庫予定の登録（発注したとき）</div><ol class="st">
+<li><b>種類のボタンで <span class="k" title="📦 입고 예정">📦 入庫予定</span> を選びます。</b></li>
+<li><b><span class="q" title="입고 예정일">入庫予定日</span> · <span class="q" title="수량">数量</span> を入れ、<span class="q" title="메모 (선택)">メモ (任意)</span> に PO 番号 · 船積日などを書きます。</b></li>
+<li><b>下のプレビューの行を確認します。</b><p><span class="q" title="등록하면 → 소진 예상 A → B (+N일) · 발주 필요일 C">登録すると → 在庫切れ予想 A → B（+N日）· 発注必要日 C</span>。入庫が在庫切れより遅いと ⚠ 警告が出ます。</p></li>
+<li><b><span class="k p" title="+ 등록">+ 登録</span> を押します。</b><p>この資材は <span class="b sky">📦 発注済み</span> と表示され、詳細の最上部に入庫待ちの帯ができます。</p></li>
+</ol></div>
+<div class="do"><div class="dt">操作手順 · 入庫確認（実際に入ったとき）</div><ol class="st">
+<li><b>予定の行（または最上部の帯）の <span class="k" title="✓ 입고 확인">✓ 入庫確認</span> を押します。</b></li>
+<li><b><span class="q" title="실제 입고일">実際の入庫日</span> · <span class="q" title="실제 수량">実際の数量</span> を確認するか修正します。</b><p>下に、実際に在庫に加わる数量がプレビューされます。入庫日の前7日以内に MES の購買があると <span class="q" title="⚠ 입고일 앞 7일 안에 MES 매입이 있습니다">⚠ 入庫日の前7日以内に MES 購買があります</span> と表示されます。その MES が今回とは別の入庫なら <span class="k" title="다른 입고">別の入庫</span>（確認数量をすべて加算）、同じ入庫なら <span class="k" title="같은 입고">同じ入庫</span>（MES ですでに入った分を除いて加算）を選びます。</p></li>
+<li><b><span class="k p" title="재고에 반영">在庫に反映</span> を押します。</b><p>予定なしで直接入れるときは、種類 <span class="k" title="✅ 입고 확인">✅ 入庫確認</span> → 日付（今日まで）· 数量 → <span class="k" title="+ 입고 반영">+ 在庫に反映</span>。</p></li>
+</ol></div>
+<div class="do"><div class="dt">操作手順 · 保有数量の調整（実際に数えたとき）</div><ol class="st">
+<li><b>種類 <span class="k" title="🔢 보유수량 맞추기">🔢 保有数量の調整</span> を選びます。</b></li>
+<li><b><span class="q" title="센 날짜">数えた日</span> と <span class="q" title="실제 보유 수량">実際の保有数量</span> を入れます（0でも可）。</b><p>プレビューに計算との差が表示されます。</p></li>
+<li><b><span class="k p" title="+ 보유수량 맞추기">+ 保有数量を合わせる</span> を押します。</b><p>その日から、この数量を起点に計算し直します。</p></li>
+</ol></div>
+<ul>
+<li>記録の修正：<span class="k" title="수정">修正</span> → 下の欄で修正 → <span class="k" title="저장">保存</span>。削除：<span class="k" title="삭제">削除</span> → 確認。入庫確認を予定に戻すには <span class="k" title="예정으로">予定に戻す</span>。</li>
+<li>保存は画面にすぐ反映され、サーバーへの保存は裏で続きます。失敗すると <span class="q" title="저장하지 못해 되돌렸습니다">保存できなかったため元に戻しました</span> と表示されます。</li>
+</ul>
+<h4>MES 入庫と自動で突き合わせます</h4>
+<p>MES の仕入（設定 › アップロード）が、実際の入庫の基準です。同じ入庫を二重に数えないよう、画面の記録と自動で突き合わせます。</p>
+<div class="tw"><table class="fx">
+<tr><th>表示</th><th>意味</th></tr>
+<tr><td><span class="q" title="MES N 들어옴 · 남은 M">MES N 入荷 · 残り M</span></td><td>予定のうち N は MES で入荷済み、残りの M だけを今後の計算に使う</td></tr>
+<tr><td><span class="b grn">MES 反映 ✓</span></td><td>入庫確認した数量が MES にもある（1回だけ数える）</td></tr>
+<tr><td><span class="b gry">MES 待ち</span></td><td>まだ MES にない — MES がアップロードされると自動で突き合わせ</td></tr>
+<tr><td><span class="k" title="🔗 MES 로 자동 확인 N건">🔗 MES で自動確認 N 件</span></td><td>MES ですべて入荷した予定の一覧（展開して確認）</td></tr>
+<tr><td><span class="q" title="앞 MES 와 다른 입고">前の MES と別の入庫</span></td><td>入庫確認のときに <span class="k" title="다른 입고">別の入庫</span> を選んだ記録 — 入庫日の前7日の MES とは別に加算</td></tr>
+</table></div>
+
+<h3 id="mml-ship">協力会社の発送記録（出発予定 · 発送確認）</h3>
+<p>協力会社から知らされた<b>出発予定日</b>と、実際に送った日（<b>発送確認</b>）を入庫予定ごとに記録し、品物が輸送中かどうかをひと目で確認します。入庫予定日 · 在庫計算は変わりません。</p>
+<div class="do"><div class="dt">操作手順 · 発送記録を入力する</div><ol class="st">
+<li><b>詳細の <span class="k" title="📦 입고 · 재고 기록">📦 入庫 · 在庫記録</span> の入庫予定の行で <span class="k" title="🚚 발송 기록">🚚 発送記録</span> を押します。</b><p>行の下に <span class="q" title="🚚 협력사 발송">🚚 協力会社の発送</span> 欄が開きます。すでに入力済みなら、ボタンの位置に今の状態（例：<span class="q" title="🗓 11/20 출발 예정">🗓 11/20 出発予定</span>）が表示され、押して修正します。</p></li>
+<li><b>協力会社から知らされた <span class="q" title="출발 예정일">出発予定日</span> を入れて <span class="k p" title="저장">保存</span> を押します。</b><p>状態が <span class="q" title="🗓 MM/DD 출발 예정">🗓 MM/DD 出発予定</span> になります。</p></li>
+<li><b>実際に出発したら <span class="q" title="실제 출발일">実際の出発日</span> · <span class="q" title="운송장 · B/L">送り状・B/L</span>（任意）を入れて <span class="k p" title="저장">保存</span>。</b><p>今日出発したなら <span class="k" title="🚚 오늘 발송 확인">🚚 本日発送確認</span> を1回押すだけです。状態が <span class="q" title="🚚 MM/DD 발송">🚚 MM/DD 発送</span> になります。間違えたら <span class="k" title="기록 지우기">記録を削除</span>。</p></li>
+</ol></div>
+<div class="tw"><table class="fx">
+<tr><th>表示</th><th>意味 · やること</th></tr>
+<tr><td>🗓 MM/DD 出発予定</td><td>協力会社から知らされた出発日 · まだ発送確認前</td></tr>
+<tr><td>🚚 MM/DD 発送</td><td>実際に出発した（発送確認）· マウスを乗せると送り状 · 出発後入庫まで何日か</td></tr>
+<tr><td>⚠ 出発 MM/DD 超過</td><td>出発予定日を過ぎたのに発送確認がない — 協力会社に実際に送ったか確認</td></tr>
+</table></div>
+<p>表示される場所：資材一覧の1次 · 2次入庫日の横 · 詳細上部の入庫待ちの帯 · 在庫切れグラフ（▶ 出発日 · 出発 → 入庫の線）· ダッシュボード › 在庫 · 在庫切れ表の発注推奨欄 · 自動メールの発注済みの行。</p>
+
+<h3 id="mml-late">入庫遅延の整理 · 品番変更</h3>
+<div class="do"><div class="dt">操作手順 · 遅れている入庫予定の整理</div><ol class="st">
+<li><b>一覧ヘッダーの <span class="k" title="⚠ 입고 지연 N · 정리">⚠ 入庫遅延 N · 整理</span> を押します。</b><p>資材 · 予定日 · 数量 · MES 入庫 · メモが表示されます。MES 入庫が80%以上なら <span class="q" title="들어온 것 같습니다">入荷したようです</span> が付きます。</p></li>
+<li><b>処理する行を選びます。</b><p><span class="k" title="모두 고르기">全て選択</span> または <span class="k" title="MES 입고가 확인된 N건 고르기">MES 入庫が確認された N 件を選択</span>。</p></li>
+<li><b>適切なボタンを押します。</b><ul>
+<li><span class="k" title="✓ 고른 N건 입고 확인 (재고 반영)">✓ 選択した N 件を入庫確認（在庫反映）</span>：実際に入ったのに MES にないとき</li>
+<li><span class="k" title="고른 N건 MES 반영됨">選択した N 件を MES 反映済みに</span>：MES にすでに入っているとき</li>
+<li><span class="k" title="고른 N건 삭제">選択した N 件を削除</span> · 日付だけ変えるときは行の <span class="k" title="날짜 수정">日付修正</span></li></ul></li>
+</ol></div>
+<ul>
+<li><b>🔁 品番変更ルール</b>：仕入先が変わって、完成品の資材品番が変わったことを記録します。適用日 · 完成品 · 新しい品番 · 置き換える品番（空欄なら自動）· メモ → <span class="k" title="+ 줄 더하기">+ 行を追加</span> → <span class="k" title="저장 · 다시 계산">保存・再計算</span>。適用日から新しい品番で使用量を計算します（以前の在庫を新しい品番に移すものではありません）。</li>
+<li><b>在庫切れ後は使用しない</b>：残りの在庫だけを使い、再発注しない資材に切り替える詳細ヘッダーのスイッチです。→ <a class="go" href="#mml-dorm">休眠在庫 · 在庫切れ後は使用しない</a></li>
+</ul>
+</section>
+
+<section id="g-material-po">
+<div class="sh"><h2>発注計画管理 · 協力会社に SL を送る</h2></div>
+<div class="meta2"><span class="path">資材管理 › 発注計画管理</span></div>
+<p class="lede">資材別の月次発注計画（SL）を入力し、協力会社に Excel · メールで送ります。<b>FIRM = 今月を含む4か月</b>、<b>FORECAST = その後の6か月</b> です。例）11月なら FIRM は11〜2月、FORECAST は3〜8月。協力会社に送るときは<b>送る期間</b>（最大12か月）と<b>言語</b>（韓国語 / English）を選びます。</p>
+
+<div class="do"><div class="dt">操作手順 · 発注計画を入力する</div><ol class="st">
+<li><b>絞り込みで資材を絞ります。</b><p>検索 · <span class="q" title="조회 년월">照会年月</span>（その月から10か月）· 品目群（初期値 ★ 重点管理）· 仕入先 · 区分 · 顧客 · <span class="q" title="계획 있는 자재만">計画のある資材のみ</span>。</p></li>
+<li><b><span class="k" title="✎ 수정">✎ 修正</span> を押します。</b></li>
+<li><b>月の欄に数量を入れます。</b><p>薄い数字はその月の予想使用量、<b>≈</b> は計画 · S/L が終わった月のため、直近3か月の平均で推定した値です。Enter = 下の欄、Tab = 横の欄、Esc = その欄を元に戻す。</p></li>
+<li><b><span class="k p" title="저장 (N)">保存 (N)</span> を押します。</b><p>変更した欄がまとめて保存されます。やめるときは <span class="k" title="취소">キャンセル</span>（すべて元に戻すか確認されます）。ページを移動しても、変更した欄は残っています。</p></li>
+</ol></div>
+<h3 id="po-auto">自動入力 · 範囲クリア · メモ</h3>
+<ul>
+<li><span class="k" title="⚡ 자동 채우기">⚡ 自動入力</span>：<span class="q" title="어느 자재">対象資材</span>（画面全体 / このページ / 計画のある資材）· <span class="q" title="어느 달">対象月</span>（FIRM · FORECAST · 10か月）· <span class="q" title="어느 칸">対象セル</span>（空欄のみ / 上書き）· 3か月平均で入力 · <span class="q" title="VINFAST 백오더 반영">VINFAST バックオーダー反映</span>（月別%、合計100%）→ <span class="k" title="채우기">入力</span>。<b>まだ保存されていないので、<span class="k" title="저장">保存</span> を押す必要があります</b>（<span class="k" title="↶ 되돌리기">↶ 元に戻す</span> 可能）。</li>
+<li><span class="k" title="🧹 범위 초기화">🧹 範囲クリア</span>：資材 · 月を選んで数量だけを消します（メモは残る）。これも <span class="k" title="저장">保存</span> しないと反映されません。</li>
+<li><span class="k" title="📝">📝</span> メモ：資材メモ · 月ごとのメモ · 修正履歴。オレンジの点がある欄は、その月のメモがあるという意味です。</li>
+</ul>
+
+<h3 id="po-send">協力会社に送る</h3>
+<div class="do"><div class="dt">操作手順 · SL の Excel · メール</div><ol class="st">
+<li><b>送る仕入先で絞り込んでから、<span class="k" title="⬇ SL 엑셀 (협력사 공유용)">⬇ SL Excel (協力会社共有用)</span> を押します。</b><p><span class="q" title="SL 엑셀 · 메일 (협력사 공유용)">SL Excel · メール（協力会社共有用）</span> ウィンドウが開きます。資材はいまの絞り込みのまま（全ページ）です。</p></li>
+<li><b><span class="q" title="보낼 기간">送る期間</span> を選びます。</b><p>開始月 ～ 終了月（最大12か月）、または <span class="q" title="당월부터">当月から</span> <span class="k" title="FIRM 4개월">FIRM 4か月</span> · <span class="k" title="6개월">6か月</span> · <span class="k" title="10개월">10か月</span>。初期値は照会年月から10か月です。→ <a class="go" href="#po-period">送る期間を選ぶ</a></p></li>
+<li><b><span class="q" title="언어">言語</span> を確認します。</b><p>海外の協力会社は最初から <span class="k">English</span>、国内の協力会社は <span class="k" title="한국어">韓国語</span> が選ばれています。→ <a class="go" href="#po-en">英文 SL を送る</a></p></li>
+<li><b><span class="q" title="협력사에 전할 말">協力会社への伝言</span> を書きます（空欄でも可）。</b><p>Excel の上部とメール本文に入ります。</p></li>
+<li><b>ファイルで受け取るなら <span class="k p" title="⬇ 엑셀 내려받기">⬇ Excel ダウンロード</span>、メールで送るなら封筒アイコン（<span class="k" title="이메일로 보내기">メールで送信</span>）を押します。</b></li>
+<li><b><span class="q" title="✉ SL 메일 보내기">✉ SLメール送信</span> ウィンドウで、宛先（必須）· CC · 件名 · 本文を確認します。</b><p>言語 · 送る期間はこのウィンドウでも変えられます（直した件名 · 本文はそのままで、期間の文字だけが新しい月に変わります）。仕入先を選んだ場合は、<span class="q" title="'매입처' 주소록에 저장">「仕入先」アドレス帳に保存</span> にチェックすると次回も使えます。本文のプレースホルダー：{매입처}（仕入先）{FIRM} {FORECAST} {기간}（期間）{전할말}（伝言）。</p></li>
+<li><b>添付の <span class="k" title="⬇ 미리 받기">⬇ 事前ダウンロード</span> で Excel を開いて確認してから <span class="k p" title="✉ 보내기">✉ 送信</span>。</b><p>ウィンドウ下の <span class="q" title="보낸 기록">送信履歴</span> に、日時 · 送信者 · 宛先 · 件名 · 期間（か月数 · English）· 結果が残ります。</p></li>
+</ol></div>
+<p class="mut">この SL メールは、手動で送ったときだけ送信されます。社内の調達通知メール（メール設定）とは別の機能です。</p>
+<h3 id="po-period">送る期間を選ぶ</h3>
+<div class="tw"><table class="fx">
+<tr><th>月の欄の色</th><th>意味</th></tr>
+<tr><td><span class="b grn">FIRM</span></td><td>当月を含む4か月 — 確定発注（数量 · 納期を守ってほしい月）</td></tr>
+<tr><td><span class="b blu">FORECAST</span></td><td>その後の月 — 予想（生産 · 資材準備用、確定ではない）</td></tr>
+<tr><td><span class="b gry">PAST</span></td><td>当月より前の月 — 過去の計画（開始月を当月より前にすると入る）</td></tr>
+</table></div>
+<ul>
+<li>期間は最大12か月です。終了月は開始月から12か月以内でしか選べません。</li>
+<li>選んだ期間に合わせて、ダウンロードする Excel · メール添付 · メール本文の {기간}（期間）{FIRM} {FORECAST} がすべて同じ月になります。欄の下に、入る月が <span class="q" title="FIRM 2026-11 ~ 2027-02 (4)">FIRM 2026-11 ~ 2027-02 (4)</span> のように表示されます。</li>
+</ul>
+<h3 id="po-en">海外の協力会社に英文 SL を送る</h3>
+<div class="do"><div class="dt">操作手順 · 英文 SL</div><ol class="st">
+<li><b>海外の協力会社で絞り込み、<span class="k" title="⬇ SL 엑셀 (협력사 공유용)">⬇ SL Excel (協力会社共有用)</span> を押します。</b><p>その仕入先の資材の半分以上が海外（輸入）なら、<span class="q" title="해외 업체 — 영문 자동 (AI 번역)">海外業者 — 英文自動（AI 翻訳）</span> として <span class="k">English</span> が先に選ばれます。国内の協力会社でも <span class="k">English</span> を押せば英文で送れます。</p></li>
+<li><b>伝言は韓国語で書いてもかまいません。</b><p>English なら件名 · 本文 · Excel（シート名 Schedule Line · 見出し Part No. · Description …）が英語になり、韓国語の伝言 · 品名 · メモは AI が英語に翻訳します。</p></li>
+<li><b>メールウィンドウで件名 · 本文を読みます。</b><p><span class="q" title="⚠ 제목 · 본문에 한글이 남아 있습니다">⚠ 件名 · 本文にハングルが残っています</span> と出たら、<span class="k" title="🌐 AI 영문 번역">🌐 AI 英文翻訳</span> を押すか英語に直します。</p></li>
+<li><b><span class="k" title="⬇ 미리 받기">⬇ 事前ダウンロード</span> で英文 Excel を確認し、<span class="k p" title="✉ 보내기">✉ 送信</span>。</b><p>送信後に <span class="q" title="엑셀에 번역 못 한 한글 N건">Excel に翻訳できなかったハングル N 件</span> と出たら Excel にハングルが残っているので、品名 · メモを確認してください。</p></li>
+</ol></div>
+<ul>
+<li>既定の文面は韓国語 · 英文で別々に保存されます（<span class="k" title="💾 기본 문구로 저장">💾 既定の文面として保存</span> · <span class="k" title="↺ 처음 문구">↺ 初期の文面</span>）。英文のプレースホルダー：{SUPPLIER} {PERIOD} {MONTHS} {FIRM} {FORECAST} {NOTE}。</li>
+</ul>
+<div class="nt warn">AI 翻訳は間違えることがあります。品番 · 数量 · 日付はそのまま残りますが、送る前に必ず一度読んでください。</div>
+</section>
+
+<section id="g-material-free">
+<div class="sh"><h2>無償出庫依頼（サンプル · 搬出）</h2></div>
+<div class="meta2"><span class="path">資材管理 › 無償出庫依頼</span><span class="who">閲覧 · 依頼：資材管理の権限 · 確認 · 出庫：生産管理チーム · マスター · Excel アップロード：マスター</span></div>
+<p class="lede">サンプル · 搬出のように<b>代金を受け取らずに出す資材 · 製品</b>を依頼し、生産管理チーム（生管）が確認 · 出庫まで処理する画面です。毎月使っていた「サンプル &amp; 搬出依頼書」Excel の代わりになり、処理結果は資材管理の在庫 · 入庫予定にそのままつながります。</p>
+<ul class="flow">
+<li><b>① 依頼</b><span>依頼者 · <span class="k" title="+ 새 요청">+ 新規依頼</span>（品番 · 数量 · 目的 · 必要日）</span></li>
+<li><b>② 確認</b><span>生管 · 処理方法 · 供給可能日 · 入庫予定日 → 資材管理の入庫予定</span></li>
+<li><b>③ 出庫完了</b><span>生管 · 出庫数量 · 日付 · 場所 → 資材管理の在庫から差し引き</span></li>
+</ul>
+
+<div class="wf"><div class="wh">画面構成 · 上から下へ</div><ol>
+<li><div><b>数字カード4枚</b><span><span class="q" title="확인 기다림">確認待ち</span> · <span class="q" title="처리 중">処理中</span> · <span class="q" title="⚠ 지연">⚠ 遅延</span>（必要日を過ぎたのに未出庫）· <span class="q" title="출고 완료">出庫完了</span> — 押すとその依頼だけ表示</span></div></li>
+<li><div><b>ヘッダー</b><span><span class="q" title="무상출고 요청">無償出庫依頼</span> · 期間 · 件数 · 状態バー · 自分の権限表示 · <span class="k" title="+ 새 요청">+ 新規依頼</span> · <span class="k" title="📤 엑셀 올리기">📤 Excel アップロード</span>（マスター）</span></div></li>
+<li><div><b>生管の担当</b><span>輸入資材 · 国内資材 · 完成品ごとの担当者名（Excel の一番上の行から読み取り）</span></div></li>
+<li><div><b>絞り込み</b><span>検索 · <span class="q" title="기간 (의뢰서 달)">期間（依頼書の月）</span> 年 · 月 ‹ › · 状態 · 区分 · 資材/製品 · 出庫タイプ · 依頼者 · <span class="q" title="내 담당 · 내 요청만">自分の担当 · 自分の依頼のみ</span> · <span class="k" title="↺ 초기화">↺ リセット</span></span></div></li>
+<li><div><b>表</b><span>No · 品番 · 品名 · 区分 · 依頼数量 · 必要日 · 出庫タイプ · 供給可能 · 入庫予定（資材管理）· 出庫 · 資材管理の在庫 · 担当 · 状態 · 操作 — 同じ依頼（依頼者 · 目的 · 必要日）は一つのまとまり</span></div></li>
+</ol></div>
+<p>最初は<b>今月</b>の依頼が表示されます。‹ › で月を移動し、<span class="k" title="이번 달">今月</span> で戻ります。上部メニュー <span class="k" title="무상출고요청">無償出庫依頼</span> の横の数字は、生管には確認待ち + 遅れている処理中の件数、それ以外の人には遅延件数です。</p>
+<div class="tw"><table class="fx">
+<tr><th>状態</th><th>意味 · 今の担当</th></tr>
+<tr><td><span class="b yel">待機</span></td><td>依頼が入っただけ — 生管の確認待ち（依頼者はまだ修正 · 削除できる）</td></tr>
+<tr><td><span class="b blu">確認 · 処理中</span></td><td>生管が処理方法 · 日付を決めた — 出庫待ち</td></tr>
+<tr><td><span class="b grn">出庫完了</span></td><td>出庫済み — 資材管理の在庫から差し引き</td></tr>
+<tr><td><span class="b gry">差戻し</span></td><td>処理しない — 差戻し理由が記録に残る</td></tr>
+<tr><td><span class="b red">⚠ 遅延</span></td><td>サンプル必要日を過ぎたのに、まだ出庫前</td></tr>
+</table></div>
+
+<h3 id="free-new">依頼する（依頼者）</h3>
+<div class="do"><div class="dt">操作手順 · 新規の無償出庫依頼</div><ol class="st">
+<li><b><span class="k p" title="+ 새 요청">+ 新規依頼</span> を押します。</b><p><span class="q" title="+ 새 무상출고 요청">+ 新規無償出庫依頼</span> ウィンドウが開きます。一つの依頼に品番を複数行まとめて入れます。</p></li>
+<li><b>上の欄に <span class="q" title="의뢰자">依頼者</span> · <span class="q" title="구분">区分</span> · <span class="q" title="차종">車種</span> · <span class="q" title="샘플 필요일자">サンプル必要日</span> · <span class="q" title="목적">目的</span> を入れます。</b><p>例）目的：KGM 開発検証サンプル · JG リワーク用部品</p></li>
+<li><b>行ごとに <span class="q" title="자재/제품">資材/製品</span> を選び、<span class="q" title="품번">品番</span> を入れます。</b><p>品番だけ入れると<b>品名 · 単位が自動で</b>入り、ロックされます（✓ 一致）。ない品番なら <span class="q" title="✗ 품목정보에 없는 품번">✗ 品目情報にない品番</span> と似た品番が出るので選んでください。</p></li>
+<li><b><span class="q" title="요청수량">依頼数量</span> を入れ、必要なら <span class="q" title="출고유형 (희망)">出庫タイプ（希望）</span> · <span class="q" title="비고">備考</span> を書きます。</b><p>出庫タイプは空けておくと生管が決めます（倉庫在庫 · 生産依頼 · 入庫依頼）。行を増やすには <span class="k" title="+ 줄 더하기">+ 行を追加</span>、外すには行末の ✕。</p></li>
+<li><b><span class="k p" title="요청 등록">依頼登録</span> を押します。</b><p><span class="q" title="요청 N줄을 등록했습니다 — 생관팀 확인을 기다립니다.">依頼 N 行を登録しました — 生管の確認を待ちます。</span> と表示され、状態は <span class="b yel">待機</span> です。どこにもない品番の場合は <span class="k" title="그대로 등록">そのまま登録</span> / <span class="k" title="품번 고치기">品番を直す</span> を聞かれます。</p></li>
+</ol></div>
+<ul>
+<li>自分が画面で書いた<b>待機</b>中の依頼は、行の <span class="k" title="수정">修正</span> · <span class="k" title="지우기">削除</span> で直したり消したりできます。生管が確認した後は生管だけが直せます。</li>
+<li>行を押すと右に詳細ウィンドウが開きます：① 依頼 → ② 確認 → ③ 出庫完了の進み具合、依頼内容、生管の処理、同じ品番の資材管理の在庫 · 在庫切れ予想、処理記録（誰が · いつ）。</li>
+<li>自分のものだけ見るには <span class="q" title="내 담당 · 내 요청만">自分の担当 · 自分の依頼のみ</span> にチェックします。</li>
+</ul>
+
+<h3 id="free-ack">確認 · 出庫処理（生管）</h3>
+<p>アカウントの部署に<b>「생산관리（生産管理）」</b>または<b>「생관」</b>が含まれる人とマスターだけができます。ヘッダーに <span class="q" title="✓ 생관팀 처리 권한">✓ 生管の処理権限</span> が表示されていれば大丈夫です。</p>
+<div class="do"><div class="dt">操作手順 · 確認処理</div><ol class="st">
+<li><b>待機行の <span class="k" title="✓ 확인">✓ 確認</span> を押します。</b><p>複数行は左の欄にチェックし、上の帯の <span class="k" title="✓ 확인">✓ 確認</span> でまとめて行います。まとまりのヘッダーにチェックすると、その依頼全体が選ばれます。</p></li>
+<li><b><span class="q" title="처리 방식">処理方法</span> を選びます：倉庫在庫 · 生産依頼 · 入庫依頼。</b></li>
+<li><b><span class="q" title="공급 가능일자">供給可能日</span> と、入ってくる資材なら <span class="q" title="예상입고일">入庫予定日</span> を入れます。</b><p>複数行なら <span class="k" title="(모두에 넣기)">（すべてに入れる）</span> で同じ日付を入れます。必要なら <span class="q" title="메모">メモ</span>。</p></li>
+<li><b>行ごとに <span class="q" title="입고 예정 수량">入庫予定数量</span> と <span class="q" title="자재관리 입고 예정">資材管理の入庫予定</span> の <span class="k" title="올리기">登録</span> を確認します。</b><p>登録をオンにすると、資材管理の同じ品番の<b>入庫予定</b>（🎁 表示）にそのまま登録されます。入庫依頼なら最初からオンです。資材管理の一覧にない品番（完成品など）は <span class="q" title="목록에 없음">一覧にない</span>。</p></li>
+<li><b><span class="k p" title="✓ 확인 처리">✓ 確認処理</span> を押します。</b><p>状態が <span class="b blu">確認 · 処理中</span> に変わります。日付を変えるには行の <span class="k" title="수정">修正</span>。</p></li>
+</ol></div>
+<div class="do"><div class="dt">操作手順 · 出庫完了</div><ol class="st">
+<li><b>処理中の行の <span class="k" title="📦 출고">📦 出庫</span> を押します。</b><p>待機行をすぐ出すときは詳細ウィンドウの <span class="k" title="📦 바로 출고 완료">📦 すぐ出庫完了</span>、複数行はチェック後に上の帯の <span class="k" title="📦 출고 완료">📦 出庫完了</span>。</p></li>
+<li><b><span class="q" title="출고일자">出庫日</span>（今日まで）· <span class="q" title="출고장소">出庫場所</span>（倉庫 · ライン）を入れます。</b></li>
+<li><b>行ごとに <span class="q" title="출고수량">出庫数量</span> と <span class="k" title="재고에서 빼기">在庫から差し引く</span> を確認します。</b><p>オンのままにすると、出庫日に出庫数量分が資材管理の<b>入庫 · 在庫記録</b>にマイナスで入り、在庫 · 在庫切れ予想がすぐ変わります。数量が「1 BOX」のような文字なら記録だけ残り、在庫からは差し引きません（数字で入れると差し引く）。</p></li>
+<li><b><span class="k p" title="📦 출고 완료">📦 出庫完了</span> を押します。</b><p>状態が <span class="b grn">出庫完了</span> になり、表の <span class="q" title="출고">出庫</span> 欄に <span class="q" title="재고 −N">在庫 −N</span> が表示されます。</p></li>
+</ol></div>
+<ul>
+<li><b>差戻し</b>：<span class="k" title="반려">差戻し</span> → 差戻し理由（必須）→ <span class="k" title="반려">差戻し</span>。再び受けるには詳細ウィンドウの <span class="k" title="반려 풀기">差戻し解除</span>。</li>
+<li><b>取り消し</b>（詳細ウィンドウ）：<span class="k" title="확인 취소">確認取消</span> = 待機へ（自動登録した入庫予定は削除 · すでに入庫確認済みのものはそのまま）· <span class="k" title="출고 완료 취소">出庫完了取消</span> = 処理中へ（在庫から差し引いた記録を消して在庫を戻す）。</li>
+</ul>
+<div class="nt warn">詳細ウィンドウの <span class="k" title="지우기">削除</span> は、つながっている資材管理の入庫予定 · 在庫記録まで一緒に消し、元に戻せません。</div>
+
+<h3 id="free-up">依頼書 Excel のアップロード（マスター）</h3>
+<div class="do"><div class="dt">操作手順 · 「サンプル &amp; 搬出依頼書」のアップロード</div><ol class="st">
+<li><b><span class="k p" title="📤 엑셀 올리기">📤 Excel アップロード</span> を押し、ファイルをドラッグします。</b><p>複数のファイルを一度に選んでも大丈夫です。ファイル名の月（例：<code>2026 10월 무상출고.xlsx</code> → 10月）を依頼書の月として使います。</p></li>
+<li><b>ファイルごとにプレビューを確認します。</b><p>新規 · 変更 · 同じの件数と警告（日付を読めなかった欄など）が出ます。<span class="k" title="▸ 줄 보기">▸ 行を見る</span> で行を展開します。</p></li>
+<li><b><span class="k p" title="저장">保存</span> を押します。</b><p>再度アップロードすると、同じ行（月 · No · 品番）は更新し、新しい行だけ追加します。画面で生管が処理した値は上書きしません。出庫完了の行は <span class="q" title="출고 완료된 줄은 자재관리 재고에서 빼기">出庫完了の行は資材管理の在庫から差し引く</span> で在庫にも反映できます。</p></li>
+</ol></div>
+<p class="mut">同じファイルの「品目情報」シートも保存され、<span class="k" title="+ 새 요청">+ 新規依頼</span> ウィンドウで品番だけ入れると、Excel の VLOOKUP と同じ品名 · 単位が入ります。</p>
+
+<h3 id="free-link">資材管理とつながるところ</h3>
+<div class="tw"><table class="fx">
+<tr><th>資材管理の画面</th><th>表示されるもの</th></tr>
+<tr><td>資材一覧</td><td>品番の横の <span class="b vio">🎁 N</span> = 処理前の無償出庫依頼 N 件</td></tr>
+<tr><td>資材詳細</td><td><span class="q" title="🎁 무상출고 요청">🎁 無償出庫依頼</span> の帯（処理前 · 出庫完了 · 在庫から差し引いた数量）· <span class="k" title="무상출고요청에서 보기 →">無償出庫依頼で見る →</span></td></tr>
+<tr><td>入庫予定</td><td>確認時に登録した予定に 🎁 番号のタグ — 日付 · 数量は資材管理で直しても構いません</td></tr>
+<tr><td>入庫 · 在庫記録</td><td><span class="q" title="🎁 무상출고">🎁 無償出庫</span> のまとまり = 出庫完了で差し引いたマイナス数量（修正 · 取消は無償出庫依頼で）</td></tr>
+<tr><td>状態（休眠）</td><td>生産 · 仕入の使用がなくても、無償出庫で使う資材（処理前の依頼 · 直近90日の出庫）は休眠とみなしません</td></tr>
+</table></div>
+</section>
+
+<section id="g-material-prod">
+<div class="sh"><h2>生産支障チェック · 受払台帳基準</h2></div>
+<div class="meta2"><span class="path">資材管理 › 生産支障チェック · 受払台帳基準</span></div>
+<p class="lede">完成品を基準に、<b>資材が足りず生産が止まる日</b> を探します。受払台帳基準は、在庫計算の起点である財務会計チームの受払台帳をそのまま表示します。</p>
+
+<h3 id="prod-check">生産支障チェック</h3>
+<div class="do"><div class="dt">操作手順 · 止まる完成品を探す</div><ol class="st">
+<li><b>状態バーで <span class="b red">生産不可</span> または <span class="b ora">緊急</span> を押します。</b><p><span class="q" title="앞으로 계획이 있는 것만">今後計画があるもののみ</span> は最初からオンです。検索（完成品 · ライン · 資材品番）· <span class="q" title="라인">ライン</span> · <span class="q" title="상태">状態</span> でも絞り込みます。</p></li>
+<li><b>表を見ます。</b><p>資材充足（バー + 不足 N）· <b>ボトルネック資材</b> · 単独で生産可能 · <b>不足開始日</b> · 今後の計画 · <b>止まる計画数量</b>。▶ を押すと資材の行が展開されます。</p></li>
+<li><b>行を押すと、完成品の詳細が開きます。</b><p>グラフ（濃い青緑 実績 · 薄い青緑 生産計画 · 薄紫 VINFAST ローリング S/L · 赤 止まる計画）、<span class="q" title="날짜별 생산계획">日付別生産計画</span>（生産可能 / 一部のみ可能 / 生産不可）、<span class="q" title="연결 자재 (BOM)">関連資材 (BOM)</span>。</p></li>
+<li><b>ボトルネック資材の行を押して資材情報を見て、資材管理で入庫 · 発注を確認します。</b><p>戻るには <span class="k" title="← 목록으로 돌아가기">← 一覧に戻る</span>。</p></li>
+</ol></div>
+<p class="mut">詳しい判定基準は、画面下の <span class="k" title="생산 차질 점검 보는 법">生産支障チェックの見方</span> を展開して見てください。</p>
+
+<h3 id="prod-base">受払台帳基準</h3>
+<p>8月末の受払台帳（基準在庫）を品番別に見ます。検索（品番 · 品名 · 業者）と <span class="q" title="시트">シート</span> で絞り込み、タイトル行で品番数 · 期末数量 · 期末金額を見ます。表：品目コード · 品目名 · 業者 · シート · 期首 · 入庫 · 出庫 · 期末 · 期末金額 · 区分。行を押すと、資材の横ウィンドウが開きます。</p>
+</section>
+
+<section id="g-material-mail">
+<div class="sh"><h2>メール設定 · スマホ通知 · データ点検</h2></div>
+<div class="meta2"><span class="path">資材管理 › メール設定 · データ点検</span><span class="who">権限：マスター</span></div>
+<p class="lede">調達 · 発注の通知メールを、決めた曜日 · 時刻に社内の担当者へ自動で送り、スマホに音声案内を送ります。</p>
+
+<div class="wf"><div class="wh">メール設定画面</div><ol>
+<li><div><b>上の4欄</b><span><span class="q" title="자동 발송">自動送信</span>（オン/オフ · 次回送信）· <span class="q" title="마지막 발송">最終送信</span> · <span class="q" title="자료 기준">資料基準</span>（最新 / ⚠ 確認）· <span class="q" title="지금 메일에 들어갈 자재">いまメールに入る資材</span>（うち 📦 発注済み N）</span></div></li>
+<li><div><b>① 自動送信 · 予約</b><span>グループ3つ：すべて / 海外輸入資材のみ / ★ 重点管理</span></div></li>
+<li><div><b>② 入れる内容 · ③ 宛先 · ④ メール文</b><span>表の選択 · 社内の宛先 · CC · 件名 · 本文 · 署名</span></div></li>
+<li><div><b>右 · 下</b><span>プレビュー（<span class="k" title="PC">PC</span>/<span class="k" title="휴대폰">スマホ</span>）· スマホ通知 · 音声案内 · 送信履歴</span></div></li>
+</ol></div>
+
+<div class="do"><div class="dt">操作手順 · 自動メールの設定</div><ol class="st">
+<li><b>最上部の <span class="q" title="자동 발송">自動送信</span> スイッチをオンにします。</b></li>
+<li><b>① で、グループごとに予約スイッチ · 時刻 · <span class="k" title="매일">毎日</span> または <span class="k" title="요일 선택">曜日選択</span> を決めます。</b><p>◉ はプレビュー · テスト · 今すぐ送信の対象グループです。同じグループは1日1回だけ送られ、送るものがなければ <span class="q" title="건너뜀">スキップ</span> と記録されます。</p></li>
+<li><b>② で、入れる表を選びます。</b><p>即時調達 · 今週発注 · 4週以内に発注。海外 + 国内の選択は <b>すべて</b> グループにだけ使われます。</p></li>
+<li><b>③ で宛先を展開して確認します。</b><p>3つのグループは同じ人に送られます。名前 · ID · アドレスの一部で探して Enter、⇄ またはドラッグで宛先 ↔ CC、× で外します。</p></li>
+<li><b>プレビュー → <span class="k" title="나에게 시험 메일">自分にテストメール</span> で確認し、<span class="k p" title="저장">保存</span>。</b><p>すぐ送るには <span class="k" title="지금 보내기">今すぐ送信</span>（◉ グループ · そのグループの今日の自動送信はスキップ）。</p></li>
+</ol></div>
+<div class="nt warn"><span class="q" title="자료 기준">資料基準</span> に ⚠ が表示されたら、生産実績 · MES 入庫が3日以上アップロードされていない、MES 生産計画が7日以内に終わる、または計算の基準日が今日と違う、のいずれかです。メールの数字が実際と違う可能性があるので、まずデータをアップロードしてください。</div>
+<ul>
+<li>メールの表は、入庫予定がある資材を下の <b>📦 発注済み · 入庫確認</b> グループとして別に表示します（件数はダッシュボードのカードと同じ）。</li>
+<li>メールの発注済みの行には、協力会社の発送（🚚 発送 · 出発予定 · ⚠ 出発予定超過）も表示されます。→ <a class="go" href="#mml-ship">協力会社の発送記録</a></li>
+<li><b>スマホ通知 · 音声案内</b>：AKC の Android アプリが即時調達の内容を読み上げます。初期値は 08:30 · 17:30、週末も。<span class="k" title="저장">保存</span> · <span class="k" title="미리 듣기">試聴</span> · <span class="k" title="내 휴대폰으로 시험">自分の携帯でテスト</span>。資材管理の権限がある人の登録端末に送られます。</li>
+<li><b>送信履歴</b>：直近20件（時刻 · 種類 · 結果 送信/スキップ/失敗 · 内容）。</li>
+</ul>
+
+<h3 id="mm-diag">データ点検</h3>
+<p>計算に使うデータが互いに正しくつながっているかを点数で表示します（80%以上は緑 · 50%以上は黄 · それ未満は赤）。資料別のカード、<span class="q" title="8월 차이가 큰 자재">8月に差が大きい資材</span>、<span class="q" title="단위가 다른 자재">単位が異なる資材</span>、<span class="q" title="BOM 이 없는 계획 품번">BOMがない計画品番</span>、<span class="q" title="품번 찾기">品番検索</span>（どの品番がなぜ表示されないか）、<span class="q" title="누락 위험 점검">漏れリスク点検</span> 7項目を見ます。数字がおかしいときは、まずここを確認してください。</p>
+</section>

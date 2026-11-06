@@ -1,0 +1,92 @@
+<section id="faq">
+<div class="sh"><h2>Frequently asked questions</h2></div>
+<p class="lede">When you are stuck, look here first. Click a title to open the answer.</p>
+
+<h3 id="faq-access">Login · Screens</h3>
+<details class="mo"><summary>I cannot see a menu</summary><div class="in"><p>You have no access to that screen. Nothing is broken. Ask an admin (Master) for the screens you need. → <a class="go" href="#start-grade">Roles and access</a></p></div></details>
+<details class="mo"><summary>I forgot my password</summary><div class="in"><p>On the login screen, click <span class="q" title="비밀번호를 잊으셨나요?">Forgot your password?</span> and enter your ID · name · employee number. A temporary password (valid for 30 minutes) appears. → <a class="go" href="#login-forgot">Forgot password</a></p></div></details>
+<details class="mo"><summary>The verification code email does not arrive</summary><div class="in"><p>Check your spam folder, and after 1 minute click <span class="k" title="인증번호 다시 보내기">Resend code</span>. If the email address in your account is wrong, ask an admin to correct it.</p></div></details>
+<details class="mo"><summary>I was logged out while working</summary><div class="in"><p>If you do nothing for 30 minutes, you are logged out automatically. Click <span class="k" title="계속 사용">Keep using</span> in the window that appears 2 minutes before, and you can continue. The installed Android app and the VF Shipment Management screen (08:00–19:00) are exceptions.</p></div></details>
+<details class="mo"><summary>The numbers are still old · I cannot see data uploaded by someone else</summary><div class="in"><p>Data updates by itself, but if you are typing in an input field, it changes after you finish. If it still does not change, press <b>F5</b> (refresh). In Materials, click <span class="k" title="새로 계산">Recalculate</span>.</p></div></details>
+<details class="mo"><summary>A downloaded Excel file shows a format warning</summary><div class="in"><p>Click <span class="k" title="예">Yes</span> and it opens normally. If you save it under another name, it becomes a normal Excel file.</p></div></details>
+
+<h3 id="faq-stock">Stock · Shipments</h3>
+<details class="mo"><summary>Stock looks lower than the real quantity</summary><div class="in"><p>Available Stock subtracts the quantity of <b>pending invoices</b> that have not left yet. If the goods have already left, click <span class="k" title="출하하기">Ship</span> in VF Shipment Management. The deduction is released.</p></div></details>
+<details class="mo"><summary>This month's target (S/L) does not change</summary><div class="in"><p>This is normal. This month's target is fixed by the last S/L round of the previous month, so it does not change in the middle of the month. The backorder uses the latest round.</p></div></details>
+<details class="mo"><summary>I cannot upload the same invoice again</summary><div class="in"><p>Add a higher Rev number to the file name, such as <code>_Rev01</code>. A same or lower Rev is not added. → <a class="go" href="#inv-upload">Upload invoices</a></p></div></details>
+<details class="mo"><summary>An invoice is not shown in Shipment Management</summary><div class="in"><p>Check that it was saved in INV Issue, or that the Excel file was uploaded to Available Stock. Also check that <span class="q" title="보기">View</span> is <span class="k" title="대기">Waiting</span>, and that no region · transport · search condition is set.</p></div></details>
+<details class="mo"><summary>The alert sound does not play</summary><div class="in"><p>Browsers block sound until you tap the screen once. Tap the screen once and try <span class="k" title="🔊 소리 시험">🔊 Sound test</span>. If it shows <span class="k" title="🔕 알림 꺼짐">🔕 Alerts off</span>, click it to turn alerts on. → <a class="go" href="#push-alert">Alerts</a></p></div></details>
+<details class="mo"><summary>I uploaded the wrong file</summary><div class="in"><p>For shipment data · production actuals, keep <b>Replace that month only</b> turned on and upload only that month's file again. For a weekly S/L, upload it again with the same date and <span class="k" title="덮어쓰기">Overwrite</span>, or delete it with <span class="q" title="S/L 스냅샷 삭제">Delete S/L snapshot</span>.</p></div></details>
+<details class="mo"><summary>Some part numbers show an amount of 0</summary><div class="in"><p>These part numbers have no unit price registered. Add the part numbers from the yellow bar in <a class="go" href="#up-price">Upload › Price Management</a>.</p></div></details>
+
+<h3 id="faq-etc">Materials · Email · Other</h3>
+<details class="mo"><summary>I don't see the Confirm · Issue buttons in Free Issue Requests</summary><div class="in"><p>Confirm, issue and reject are only for people whose account department contains '생산관리' (Production Control) or '생관', and masters. Others can only request and view. Excel upload is for masters only. → <a class="go" href="#free-ack">Confirm · issue</a></p></div></details>
+<details class="mo"><summary>A material in use shows as dormant (or the opposite)</summary><div class="in"><p>Change it yourself with the <span class="k" title="💤 휴면 재고">💤 Dormant stock</span> switch in the material detail header. When off, it is subject to out-of-stock · order alerts again. → <a class="go" href="#mml-dorm">Dormant stock · Stop after run-out</a></p></div></details>
+<details class="mo"><summary>Korean text remains in the English SL email</summary><div class="in"><p>Click <span class="k" title="🌐 AI 영문 번역">🌐 AI English translation</span> in the email window or fix it in English yourself. If AI translation is not available, the Korean stays as it is, so read it before sending. → <a class="go" href="#po-en">Send an English SL</a></p></div></details>
+<details class="mo"><summary>There is a planned receipt, so why does it say 'Receipt check needed'?</summary><div class="in"><p>A plan is not an actual receipt. If the material is normal only when the plan arrives, or the planned date has passed, check whether the goods actually arrived and click <span class="k" title="✓ 입고 확인">✓ Confirm receipt</span>. If it is already in MES, clear it with <span class="k" title="MES 반영됨">In MES</span>.</p></div></details>
+<details class="mo"><summary>Can I send again right away when the email result is unclear?</summary><div class="in"><p>First check the status · recipients · time in the send log. If it shows <span class="b yel">Partly not received</span>, you only need to check the rejected addresses. Decide whether to send again after looking at the log and any bounce emails.</p></div></details>
+<details class="mo"><summary>The AI answer seems wrong</summary><div class="in"><p>Check the numbers on the screen itself using the shortcut below the answer, and click <span class="k" title="🚩 답변 신고">🚩 Report answer</span>. An admin refines it in <a class="go" href="#ailearn">AI Training</a>.</p></div></details>
+</section>
+
+<section id="glossary">
+<div class="sh"><h2>Glossary</h2></div>
+<p class="lede">Words you often see on the screens.</p>
+<h3 id="glo-plan">Orders · Plans</h3>
+<div class="tw"><table class="fx">
+<tr><th>Term</th><th>Meaning</th></tr>
+<tr><td>S/L</td><td>Shipping List. The planned quantities the customer sends, saying when and how much they want. Received anew every week.</td></tr>
+<tr><td>Round (snapshot)</td><td>The order on the day an S/L was uploaded, kept as one snapshot. Called by its date, like <code>07-21_SL</code>.</td></tr>
+<tr><td>Rolling</td><td>Looking ahead over many months from one round.</td></tr>
+<tr><td>Backorder</td><td>Overdue quantity that should have been delivered but has not been yet.</td></tr>
+<tr><td>FIRM · FORECAST · PAST</td><td>Confirmed · forecast orders (order plan) · past months. The material order plan is FIRM 4 months + FORECAST 6 months; the SL sent to suppliers is up to 12 months.</td></tr>
+<tr><td>Adjustment ratio</td><td>The share of the S/L expected to actually sell (usually about 80%).</td></tr>
+<tr><td>FY</td><td>Fiscal year. From April to March of the next year.</td></tr>
+</table></div>
+<h3 id="glo-stock">Stock · Shipments</h3>
+<div class="tw"><table class="fx">
+<tr><th>Term</th><th>Meaning</th></tr>
+<tr><td>Stock count · Actual stock</td><td>Quantity counted directly in the warehouse · current quantity after adding production and subtracting shipments since the count.</td></tr>
+<tr><td>Available stock</td><td>Quantity you can really ship (Sea: + planned production, Air: − packing pending).</td></tr>
+<tr><td>Shippable</td><td>Available stock minus pending invoices.</td></tr>
+<tr><td>S/L Remaining</td><td>The part of this month's target not yet filled.</td></tr>
+<tr><td>Rev</td><td>Revision number of an invoice corrected and issued again. Higher = newer.</td></tr>
+<tr><td>Pickup Request · Blocked</td><td>A promise: "please ship on this day with this truck" · a mark: "this pallet cannot be shipped".</td></tr>
+<tr><td>P/L No · NET · GROSS</td><td>Pallet serial number · weight of the goods only · weight including packing.</td></tr>
+<tr><td>Forwarder · DG</td><td>Transport agent · Dangerous Goods (airbag explosives, etc.).</td></tr>
+</table></div>
+<h3 id="glo-mat">Materials</h3>
+<div class="tw"><table class="fx">
+<tr><th>Term</th><th>Meaning</th></tr>
+<tr><td>Lead time</td><td>Number of days from order to receipt. Can be edited with ✎ in the material detail.</td></tr>
+<tr><td>Free issue</td><td>Goods sent out free of charge, such as samples and take-outs. In Free Issue Requests: request → Production Control confirms → issued.</td></tr>
+<tr><td>Dormant</td><td>A material with no usage in the last 30 days · next 60 days. You can set or undo it yourself with the 💤 switch in the detail.</td></tr>
+<tr><td>Stop after run-out (discontinued after run-out)</td><td>A material that uses only its remaining stock and is not ordered again. Left out of order alerts.</td></tr>
+<tr><td>Planned departure · Shipment confirmed</td><td>Records of the departure date the supplier gave · the day it actually left (tracking no. · B/L).</td></tr>
+<tr><td>Reorder date</td><td>Expected run-out date − lead time.</td></tr>
+<tr><td>Planned receipt · Confirm receipt</td><td>Plan for what will arrive · record of what actually arrived.</td></tr>
+<tr><td>MES</td><td>In-house production · purchasing system. Its purchase data is the basis for actual receipts.</td></tr>
+<tr><td>Ledger</td><td>The Finance &amp; Accounting team's month-end stock ledger. The starting point of the stock calculation.</td></tr>
+<tr><td>≈</td><td>A value estimated, for example from an average, for a month with no data.</td></tr>
+</table></div>
+<h3 id="glo-item">Product abbreviations</h3>
+<div class="tw"><table>
+<tr><th>Abbreviation</th><th>Product</th><th>Abbreviation</th><th>Product</th></tr>
+<tr><td>DAB</td><td>Driver airbag</td><td>PAB</td><td>Passenger airbag</td></tr>
+<tr><td>SAB</td><td>Side airbag</td><td>CAB</td><td>Curtain airbag</td></tr>
+<tr><td>KAB</td><td>Knee airbag</td><td>CeAB</td><td>Center airbag</td></tr>
+<tr><td>STW</td><td>Steering wheel</td><td>FRT SB · RR SB</td><td>Front · rear seat belt</td></tr>
+<tr><td>FRT BKL · RR BKL</td><td>Front · rear seat buckle</td><td>Others</td><td>Everything else</td></tr>
+</table></div>
+</section>
+
+<section id="privacy-info">
+<div class="sh"><h2>Privacy · Terms of Use</h2></div>
+<div class="meta2"><span class="path">Bottom of the main screen · top left of the login screen</span></div>
+<p class="lede">What personal information the system processes and why, and the rules users must follow, are written up separately. If you are new, please read them once.</p>
+<ul>
+<li><b>Privacy Policy</b>: information processed (name · employee number · department · position · work email · access log), purpose, retention period, outsourcing, rights of data subjects, contact (information security officer).</li>
+<li><b>System Terms of Use</b>: account · password management, prohibited actions, data download · taking data outside, access log, measures for violations.</li>
+<li>Logins · access changes · key actions · file downloads are recorded for 1 year, with user · date/time · access location.</li>
+<li>To delete your account, request it with <span class="k" title="계정 삭제 요청">Request account deletion</span> in the 🔑 window. It is processed within 30 days.</li>
+</ul>
+</section>

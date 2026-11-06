@@ -1,0 +1,440 @@
+<section id="bom">
+<div class="sh"><h2>BOM Management</h2></div>
+<div class="meta2"><span class="path">Sidebar › Operations › BOM Management</span><span class="who">Access: BOM Management</span></div>
+<p class="lede">Here you look up and correct which materials, and how many of each, make up a finished product (BOM), and at what price materials are bought (purchase price).</p>
+<div class="tw"><table class="fx">
+<tr><th>Top tab</th><th>What it does</th></tr>
+<tr><td>BOM (bill of materials)</td><td>Shows parent · child items, required quantity, process, M/C and customer, one row each.</td></tr>
+<tr><td>Purchase price list</td><td>Shows purchase prices by item (MAX · MIN · AVG) and their changes.</td></tr>
+<tr><td>M-BOM</td><td>Product material cost — the total material cost to make one product (excluding paid supply materials)</td></tr>
+<tr><td>E-BOM · F-BOM</td><td>Engineering · finance BOMs, entered and managed by hand (F-BOM includes amount · currency · FX rate)</td></tr>
+<tr><td>Settings</td><td>Upload BOM · price files, manage vendors</td></tr>
+</table></div>
+
+<h3 id="bom-find">Find · correct materials</h3>
+<div class="do"><div class="dt">Step by step · BOM (bill of materials)</div><ol class="st">
+<li><b>Click the <span class="k" title="BOM (자재명세서)">BOM (bill of materials)</span> tab.</b><p>The first time, a progress bar runs while the data downloads. After that, it opens right away.</p></li>
+<li><b>Enter a part number · part name · process name, etc. in the search box.</b><p>Narrow down further with <span class="q" title="구분">Type</span> · <span class="q" title="Level">Level</span> · <span class="q" title="고객사">Customer</span>. To clear all, click <span class="k" title="초기화">Reset</span>. Results are split into pages of 50.</p></li>
+<li><b>Click a row to open the <span class="q" title="BOM 상세 제원">BOM detail specs</span> window.</b><p>Parent · child information, process · production specs, notes. Click the customer name to see the business partner information.</p></li>
+<li><b>To correct it: <span class="k" title="수정">Edit</span> → change the values → <span class="k p" title="저장하기">Save</span>.</b></li>
+<li><b>If needed, download the currently filtered list with <span class="k" title="엑셀">Excel</span>.</b><p>File name: <code>BOM자재명세서_날짜.xlsx</code> (BOM bill of materials_date)</p></li>
+</ol></div>
+<ul>
+<li><b>If you correct the child unit (UM)</b>, it is remembered separately for that part number and kept even when the BOM is uploaded again. It is shown in orange text in the table. If you empty the field, it goes back to the original unit.</li>
+<li>Level 1 has a green tag, level 2 a blue tag. Required quantity = the number needed for one parent item.</li>
+</ul>
+<div class="nt bad">Delete in the detail window removes that row from the database completely. Before deleting, check the parent · child part numbers once more.</div>
+
+<h3 id="bom-price">Purchase price · Product material cost</h3>
+<ul>
+<li><b>Purchase price list</b>: search box (item code · item name · vendor name · spec) + vendor · currency · type selectors → within the results, narrow down once more with <span class="q" title="약어">Abbreviation</span> · <span class="q" title="품목 종류">Item kind</span>. <span class="k" title="상세보기">Details</span> → price information → <span class="k" title="수정">Edit</span> → <span class="k" title="저장하기">Save</span>. <span class="k" title="엑셀">Excel</span> downloads the narrowed list as is.</li>
+<li><b>M-BOM (product material cost)</b>: expand a main category (project) and choose a product to see the total material cost to make one. Adjust prices in a different unit with <span class="k" title="단가 수식 적용">Apply price formula</span> (× 10, ÷ 100, etc.); this is kept even after re-uploading. To remove it, click <span class="k" title="수식 해제">Remove formula</span>.</li>
+</ul>
+
+<h3 id="bom-upload">Upload BOM · price files</h3>
+<div class="do"><div class="dt">Step by step · Upload the BOM</div><ol class="st">
+<li><b>Click <span class="k" title="설정">Settings</span> at the top right of BOM Management → go to data upload.</b><p>This is <b>Settings inside BOM Management</b>, not Settings › Upload on the main screen.</p></li>
+<li><b>For the BOM, upload one Frm_MASTER BOM file in <span class="k" title="BOM 업로드">BOM upload</span>.</b></li>
+<li><b>For prices: <span class="k" title="완제품 파일 선택">Select finished-product file</span> · <span class="k" title="반제품 파일 선택">Select semi-finished file</span> → <span class="k" title="단가 업로드 (완제품+반제품 병합)">Upload prices (merge finished + semi-finished)</span>.</b><p>Get the template with <span class="k" title="양식다운">Template</span>. Only the uploaded kinds are replaced, and child units you changed by hand are kept.</p></li>
+</ol></div>
+</section>
+
+<section id="g-material">
+<div class="sh"><h2>Materials · Getting started</h2></div>
+<div class="meta2"><span class="path">Sidebar › Operations › Materials</span><span class="who">Access: Materials (Email Settings · Data Check: Master)</span></div>
+<p class="lede">Takes the 8/31 ledger stock, adds MES receipts · production actuals, and calculates future usage from BOM × production plan · rolling S/L. It tells you <b>which material runs out when, and when you must order it</b>.</p>
+
+<div class="wf"><div class="wh">Screen layout · top to bottom</div><ol>
+<li><div><b>Top menu</b><span><span class="k" title="대시보드">Dashboard</span> · <span class="k" title="자재관리">Materials</span> · <span class="k" title="발주계획관리">PO Planning</span> · <span class="k" title="무상출고요청">Free Issue Requests</span> · <span class="k" title="생산 차질 점검">Production Risk Check</span> · <span class="k" title="수불부 기준">Ledger baseline</span> · <span class="k" title="이메일 설정">Email Settings</span> · <span class="k" title="데이터 점검">Data Check</span> · on the right, <span class="k" title="새로 계산">Recalculate</span></span></div></li>
+<li><div><b>Title bar</b><span>Screen name · <span class="k" title="내보내기">Export</span> (CSV)</span></div></li>
+<li><div><b>Search conditions</b><span><span class="q" title="기준일">Date basis</span> · <span class="q" title="자재 구분">Material type</span> · <span class="q" title="품목군">Item group</span> · <span class="q" title="고객사">Customer</span> · <span class="q" title="매입처">Supplier</span> · <span class="q" title="JG 제외">Excl. JG</span> · <span class="q" title="상품 제외">Excl. goods</span> (Dashboard Stock · Runout, Production Risk Check, Ledger baseline)</span></div></li>
+<li><div><b>Data bar</b><span>Chips for ledger · BOM · production plan · VF rolling S/L · production actuals · MES receipts · import material list (green = present, red = missing) and the data dates</span></div></li>
+</ol></div>
+<p>Numbers on the top menu: Dashboard = number of out-of-stock + urgent materials; Materials = number of focus items (inflator · OPW · wire harness) that need action; Free Issue Requests = requests waiting for confirmation · late; Production Risk Check = number of products that cannot be produced.</p>
+
+<h3 id="mm-flow">Daily order of work</h3>
+<div class="do"><div class="dt">Step by step · A day in Materials</div><ol class="st">
+<li><b>(Data owner) Upload the MES data.</b><p>Settings › Upload › the 4 Materials files (purchases · outsourced processing · goods sales · overseas shipments). → <a class="go" href="#up-mm">Upload › Materials MES</a></p></li>
+<li><b>Click <span class="k" title="새로 계산">Recalculate</span> at the top right.</b><p>Click it once after uploading to recalculate with the latest data. Check that the dates on the <b>data bar</b> are recent.</p></li>
+<li><b>Look at the <span class="k" title="대시보드">Dashboard</span> › <span class="k" title="재고 · 소진">Stock · Runout</span> cards.</b><p>Check the counts for urgent procurement · order this week · order within 4 weeks. → <a class="go" href="#g-material-dash">Dashboard</a></p></li>
+<li><b>Open urgent materials from the <span class="k" title="자재관리">Materials</span> list.</b><p>Check the expected run-out · order timing, and if needed, register planned receipts or confirm receipts. → <a class="go" href="#g-material-list">Material list · Detail</a></p></li>
+<li><b>In <span class="k" title="발주계획관리">PO Planning</span>, enter the monthly order plan and send it to suppliers.</b><p>→ <a class="go" href="#g-material-po">PO Planning</a></p></li>
+<li><b>(Production Control) Handle requests waiting for confirmation · late in <span class="k" title="무상출고요청">Free Issue Requests</span>.</b><p>Confirm sample · take-out requests and process them through to issue. → <a class="go" href="#g-material-free">Free Issue Requests</a></p></li>
+</ol></div>
+
+<h3 id="mm-cond">Choose the search conditions</h3>
+<ul>
+<li><span class="q" title="기준일">Date basis</span>: <span class="k" title="오늘">Today</span> (default) or the ledger closing date (example: <span class="k" title="8/31 마감">8/31 closing</span>). It is also used for the Materials calculation.</li>
+<li><span class="q" title="자재 구분">Material type</span>: All / Overseas (import) / Domestic. <span class="q" title="품목군">Item group</span>: All materials · Key materials · ★ Focus items · ★ Inflator · ★ OPW · ★ Wire harness · VINFAST · KGM shared · overseas lead time 90 · 60 · 45 days or more.</li>
+<li><span class="q" title="JG 제외">Excl. JG</span> · <span class="q" title="상품 제외">Excl. goods</span> are checked by default.</li>
+<li>Type · customer · supplier use the same values on all screens. If you change them in one place, the other screens change too.</li>
+<li>Filter fields that are not at their default value turn <b>green</b>, and <span class="k" title="↺ 초기화">↺ Reset</span> appears.</li>
+</ul>
+
+<h3 id="mm-status">What the statuses mean · How dates are set</h3>
+<div class="tw"><table class="fx">
+<tr><th>Status</th><th>Meaning · What to do</th></tr>
+<tr><td><span class="b red">Out of stock</span></td><td>Stock on hand is 0 or less — procure immediately</td></tr>
+<tr><td><span class="b ora">Urgent</span></td><td>Expected to run out within 14 days — check the receipt · procurement schedule first</td></tr>
+<tr><td><span class="b yel">Order needed</span></td><td>Expected to run out within the lead time (the reorder date is today or past) — place an order</td></tr>
+<tr><td><span class="b blu">Receipt check needed</span></td><td>Normal only if the planned receipt arrives, or the planned date has passed and it has not been cleared — check the actual receipt (Materials list only)</td></tr>
+<tr><td><span class="b grn">Normal</span></td><td>No order warning within the current calculation range</td></tr>
+<tr><td><span class="b gry">Stock unconfirmed</span></td><td>Not in the ledger and no stock count set — check the base data</td></tr>
+<tr><td><span class="b gry">Dormant</span></td><td>No usage in the last 30 days · next 60 days — check whether production has stopped (materials used for free issues are not dormant · you can change it yourself with the <span class="k" title="💤 휴면 재고">💤 Dormant stock</span> switch in the detail)</td></tr>
+<tr><td><span class="b vio">Discontinued after run-out</span></td><td>Only the remaining stock is used and it is not reordered — left out of alerts · orders (the <span class="k" title="소진 후 사용 안 함">Stop after run-out</span> switch in the detail)</td></tr>
+</table></div>
+<div class="tw"><table class="fx">
+<tr><th>Date · Number</th><th>How it is calculated</th></tr>
+<tr><td>Stock on hand</td><td>8/31 ledger closing + later MES receipts · in-house production − usage (if a stock count was set, from that day's quantity)</td></tr>
+<tr><td>Usage</td><td>Production actuals × BOM; future days use MES production plan · rolling S/L × BOM (materials with no BOM use the August average; goods use goods sales)</td></tr>
+<tr><td>Expected run-out</td><td>The first day the stock reaches 0 or less, subtracting each future day's usage (within 365 days). <b>Now</b> = without planned receipts · <b>With receipts</b> = adding them on the planned dates</td></tr>
+<tr><td>Reorder date</td><td>Expected run-out (with receipts) − lead time (lead time = value edited on screen → item master → default 60 days overseas · 30 days domestic)</td></tr>
+<tr><td>Additional order date</td><td>Next run-out date after all planned receipts arrive − lead time</td></tr>
+</table></div>
+</section>
+
+<section id="g-material-dash">
+<div class="sh"><h2>Materials Dashboard</h2></div>
+<div class="meta2"><span class="path">Materials › Dashboard</span></div>
+<p class="lede">The top tabs show four things: <span class="k" title="생산 · 출고">Production · Shipments</span> · <span class="k" title="협력사 매입 · 외주">Supplier Purchases · Outsourcing</span> · <span class="k" title="재고 · 소진">Stock · Runout</span> · <span class="k" title="발주계획">PO plan</span>. At first, the current month is shown.</p>
+
+<h3 id="mmd-stock">Stock · Runout — what runs out when</h3>
+<div class="do"><div class="dt">Step by step · Find urgent materials</div><ol class="st">
+<li><b>Click the <span class="k" title="재고 · 소진">Stock · Runout</span> tab and look at the 4 cards at the top.</b><p><span class="q" title="즉시 조달">Urgent procurement</span> (out of stock) · <span class="q" title="이번 주 발주">Order this week</span> (recommended order date within 7 days · including past ones) · <span class="q" title="4주 안 발주">Order within 4 weeks</span> (8–28 days) · <span class="q" title="휴면 · 재고 없음">Dormant · no stock</span>. <span class="q" title="📦 발주 완료 N">📦 Ordered N</span> is shown below the cards.</p></li>
+<li><b>Click a card to open a list window.</b><p>Click <span class="k" title="아래 표를 이 조건으로 거르기">Filter the table below by this</span> in the window to narrow the table below to that condition.</p></li>
+<li><b>Look at the <span class="q" title="앞으로 12주 · 주별 소진 예정 자재">Next 12 weeks · materials running out by week</span> bars.</b><p>Blue = overseas, gray = domestic, ★ = focus item. Click a bar to show only that week; clear it with <span class="k" title="주 선택 풀기 ✕">Clear week ✕</span>.</p></li>
+<li><b>Narrow down with the status bar above the table or the filters.</b><p>Click a section of the status bar to show only that status; click again to show all. Search · <span class="q" title="상태">Status</span> · <span class="q" title="사용량 근거">Usage basis</span> · <span class="q" title="사용 중인 것만">In use only</span>.</p></li>
+<li><b>Click a row to see details in the side window.</b><p>Base stock · estimated stock · receipts · daily usage · 120-day expected stock line · products that use this material.</p></li>
+</ol></div>
+<div class="tw"><table class="fx">
+<tr><th>Recommended order column</th><th>Meaning</th></tr>
+<tr><td><span class="b sky">📦 Ordered</span> + receipt MM/DD</td><td>A planned receipt is set = already ordered. Check that it arrived on the planned date</td></tr>
+<tr><td>⚠ Check late receipt</td><td>The planned receipt date has passed</td></tr>
+<tr><td>🚚 Shipped MM/DD · 🗓 Departs MM/DD · ⚠ Departure MM/DD passed</td><td>Supplier shipping record — whether the goods have left · whether the planned departure date has passed → <a class="go" href="#mml-ship">Supplier shipping record</a></td></tr>
+<tr><td>Additional order MM/DD</td><td>Even after all planned receipts arrive, you must order again after that</td></tr>
+<tr><td>Urgent procurement · N days past · Today · MM/DD · D-N</td><td>Order timing for materials not yet ordered</td></tr>
+</table></div>
+
+<h3 id="mmd-other">Production · Shipments · Supplier purchases · PO plan</h3>
+<ul>
+<li><b>Production · Shipments</b>: <span class="q" title="자료">Data</span> Production actuals / Goods sales / Overseas shipments. <span class="q" title="조회 년">Year</span> → <span class="q" title="조회 월">Month</span> (choose the year first) · detail · type · customer · search. Cards (production quantity · daily average · part numbers · defect rate), charts by date · top 10, and a part-number table. Click a row to see a chart by date and the BOM materials.</li>
+<li><b>Supplier Purchases · Outsourcing</b>: <span class="q" title="자료">Data</span> Purchases / Outsourced processing. Cards (purchase amount · suppliers · receipt quantity · waiting for confirmation · returns), monthly · top 10 suppliers, and a table by supplier (confirmed green · waiting yellow · returns red). Click a row to see receipts by part number.</li>
+<li><b>PO plan</b>: <span class="q" title="기간 시작">Period start</span> ~ <span class="q" title="기간 끝">Period end</span> · <span class="q" title="빠른 기간">Quick period</span> (FIRM / FORECAST / 10 months / last 6 months) · vendor · item. Monthly bars (green FIRM · purple FORECAST · gray PAST) and an expected usage line. Click a supplier · material row to open that supplier · part number in PO Planning.</li>
+</ul>
+<p class="mut">Click a table header to sort. Choose 50 / 100 / 200 rows per page.</p>
+</section>
+
+<section id="g-material-list">
+<div class="sh"><h2>Material list · Material detail</h2></div>
+<div class="meta2"><span class="path">Materials › Materials</span></div>
+<p class="lede">For each material, check <b>when it runs out · when to order · whether the receipt arrived</b>, and record planned receipts · receipt confirmations. ★ Inflator · OPW · wire harness come first.</p>
+
+<div class="wf"><div class="wh">List screen · top to bottom</div><ol>
+<li><div><b>Header</b><span><span class="q" title="자재별 소진 · 입고 예정">Runout &amp; planned receipts by material</span> · count · status bar · <span class="k" title="⚠ 입고 지연 N · 정리">⚠ Late receipts N · Clean up</span> · <span class="k" title="🔁 품번 변경 규칙 N">🔁 Part number change rules N</span></span></div></li>
+<li><div><b>Filters</b><span>Search · item group (default ★ Focus items) · type · customer · supplier · status · order timing · <span class="k" title="↺ 초기화">↺ Reset</span></span></div></li>
+<li><div><b>Run-out timeline</b><span>The 10 most urgent materials as 120-day bars (▼ order date · ◆ planned receipt)</span></div></li>
+<li><div><b>Table</b><span>Part number · part name · parent part number (FG) · supplier │ current stock │ 1st planned receipt │ 2nd planned receipt │ lead time · order · status</span></div></li>
+</ol></div>
+
+<h3 id="mml-find">Find urgent materials</h3>
+<div class="do"><div class="dt">Step by step · Narrow down the list</div><ol class="st">
+<li><b>In the status bar, click the <span class="b red">Out of stock</span> · <span class="b ora">Urgent</span> section.</b><p>Only that status remains. Click again to go back to all.</p></li>
+<li><b>In <span class="q" title="발주 시점">Order timing</span>, choose <span class="k" title="발주 시점 지남">Reorder date passed</span> · <span class="k" title="7일 안 발주">Order within 7 days</span>.</b><p>To see only materials already ordered, choose <span class="k" title="📦 입고 대기 (발주 완료)">📦 Waiting for receipt (ordered)</span>.</p></li>
+<li><b>Enter a part number · part name · parent part number · supplier in the search box.</b><p>Part numbers are found even without - or spaces (example: 569036AA26 = 569036-AA26). If nothing is found, the reason (example: not in the item group) and <span class="k" title="이 자재 바로 열기 →">Open this material →</span> are shown.</p></li>
+<li><b>Click a row to open the material detail in full screen.</b><p>When you come back with <span class="k" title="← 목록으로">← Back to list</span> · Esc · the browser Back button, the filters and scroll position stay the same.</p></li>
+</ol></div>
+<ul>
+<li>Color groups in the table: gray-blue = current stock (on hand · expected run-out), light green = 1st planned receipt, light purple = 2nd planned receipt. If the run-out date is the same even after adding the receipt, it shows <span class="q" title="변화 없음">No change</span> (the receipt comes after the run-out).</li>
+<li>Click <span class="k" title="+N">+N</span> in the parent part number column to expand all of them in place. <span class="k" title="복사">Copy</span> copies all of them with line breaks. Dragging over text to copy part of it does not open the detail.</li>
+<li>Click <span class="k" title="+ 입력">+ Add</span> or a date in a receipt column to register · edit a planned receipt or confirm a receipt in a small window, without opening the detail.</li>
+<li>Dormant materials are collapsed in <span class="k" title="▸ 💤 휴면 자재 N개 … 펼치기">▸ 💤 N dormant materials … Expand</span> at the bottom. If the judgment is wrong, change it in the detail → <a class="go" href="#mml-dorm">Dormant stock · Stop after run-out</a></li>
+<li>Small marks next to the 1st · 2nd receipt dates: 🚚 shipment confirmed · 🗓 planned departure · ⚠ planned departure passed → <a class="go" href="#mml-ship">Supplier shipping record</a></li>
+</ul>
+
+<h3 id="mml-detail">How to read the material detail</h3>
+<div class="wf"><div class="wh">Detail screen · top to bottom</div><ol>
+<li><div><b>Header</b><span>Part number · status · tags · part name · supplier · parent part number · two switches on the right: <span class="q" title="💤 휴면 재고">💤 Dormant stock</span> (Auto / Manual) · <span class="q" title="소진 후 사용 안 함 (재주문 안 함)">Stop after run-out (no reorder)</span></span></div></li>
+<li><div><b>Order bar</b><span>One line on what to do now (example: <span class="q" title="⚠ 발주 시점 N일 지남 — 지금 발주하세요">⚠ Reorder date passed N days ago — order now</span> · <span class="q" title="🛒 발주까지 D-N">🛒 D-N until order</span>) · if there is a planned receipt, the <span class="q" title="📦 발주 완료 · 입고 대기">📦 Ordered · waiting for receipt</span> bar and a time bar · a supplier shipping mark on each line (<span class="q" title="🚚 발송">🚚 Shipped</span> · <span class="q" title="🗓 출발 MM/DD">🗓 Departs MM/DD</span> · <span class="q" title="⚠ 미발송">⚠ Not shipped</span>)</span></div></li>
+<li><div><b>6 number cards</b><span>Stock on hand · average daily usage · expected run-out now · expected run-out with receipts · lead time (<span class="k" title="✎ 수정">✎ Edit</span>) · reorder date (or order status)</span></div></li>
+<li><div><b>Stock run-out chart</b><span><span class="k" title="일간">Daily</span> / <span class="k" title="주간">Weekly</span> / <span class="k" title="월간">Monthly</span> · ◀ period ▶</span></div></li>
+<li><div><b>View details</b><span>Two cards you click to switch: <span class="k" title="📦 입고 · 재고 기록">📦 Receipts · Stock records</span> · <span class="k" title="📅 기간별 재고">📅 Stock by period</span></span></div></li>
+</ol></div>
+<div class="tw"><table class="fx">
+<tr><th>Chart</th><th>Meaning</th></tr>
+<tr><td>Purple line</td><td>Current stock (without planned receipts). After today, dotted line = forecast</td></tr>
+<tr><td>Teal dotted line</td><td>Stock if planned receipts also arrive</td></tr>
+<tr><td>Green bar / light green outline</td><td>Receipt / planned receipt</td></tr>
+<tr><td>Orange bars in the lower area</td><td>Quantity used that day (week · month) — it has its own scale, so small quantities are visible too</td></tr>
+<tr><td>Vertical lines</td><td>Today · expected run-out (red) · order needed (or additional order)</td></tr>
+<tr><td>▶ Triangle (filled / white)</td><td>Supplier departure date — filled = 🚚 shipment confirmed · white = planned departure (not shipped)</td></tr>
+<tr><td>Departure → receipt arrow line</td><td>From the departure date to the planned receipt date (solid = shipment confirmed · dotted = planned departure)</td></tr>
+</table></div>
+<div class="nt warn">Do not judge that material has already arrived just from the teal dotted line. A plan is not an actual receipt. When the planned date passes, check whether it arrived and click <b>Confirm receipt</b>.</div>
+
+<h3 id="mml-lead">Edit the lead time</h3>
+<div class="do"><div class="dt">Step by step · Edit the lead time</div><ol class="st">
+<li><b>On the <span class="q" title="리드타임">Lead time</span> card in the detail, click <span class="k" title="✎ 수정">✎ Edit</span>.</b><p>The card shows where the current value comes from (item master · default · ✎ edited).</p></li>
+<li><b>Enter the number of days (1 – 365).</b><p>While you type, the new reorder date is previewed.</p></li>
+<li><b>Click <span class="k p" title="저장">Save</span> (or press Enter).</b><p>Reorder date, status, dashboard and email are recalculated with the new value, and a ✎ mark appears in the list, dashboard and PO Planning. To go back, use <span class="k" title="↺ … 로 되돌리기">↺ Back to …</span>.</p></li>
+</ol></div>
+<h3 id="mml-dorm">Change Dormant stock · Stop after run-out</h3>
+<p>Use the two switches on the right of the detail header to take a material out of alerts · orders, or put it back. When you switch, the screen, automatic email and AI search recalculate with the same judgment.</p>
+<div class="tw"><table class="fx">
+<tr><th>Switch</th><th>When on</th><th>Use it when</th></tr>
+<tr><td><span class="k" title="💤 휴면 재고">💤 Dormant stock</span></td><td>Treated as dormant — left out of order alerts · email · the default list view, and moved to the 💤 group at the bottom of the list. When off, it is not dormant (subject to out-of-stock · order alerts)</td><td>Production has ended or the material is not used for now · or the opposite: it is used but was wrongly judged dormant</td></tr>
+<tr><td><span class="k" title="소진 후 사용 안 함 (재주문 안 함)">Stop after run-out (no reorder)</span></td><td>Only the remaining stock is used and it is not reordered — left out of out-of-stock · urgent · order-needed alerts, the mail order tables and PO plan auto-fill; only the expected run-out date is shown</td><td>Materials to be discontinued · replaced by another part number (the 15 Jinyoung Electric wire harnesses are on from the start)</td></tr>
+</table></div>
+<div class="do"><div class="dt">Step by step · Set dormant stock yourself</div><ol class="st">
+<li><b>Open the material detail and look at the <span class="k" title="💤 휴면 재고">💤 Dormant stock</span> switch on the right of the header.</b><p>At the end of the switch, <span class="q" title="자동">Auto</span> = the system's judgment, <span class="q" title="직접">Manual</span> = set by someone. Hover over it to see the automatic judgment and the reason (example: 0 usage in the last 30 days · 0 demand in the next 60 days), and who set it · when.</p></li>
+<li><b>Turn the switch on or off.</b><p>On shows <span class="q" title="휴면 재고로 표시했습니다">Marked as dormant stock</span>; off shows <span class="q" title="휴면 재고가 아닌 재고로 되돌렸습니다">Changed back to non-dormant stock</span>. Materials you set as dormant show as <span class="q" title="💤 휴면 (직접 지정)">💤 Dormant (set manually)</span> in the dashboard table.</p></li>
+<li><b>To go back to the automatic judgment, switch it back to the same side as the automatic judgment.</b><p>The manual setting is cleared and the end of the switch shows <span class="q" title="자동">Auto</span> again.</p></li>
+</ol></div>
+<div class="do"><div class="dt">Step by step · Stop after run-out</div><ol class="st">
+<li><b>Turn on the <span class="k" title="소진 후 사용 안 함 (재주문 안 함)">Stop after run-out (no reorder)</span> switch on the right of the detail header.</b><p><span class="q" title="소진 후 단종으로 표시했습니다">Marked as discontinued after run-out</span> appears, the status becomes <span class="b vio">Discontinued after run-out</span>, and the order cell in the list shows <span class="q" title="재주문 안 함">No reorder</span>.</p></li>
+<li><b>To make it an order target again, turn the switch off.</b><p><span class="q" title="소진 후 단종 표시를 껐습니다 — 다시 발주 알림 대상입니다">Discontinued-after-run-out mark removed — it is an order alert target again</span> appears.</p></li>
+</ol></div>
+<h3 id="mml-inb">Planned receipt · Confirm receipt · Set stock count</h3>
+<p>Under <span class="q" title="자세히 보기">View details</span> at the bottom of the detail, click the <span class="k" title="📦 입고 · 재고 기록">📦 Receipts · Stock records</span> card. The fields for a new record are at the top, and the record list is below.</p>
+<div class="do"><div class="dt">Step by step · Register a planned receipt (when you placed an order)</div><ol class="st">
+<li><b>From the kind buttons, choose <span class="k" title="📦 입고 예정">📦 Planned receipt</span>.</b></li>
+<li><b>Enter <span class="q" title="입고 예정일">Planned date</span> · <span class="q" title="수량">Qty</span>, and write the PO number · shipping date, etc. in <span class="q" title="메모 (선택)">Memo (optional)</span>.</b></li>
+<li><b>Check the preview line below.</b><p><span class="q" title="등록하면 → 소진 예상 A → B (+N일) · 발주 필요일 C">If registered → expected run-out A → B (+N days) · reorder date C</span>. If the receipt comes after the run-out, a ⚠ warning appears.</p></li>
+<li><b>Click <span class="k p" title="+ 등록">+ Register</span>.</b><p>The material is now marked <span class="b sky">📦 Ordered</span>, and a waiting-for-receipt bar appears at the top of the detail.</p></li>
+</ol></div>
+<div class="do"><div class="dt">Step by step · Confirm receipt (when it actually arrived)</div><ol class="st">
+<li><b>Click <span class="k" title="✓ 입고 확인">✓ Confirm receipt</span> on the planned row (or on the bar at the top).</b></li>
+<li><b>Check or correct <span class="q" title="실제 입고일">Actual date</span> · <span class="q" title="실제 수량">Actual qty</span>.</b><p>The quantity that will actually be added to stock is previewed below. If there is an MES purchase within 7 days before the receipt date, <span class="q" title="⚠ 입고일 앞 7일 안에 MES 매입이 있습니다">⚠ There is an MES purchase within 7 days before the receipt date</span> appears. If that MES is a different receipt, choose <span class="k" title="다른 입고">Different receipt</span> (adds the whole confirmed quantity); if it is the same receipt, choose <span class="k" title="같은 입고">Same receipt</span> (adds only what MES has not already counted).</p></li>
+<li><b>Click <span class="k p" title="재고에 반영">Add to stock</span>.</b><p>To add a receipt directly without a plan: kind <span class="k" title="✅ 입고 확인">✅ Confirm receipt</span> → date (up to today) · quantity → <span class="k" title="+ 입고 반영">+ Add to stock</span>.</p></li>
+</ol></div>
+<div class="do"><div class="dt">Step by step · Set stock count (when you actually counted)</div><ol class="st">
+<li><b>Choose the kind <span class="k" title="🔢 보유수량 맞추기">🔢 Set stock count</span>.</b></li>
+<li><b>Enter <span class="q" title="센 날짜">Count date</span> and <span class="q" title="실제 보유 수량">Actual quantity on hand</span> (0 is allowed).</b><p>The preview shows the difference from the calculation.</p></li>
+<li><b>Click <span class="k p" title="+ 보유수량 맞추기">+ Set stock count</span>.</b><p>From that day, counting starts again from this quantity.</p></li>
+</ol></div>
+<ul>
+<li>Correct a record: <span class="k" title="수정">Edit</span> → correct it in the fields below → <span class="k" title="저장">Save</span>. Delete: <span class="k" title="삭제">Delete</span> → confirm. To turn a confirmed receipt back into a plan, click <span class="k" title="예정으로">Back to plan</span>.</li>
+<li>Saving shows on the screen right away, and the server save continues in the background. If it fails, <span class="q" title="저장하지 못해 되돌렸습니다">Could not save, so the change was undone</span> appears.</li>
+</ul>
+<h4>Matched with MES receipts automatically</h4>
+<p>MES purchases (Settings › Upload) are the basis for actual receipts. They are matched with the records on the screen automatically, so the same receipt is not counted twice.</p>
+<div class="tw"><table class="fx">
+<tr><th>Mark</th><th>Meaning</th></tr>
+<tr><td><span class="q" title="MES N 들어옴 · 남은 M">MES N received · M left</span></td><td>N of the planned quantity arrived through MES; only the remaining M is used in future calculations</td></tr>
+<tr><td><span class="b grn">In MES ✓</span></td><td>The confirmed receipt quantity is also in MES (counted only once)</td></tr>
+<tr><td><span class="b gry">Waiting for MES</span></td><td>Not in MES yet — matched automatically when MES is uploaded</td></tr>
+<tr><td><span class="k" title="🔗 MES 로 자동 확인 N건">🔗 Auto-confirmed by MES: N</span></td><td>List of planned receipts that fully arrived through MES (expand to check)</td></tr>
+<tr><td><span class="q" title="앞 MES 와 다른 입고">Different from earlier MES</span></td><td>A receipt confirmed with <span class="k" title="다른 입고">Different receipt</span> — added separately from the MES within 7 days before</td></tr>
+</table></div>
+
+<h3 id="mml-ship">Supplier shipping record (planned departure · shipment confirmed)</h3>
+<p>For each planned receipt, record the <b>planned departure date</b> the supplier gave you and the day it actually left (<b>shipment confirmed</b>), so you can see at a glance whether goods are on the way. The planned receipt date and the stock calculation do not change.</p>
+<div class="do"><div class="dt">Step by step · Record a shipment</div><ol class="st">
+<li><b>In the detail's <span class="k" title="📦 입고 · 재고 기록">📦 Receipts · Stock records</span>, click <span class="k" title="🚚 발송 기록">🚚 Shipping record</span> on a planned receipt line.</b><p>The <span class="q" title="🚚 협력사 발송">🚚 Supplier shipment</span> fields open under the line. If it is already recorded, the button shows the current state (example: <span class="q" title="🗓 11/20 출발 예정">🗓 Departs 11/20</span>); click it to change.</p></li>
+<li><b>Enter the <span class="q" title="출발 예정일">Planned departure</span> date from the supplier and click <span class="k p" title="저장">Save</span>.</b><p>The state becomes <span class="q" title="🗓 MM/DD 출발 예정">🗓 Departs MM/DD</span>.</p></li>
+<li><b>When it actually leaves, enter <span class="q" title="실제 출발일">Actual departure</span> · <span class="q" title="운송장 · B/L">Tracking no. · B/L</span> (optional) and click <span class="k p" title="저장">Save</span>.</b><p>If it left today, just click <span class="k" title="🚚 오늘 발송 확인">🚚 Shipped today</span>. The state becomes <span class="q" title="🚚 MM/DD 발송">🚚 Shipped MM/DD</span>. If you made a mistake, use <span class="k" title="기록 지우기">Delete record</span>.</p></li>
+</ol></div>
+<div class="tw"><table class="fx">
+<tr><th>Mark</th><th>Meaning · what to do</th></tr>
+<tr><td>🗓 Departs MM/DD</td><td>Departure date from the supplier · not yet confirmed as shipped</td></tr>
+<tr><td>🚚 Shipped MM/DD</td><td>Actually left (shipment confirmed) · hover to see the tracking number · days from departure to receipt</td></tr>
+<tr><td>⚠ Departure MM/DD passed</td><td>The planned departure date has passed with no shipment confirmation — check with the supplier whether it was actually sent</td></tr>
+</table></div>
+<p>Where it shows: next to the 1st · 2nd receipt dates in the material list · the waiting-for-receipt bar at the top of the detail · the stock run-out chart (▶ departure date · departure → receipt line) · the order recommendation cell in Dashboard › Stock · Runout table · the ordered line in the automatic email.</p>
+
+<h3 id="mml-late">Clean up late receipts · Part number change</h3>
+<div class="do"><div class="dt">Step by step · Clean up late planned receipts</div><ol class="st">
+<li><b>Click <span class="k" title="⚠ 입고 지연 N · 정리">⚠ Late receipts N · Clean up</span> in the list header.</b><p>Material · planned date · quantity · MES receipts · memo are shown. If MES receipts are 80% or more, <span class="q" title="들어온 것 같습니다">Seems to have arrived</span> is added.</p></li>
+<li><b>Choose the rows to process.</b><p><span class="k" title="모두 고르기">Select all</span> or <span class="k" title="MES 입고가 확인된 N건 고르기">Select N with MES receipt confirmed</span>.</p></li>
+<li><b>Click the right button.</b><ul>
+<li><span class="k" title="✓ 고른 N건 입고 확인 (재고 반영)">✓ Confirm receipt for N selected (add to stock)</span>: when it actually arrived but is not in MES</li>
+<li><span class="k" title="고른 N건 MES 반영됨">N selected: in MES</span>: when it is already in MES</li>
+<li><span class="k" title="고른 N건 삭제">Delete N selected</span> · to change only the date, use <span class="k" title="날짜 수정">Edit date</span> on the row</li></ul></li>
+</ol></div>
+<ul>
+<li><b>🔁 Part number change rules</b>: Record when a product's material part number changed because the supplier changed. Effective date · product · new part number · part number to replace (empty = automatic) · memo → <span class="k" title="+ 줄 더하기">+ Add row</span> → <span class="k" title="저장 · 다시 계산">Save · recalculate</span>. From the effective date, usage is counted under the new part number (old stock is not moved to the new part number).</li>
+<li><b>Stop after run-out</b>: the switch in the detail header that makes a material use only its remaining stock with no reorder. → <a class="go" href="#mml-dorm">Dormant stock · Stop after run-out</a></li>
+</ul>
+</section>
+
+<section id="g-material-po">
+<div class="sh"><h2>PO Planning · Send SL to suppliers</h2></div>
+<div class="meta2"><span class="path">Materials › PO Planning</span></div>
+<p class="lede">Enter the monthly order plan (SL) by material and send it to suppliers by Excel · email. <b>FIRM = 4 months including this month</b>, <b>FORECAST = the 6 months after that</b>. Example: in November, FIRM is November–February and FORECAST is March–August. When sending to suppliers, choose the <b>period to send</b> (up to 12 months) and the <b>language</b> (Korean / English).</p>
+
+<div class="do"><div class="dt">Step by step · Enter the order plan</div><ol class="st">
+<li><b>Narrow down the materials with the filters.</b><p>Search · <span class="q" title="조회 년월">View from</span> (10 months from that month) · item group (default ★ Focus items) · supplier · type · customer · <span class="q" title="계획 있는 자재만">With plan only</span>.</p></li>
+<li><b>Click <span class="k" title="✎ 수정">✎ Edit</span>.</b></li>
+<li><b>Enter quantities in the month fields.</b><p>Faded numbers are the expected usage for that month. <b>≈</b> marks an estimate from the average of the last 3 months, for months after the plan · S/L ends. Enter = field below, Tab = next field, Esc = undo that field.</p></li>
+<li><b>Click <span class="k p" title="저장 (N)">Save (N)</span>.</b><p>All changed fields are saved together. To stop, click <span class="k" title="취소">Cancel</span> (it asks whether to undo everything). Changed fields are kept even if you move to another page.</p></li>
+</ol></div>
+<h3 id="po-auto">Auto-fill · Clear range · Memo</h3>
+<ul>
+<li><span class="k" title="⚡ 자동 채우기">⚡ Auto-fill</span>: <span class="q" title="어느 자재">Which materials</span> (whole screen / this page / materials with a plan) · <span class="q" title="어느 달">Which months</span> (FIRM · FORECAST · 10 months) · <span class="q" title="어느 칸">Which cells</span> (empty only / overwrite) · fill with 3-month average · <span class="q" title="VINFAST 백오더 반영">Include VINFAST backorder</span> (% by month, total 100%) → <span class="k" title="채우기">Fill</span>. <b>It is not saved yet, so you must click <span class="k" title="저장">Save</span></b> (<span class="k" title="↶ 되돌리기">↶ Undo</span> is possible).</li>
+<li><span class="k" title="🧹 범위 초기화">🧹 Clear range</span>: choose materials · months to clear only the quantities (memos stay). This also needs <span class="k" title="저장">Save</span> to take effect.</li>
+<li><span class="k" title="📝">📝</span> Memo: material memo · memo per month · edit history. A cell with an orange dot has a memo for that month.</li>
+</ul>
+
+<h3 id="po-send">Send to suppliers</h3>
+<div class="do"><div class="dt">Step by step · SL Excel · email</div><ol class="st">
+<li><b>Filter by the supplier to send to, then click <span class="k" title="⬇ SL 엑셀 (협력사 공유용)">⬇ SL Excel (for suppliers)</span>.</b><p>The <span class="q" title="SL 엑셀 · 메일 (협력사 공유용)">SL Excel · Email (for suppliers)</span> window opens. The materials are exactly as filtered now (all pages).</p></li>
+<li><b>Choose the <span class="q" title="보낼 기간">Period to send</span>.</b><p>Start month – end month (up to 12 months), or <span class="q" title="당월부터">From this month</span> <span class="k" title="FIRM 4개월">FIRM 4 months</span> · <span class="k" title="6개월">6 months</span> · <span class="k" title="10개월">10 months</span>. The default is 10 months from the View-from month. → <a class="go" href="#po-period">Choose the period to send</a></p></li>
+<li><b>Check the <span class="q" title="언어">Language</span>.</b><p>Overseas suppliers start with <span class="k">English</span>, domestic suppliers with <span class="k" title="한국어">Korean</span>. → <a class="go" href="#po-en">Send an English SL</a></p></li>
+<li><b>Write the <span class="q" title="협력사에 전할 말">Message to supplier</span> (optional).</b><p>It goes at the top of the Excel file and into the email body.</p></li>
+<li><b>To get the file, click <span class="k p" title="⬇ 엑셀 내려받기">⬇ Download Excel</span>. To send it by email, click the envelope icon (<span class="k" title="이메일로 보내기">Send by email</span>).</b></li>
+<li><b>In the <span class="q" title="✉ SL 메일 보내기">✉ Send SL email</span> window, check To (required) · CC · subject · body.</b><p>You can also change the language · period in this window (your edited subject · body stay; only the period text moves to the new months). If you chose a supplier, check <span class="q" title="&#x27;매입처&#x27; 주소록에 저장">Save to the supplier's address book</span> to reuse it next time. Body placeholders: {매입처} (supplier) {FIRM} {FORECAST} {기간} (period) {전할말} (message).</p></li>
+<li><b>Open the Excel file with the attachment's <span class="k" title="⬇ 미리 받기">⬇ Preview download</span>, then click <span class="k p" title="✉ 보내기">✉ Send</span>.</b><p>The <span class="q" title="보낸 기록">Sent log</span> at the bottom of the window keeps the time · sender · recipients · subject · period (months · English) · result.</p></li>
+</ol></div>
+<p class="mut">This SL email goes out only when you send it yourself. It is a different function from the internal procurement alert email (Email Settings).</p>
+<h3 id="po-period">Choose the period to send</h3>
+<div class="tw"><table class="fx">
+<tr><th>Month cell color</th><th>Meaning</th></tr>
+<tr><td><span class="b grn">FIRM</span></td><td>4 months including this month — confirmed orders (please keep the quantity · delivery date)</td></tr>
+<tr><td><span class="b blu">FORECAST</span></td><td>The months after that — forecast (for production · material planning, not confirmed)</td></tr>
+<tr><td><span class="b gry">PAST</span></td><td>Months before this month — past plans (included if you choose a start month before this month)</td></tr>
+</table></div>
+<ul>
+<li>The period is up to 12 months. The end month can only be chosen within 12 months from the start month.</li>
+<li>The downloaded Excel, the email attachment and {기간} (period) {FIRM} {FORECAST} in the email body all use the same months you chose. The months included are shown under the fields, like <span class="q" title="FIRM 2026-11 ~ 2027-02 (4)">FIRM 2026-11 ~ 2027-02 (4)</span>.</li>
+</ul>
+<h3 id="po-en">Send an English SL to overseas suppliers</h3>
+<div class="do"><div class="dt">Step by step · English SL</div><ol class="st">
+<li><b>Filter by the overseas supplier and click <span class="k" title="⬇ SL 엑셀 (협력사 공유용)">⬇ SL Excel (for suppliers)</span>.</b><p>If at least half of that supplier's materials are overseas (imported), it shows <span class="q" title="해외 업체 — 영문 자동 (AI 번역)">Overseas supplier — English automatically (AI translation)</span> and <span class="k">English</span> is chosen first. Domestic suppliers can also get an English SL if you click <span class="k">English</span>.</p></li>
+<li><b>You may write the message in Korean.</b><p>With English, the subject, body and Excel (sheet name Schedule Line · headers Part No. · Description …) become English, and AI translates Korean messages · part names · memos into English.</p></li>
+<li><b>Read the subject · body in the email window.</b><p>If <span class="q" title="⚠ 제목 · 본문에 한글이 남아 있습니다">⚠ Korean text remains in the subject · body</span> appears, click <span class="k" title="🌐 AI 영문 번역">🌐 AI English translation</span> or fix it in English.</p></li>
+<li><b>Check the English Excel with <span class="k" title="⬇ 미리 받기">⬇ Preview download</span>, then click <span class="k p" title="✉ 보내기">✉ Send</span>.</b><p>If <span class="q" title="엑셀에 번역 못 한 한글 N건">N Korean texts in the Excel could not be translated</span> appears after sending, Korean remains in the Excel, so check the part names · memos.</p></li>
+</ol></div>
+<ul>
+<li>The default text is saved separately for Korean · English (<span class="k" title="💾 기본 문구로 저장">💾 Save as default text</span> · <span class="k" title="↺ 처음 문구">↺ Original text</span>). English placeholders: {SUPPLIER} {PERIOD} {MONTHS} {FIRM} {FORECAST} {NOTE}.</li>
+</ul>
+<div class="nt warn">AI translation can be wrong. Part numbers, quantities and dates are kept as they are, but always read it once before sending.</div>
+</section>
+
+<section id="g-material-free">
+<div class="sh"><h2>Free Issue Requests (samples · take-outs)</h2></div>
+<div class="meta2"><span class="path">Materials › Free Issue Requests</span><span class="who">View · request: Materials access · Confirm · issue: Production Control team · master · Excel upload: master</span></div>
+<p class="lede">Request materials or products that leave the company <b>free of charge</b> (samples, take-outs), and let the Production Control team confirm and issue them. This replaces the monthly “Sample &amp; Take-out Request” Excel, and the results flow straight into Materials stock and planned receipts.</p>
+<ul class="flow">
+<li><b>① Request</b><span>Requester · <span class="k" title="+ 새 요청">+ New request</span> (part no. · quantity · purpose · needed date)</span></li>
+<li><b>② Confirm</b><span>Production Control · method · available date · expected receipt → Materials planned receipt</span></li>
+<li><b>③ Issued</b><span>Production Control · issued quantity · date · place → deducted from Materials stock</span></li>
+</ul>
+
+<div class="wf"><div class="wh">Screen layout · top to bottom</div><ol>
+<li><div><b>4 number cards</b><span><span class="q" title="확인 기다림">Waiting for confirmation</span> · <span class="q" title="처리 중">In progress</span> · <span class="q" title="⚠ 지연">⚠ Late</span> (needed date passed, not issued yet) · <span class="q" title="출고 완료">Issued</span> — click one to show only those requests</span></div></li>
+<li><div><b>Header</b><span><span class="q" title="무상출고 요청">Free issue requests</span> · period · count · status bar · your access · <span class="k" title="+ 새 요청">+ New request</span> · <span class="k" title="📤 엑셀 올리기">📤 Upload Excel</span> (master)</span></div></li>
+<li><div><b>Production Control contacts</b><span>Person in charge of imported materials · domestic materials · finished goods (read from the top row of the Excel)</span></div></li>
+<li><div><b>Filters</b><span>Search · <span class="q" title="기간 (의뢰서 달)">Period (request form month)</span> year · month ‹ › · status · division · material/product · issue type · requester · <span class="q" title="내 담당 · 내 요청만">Only my items · my requests</span> · <span class="k" title="↺ 초기화">↺ Reset</span></span></div></li>
+<li><div><b>Table</b><span>No · part no. · part name · division · requested qty · needed date · issue type · available · planned receipt (Materials) · issue · Materials stock · contact · status · action — lines of the same request (requester · purpose · needed date) are grouped</span></div></li>
+</ol></div>
+<p>It opens on <b>this month</b>. Use ‹ › to move between months and <span class="k" title="이번 달">This month</span> to come back. The number next to <span class="k" title="무상출고요청">Free Issue Requests</span> in the top menu is, for Production Control, the requests waiting for confirmation + late ones in progress; for everyone else, the late requests.</p>
+<div class="tw"><table class="fx">
+<tr><th>Status</th><th>Meaning · whose turn</th></tr>
+<tr><td><span class="b yel">Waiting</span></td><td>Request received — Production Control to confirm (the requester can still edit or delete it)</td></tr>
+<tr><td><span class="b blu">Confirmed · in progress</span></td><td>Production Control set the method and dates — to be issued</td></tr>
+<tr><td><span class="b grn">Issued</span></td><td>Sent out — deducted from Materials stock</td></tr>
+<tr><td><span class="b gry">Rejected</span></td><td>Will not be handled — the reason is kept in the log</td></tr>
+<tr><td><span class="b red">⚠ Late</span></td><td>The sample needed date has passed and it is not issued yet</td></tr>
+</table></div>
+
+<h3 id="free-new">Make a request (requester)</h3>
+<div class="do"><div class="dt">Step by step · New free issue request</div><ol class="st">
+<li><b>Click <span class="k p" title="+ 새 요청">+ New request</span>.</b><p>The <span class="q" title="+ 새 무상출고 요청">+ New free issue request</span> window opens. Put several part numbers into one request.</p></li>
+<li><b>At the top, enter <span class="q" title="의뢰자">Requester</span> · <span class="q" title="구분">Division</span> · <span class="q" title="차종">Vehicle</span> · <span class="q" title="샘플 필요일자">Sample needed date</span> · <span class="q" title="목적">Purpose</span>.</b><p>e.g. Purpose: KGM development validation sample · parts for JG rework</p></li>
+<li><b>On each line, choose <span class="q" title="자재/제품">Material/Product</span> and enter the <span class="q" title="품번">Part No.</span>.</b><p>Enter just the part number and the <b>name and unit fill in automatically</b> and lock (✓ match). If the part number is unknown, <span class="q" title="✗ 품목정보에 없는 품번">✗ Not in the item list</span> and similar part numbers appear — pick one.</p></li>
+<li><b>Enter the <span class="q" title="요청수량">Requested qty</span>, and if needed the <span class="q" title="출고유형 (희망)">Issue type (preferred)</span> and <span class="q" title="비고">Remarks</span>.</b><p>Leave the issue type empty and Production Control will decide (warehouse stock · production request · receipt request). Add lines with <span class="k" title="+ 줄 더하기">+ Add line</span>; remove one with ✕ at the end of the line.</p></li>
+<li><b>Click <span class="k p" title="요청 등록">Submit request</span>.</b><p><span class="q" title="요청 N줄을 등록했습니다 — 생관팀 확인을 기다립니다.">N request lines registered — waiting for Production Control.</span> appears and the status is <span class="b yel">Waiting</span>. If a part number exists nowhere, you are asked <span class="k" title="그대로 등록">Submit as is</span> / <span class="k" title="품번 고치기">Fix part no.</span>.</p></li>
+</ol></div>
+<ul>
+<li>Your own <b>Waiting</b> requests made on screen can be changed or removed with <span class="k" title="수정">Edit</span> · <span class="k" title="지우기">Delete</span> on the line. After Production Control confirms, only they can change it.</li>
+<li>Click a line to open the detail panel on the right: progress ① request → ② confirm → ③ issued, request details, Production Control handling, Materials stock and expected run-out for the same part, and the log (who · when).</li>
+<li>To see only your own, tick <span class="q" title="내 담당 · 내 요청만">Only my items · my requests</span>.</li>
+</ul>
+
+<h3 id="free-ack">Confirm · issue (Production Control)</h3>
+<p>Only people whose account department contains <b>'생산관리' (Production Control)</b> or <b>'생관'</b>, and masters, can do this. You have the right if the header shows <span class="q" title="✓ 생관팀 처리 권한">✓ Production Control access</span>.</p>
+<div class="do"><div class="dt">Step by step · Confirm</div><ol class="st">
+<li><b>Click <span class="k" title="✓ 확인">✓ Confirm</span> on a Waiting line.</b><p>For several lines, tick the boxes on the left and use <span class="k" title="✓ 확인">✓ Confirm</span> on the bar above. Ticking a group header selects the whole request.</p></li>
+<li><b>Choose the <span class="q" title="처리 방식">Method</span>: warehouse stock · production request · receipt request.</b></li>
+<li><b>Enter the <span class="q" title="공급 가능일자">Available date</span>, and for materials still to arrive, the <span class="q" title="예상입고일">Expected receipt date</span>.</b><p>For several lines, <span class="k" title="(모두에 넣기)">(Apply to all)</span> fills the same date. Add a <span class="q" title="메모">Memo</span> if needed.</p></li>
+<li><b>On each line, check the <span class="q" title="입고 예정 수량">Planned receipt qty</span> and the <span class="q" title="자재관리 입고 예정">Materials planned receipt</span> <span class="k" title="올리기">Add</span> switch.</b><p>With Add on, it is added as a <b>planned receipt</b> (🎁 mark) for the same part in Materials. It is on by default for receipt requests. Part numbers not in the Materials list (finished goods etc.) show <span class="q" title="목록에 없음">Not in list</span>.</p></li>
+<li><b>Click <span class="k p" title="✓ 확인 처리">✓ Confirm</span>.</b><p>The status changes to <span class="b blu">Confirmed · in progress</span>. To change dates, use <span class="k" title="수정">Edit</span> on the line.</p></li>
+</ol></div>
+<div class="do"><div class="dt">Step by step · Issue</div><ol class="st">
+<li><b>Click <span class="k" title="📦 출고">📦 Issue</span> on an in-progress line.</b><p>To issue a Waiting line straight away, use <span class="k" title="📦 바로 출고 완료">📦 Issue now</span> in the detail panel; for several lines, tick them and use <span class="k" title="📦 출고 완료">📦 Issued</span> on the bar above.</p></li>
+<li><b>Enter the <span class="q" title="출고일자">Issue date</span> (up to today) and <span class="q" title="출고장소">Issue place</span> (warehouse · line).</b></li>
+<li><b>On each line, check the <span class="q" title="출고수량">Issued qty</span> and <span class="k" title="재고에서 빼기">Deduct from stock</span>.</b><p>If left on, the issued quantity is entered as a minus in Materials <b>Receipts · Stock records</b> on the issue date, and stock and expected run-out change at once. If the quantity is text such as “1 BOX”, only a record is kept and nothing is deducted (enter a number to deduct).</p></li>
+<li><b>Click <span class="k p" title="📦 출고 완료">📦 Issued</span>.</b><p>The status becomes <span class="b grn">Issued</span> and the table's <span class="q" title="출고">Issue</span> column shows <span class="q" title="재고 −N">Stock −N</span>.</p></li>
+</ol></div>
+<ul>
+<li><b>Reject</b>: <span class="k" title="반려">Reject</span> → reason (required) → <span class="k" title="반려">Reject</span>. To take it back, use <span class="k" title="반려 풀기">Undo reject</span> in the detail panel.</li>
+<li><b>Undo</b> (detail panel): <span class="k" title="확인 취소">Cancel confirmation</span> = back to Waiting (removes the planned receipt that was added automatically · receipts already confirmed stay) · <span class="k" title="출고 완료 취소">Cancel issue</span> = back to in progress (removes the deduction, so the stock comes back).</li>
+</ul>
+<div class="nt warn"><span class="k" title="지우기">Delete</span> in the detail panel also removes the linked Materials planned receipt and stock record, and cannot be undone.</div>
+
+<h3 id="free-up">Upload the request form Excel (master)</h3>
+<div class="do"><div class="dt">Step by step · Upload the “Sample &amp; Take-out Request”</div><ol class="st">
+<li><b>Click <span class="k p" title="📤 엑셀 올리기">📤 Upload Excel</span> and drop the files.</b><p>You can pick several files at once. The month in the file name (e.g. <code>2026 10월 무상출고.xlsx</code> → October) is used as the request month.</p></li>
+<li><b>Check the preview for each file.</b><p>It shows new · changed · same counts and warnings (cells whose date could not be read, etc.). Open the lines with <span class="k" title="▸ 줄 보기">▸ Show lines</span>.</p></li>
+<li><b>Click <span class="k p" title="저장">Save</span>.</b><p>Uploading again updates the same lines (month · No · part no.) and only adds new ones. Values Production Control handled on screen are not overwritten. Issued lines can also be reflected in stock with <span class="q" title="출고 완료된 줄은 자재관리 재고에서 빼기">Deduct issued lines from Materials stock</span>.</p></li>
+</ol></div>
+<p class="mut">The “item info” sheet in the same file is saved too, so in the <span class="k" title="+ 새 요청">+ New request</span> window, entering a part number fills the same name and unit as the Excel VLOOKUP.</p>
+
+<h3 id="free-link">Where it connects to Materials</h3>
+<div class="tw"><table class="fx">
+<tr><th>Materials screen</th><th>What you see</th></tr>
+<tr><td>Material list</td><td><span class="b vio">🎁 N</span> next to the part no. = N free issue requests not handled yet</td></tr>
+<tr><td>Material detail</td><td>The <span class="q" title="🎁 무상출고 요청">🎁 Free issue requests</span> band (open · issued · quantity deducted) · <span class="k" title="무상출고요청에서 보기 →">View in Free Issue Requests →</span></td></tr>
+<tr><td>Planned receipts</td><td>Plans added at confirmation carry a 🎁 number tag — you may edit the date and quantity in Materials</td></tr>
+<tr><td>Receipts · Stock records</td><td>The <span class="q" title="🎁 무상출고">🎁 Free issue</span> group = minus quantities deducted when issued (edit · undo in Free Issue Requests)</td></tr>
+<tr><td>Status (Dormant)</td><td>Materials used for free issues (open requests · issued in the last 90 days) are not treated as dormant, even with no production or purchase usage</td></tr>
+</table></div>
+</section>
+
+<section id="g-material-prod">
+<div class="sh"><h2>Production Risk Check · Ledger baseline</h2></div>
+<div class="meta2"><span class="path">Materials › Production Risk Check · Ledger baseline</span></div>
+<p class="lede">Finds, for each finished product, <b>the day production is blocked by a material shortage</b>. Ledger baseline shows the Finance &amp; Accounting team's ledger, the starting point of the stock calculation, as it is.</p>
+
+<h3 id="prod-check">Production Risk Check</h3>
+<div class="do"><div class="dt">Step by step · Find blocked products</div><ol class="st">
+<li><b>In the status bar, click <span class="b red">Cannot produce</span> or <span class="b ora">Urgent</span>.</b><p><span class="q" title="앞으로 계획이 있는 것만">Future plan only</span> is on by default. You can also narrow down with search (product · line · material part number) · <span class="q" title="라인">Line</span> · <span class="q" title="상태">Status</span>.</p></li>
+<li><b>Look at the table.</b><p>Materials OK (bar + short N) · <b>Bottleneck material</b> · buildable alone · <b>Shortage starts</b> · future plan · <b>Blocked plan qty</b>. Click ▶ to expand the material rows.</p></li>
+<li><b>Click a row to open the product detail.</b><p>Chart (dark teal actuals · light teal production plan · light purple VINFAST rolling S/L · red blocked plan), <span class="q" title="날짜별 생산계획">Production plan by date</span> (can produce / partly possible / cannot produce), <span class="q" title="연결 자재 (BOM)">Linked materials (BOM)</span>.</p></li>
+<li><b>Click a bottleneck material row to see the material information, and handle receipts · orders in Materials.</b><p>To go back, click <span class="k" title="← 목록으로 돌아가기">← Back to list</span>.</p></li>
+</ol></div>
+<p class="mut">For the detailed judgment rules, expand <span class="k" title="생산 차질 점검 보는 법">How to read Production Risk Check</span> at the bottom of the screen.</p>
+
+<h3 id="prod-base">Ledger baseline</h3>
+<p>Shows the end-of-August ledger (base stock) by part number. Narrow down with search (part number · part name · vendor) and <span class="q" title="시트">Sheet</span>, and see the number of part numbers · closing quantity · closing amount in the title bar. Table: item code · item name · vendor · sheet · opening · receipts · issues · closing · closing amount · type. Click a row to open the material side window.</p>
+</section>
+
+<section id="g-material-mail">
+<div class="sh"><h2>Email Settings · Phone alerts · Data Check</h2></div>
+<div class="meta2"><span class="path">Materials › Email Settings · Data Check</span><span class="who">Access: Master</span></div>
+<p class="lede">Automatically sends procurement · order alert emails to internal staff on set days · times, and sends voice messages to phones.</p>
+
+<div class="wf"><div class="wh">Email Settings screen</div><ol>
+<li><div><b>Top 4 boxes</b><span><span class="q" title="자동 발송">Auto send</span> (on/off · next send) · <span class="q" title="마지막 발송">Last sent</span> · <span class="q" title="자료 기준">Data basis</span> (latest / ⚠ check) · <span class="q" title="지금 메일에 들어갈 자재">Materials in the current email</span> (of which 📦 ordered N)</span></div></li>
+<li><div><b>① Auto send · schedule</b><span>3 groups: All / Overseas imports only / ★ Focus items</span></div></li>
+<li><div><b>② Content · ③ Recipients · ④ Mail text</b><span>Choose tables · internal recipients · CC · subject · body · signature</span></div></li>
+<li><div><b>Right · bottom</b><span>Preview (<span class="k" title="PC">PC</span>/<span class="k" title="휴대폰">Phone</span>) · phone alerts · voice messages · send log</span></div></li>
+</ol></div>
+
+<div class="do"><div class="dt">Step by step · Set up automatic email</div><ol class="st">
+<li><b>Turn on the <span class="q" title="자동 발송">Auto send</span> switch at the very top.</b></li>
+<li><b>In ①, set the schedule switch · time · <span class="k" title="매일">Every day</span> or <span class="k" title="요일 선택">Select days</span> for each group.</b><p>◉ marks the group used for preview · test · send now. The same group is sent only once a day. If there is nothing to send, it is logged as <span class="q" title="건너뜀">Skipped</span>.</p></li>
+<li><b>In ②, choose the tables to include.</b><p>Urgent procurement · order this week · order within 4 weeks. The overseas + domestic choice is used only for the <b>All</b> group.</p></li>
+<li><b>In ③, expand and check the recipients.</b><p>All three groups go to the same people. Search by name · ID · part of an address and press Enter. Use ⇄ or drag to move between To ↔ CC, and × to remove.</p></li>
+<li><b>Preview → check with <span class="k" title="나에게 시험 메일">Test mail to me</span> → <span class="k p" title="저장">Save</span>.</b><p>To send right away, click <span class="k" title="지금 보내기">Send now</span> (◉ group · today's automatic send for that group is skipped).</p></li>
+</ol></div>
+<div class="nt warn">If ⚠ appears in <span class="q" title="자료 기준">Data basis</span>, production actuals · MES receipts have not been uploaded for more than 3 days, or the MES production plan ends within 7 days, or the calculation date differs from today. The numbers in the email may be different from reality, so upload the data first.</div>
+<ul>
+<li>The mail tables show materials with planned receipts separately in a <b>📦 Ordered · confirm receipt</b> group at the bottom (the count is the same as on the dashboard cards).</li>
+<li>The ordered line in the email also shows the supplier shipment (🚚 shipped · planned departure · ⚠ planned departure passed). → <a class="go" href="#mml-ship">Supplier shipping record</a></li>
+<li><b>Phone alerts · Voice messages</b>: The AKC Android app reads out the urgent procurement items. Default 08:30 · 17:30, including weekends. <span class="k" title="저장">Save</span> · <span class="k" title="미리 듣기">Listen</span> · <span class="k" title="내 휴대폰으로 시험">Test on my phone</span>. Sent to the registered devices of people with Materials access.</li>
+<li><b>Send log</b>: the last 20 sends (time · kind · result sent/skipped/failed · content).</li>
+</ul>
+
+<h3 id="mm-diag">Data Check</h3>
+<p>Shows with a score whether the data used in the calculation is well connected (80% or more green · 50% or more yellow · below that red). See the cards by data, <span class="q" title="8월 차이가 큰 자재">Materials with large August differences</span>, <span class="q" title="단위가 다른 자재">Materials with different units</span>, <span class="q" title="BOM 이 없는 계획 품번">Planned parts without BOM</span>, <span class="q" title="품번 찾기">Find part number</span> (why a part number is not shown), and the 7 items of <span class="q" title="누락 위험 점검">Omission risk check</span>. When numbers look wrong, check here first.</p>
+</section>
